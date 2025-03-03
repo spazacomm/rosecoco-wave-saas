@@ -35,6 +35,10 @@ RUN php artisan key:generate
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 RUN chmod 644 /var/www/.env
 
+
+# Copy Nginx configuration
+COPY nginx.conf /etc/nginx/sites-available/default
+
 # Expose port
 EXPOSE 9000
 
