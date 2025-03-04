@@ -1,9 +1,6 @@
 # Use the official PHP image as base
 FROM php:8.4-fpm
 
-# Set working directory
-WORKDIR /var/www
-
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -11,33 +8,42 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    locales \
     zip \
     unzip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
     libicu-dev \
     libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql exif intl zip
+    && docker-php-ext-install gd bcmath mbstring pdo pdo_mysql exif pcntl intl zip
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy application
-COPY . .
+# Set working directory
+WORKDIR /var/www
 
-# Ensure .env file exists
-RUN if [ ! -f .env ]; then cp .env.example .env; fi
+# Copy existing application directory contents
+COPY . /var/www
 
-# Install Laravel dependencies
-RUN composer install --optimize-autoloader --no-dev
-RUN php artisan key:generate
+# Change current user to www-data
+USER www-data
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-RUN chmod 644 /var/www/.env
+# # Ensure .env file exists
+# RUN if [ ! -f .env ]; then cp .env.example .env; fi
+
+# # Install Laravel dependencies
+# RUN composer install --optimize-autoloader --no-dev
+# RUN php artisan key:generate
+
+# # Set permissions
+# RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+# RUN chmod 644 /var/www/.env
 
 
-# Copy Nginx configuration
-COPY nginx.conf /etc/nginx/sites-available/default
+# # Copy Nginx configuration
+# COPY nginx.conf /etc/nginx/sites-available/default
 
 # Expose port
 EXPOSE 9000
