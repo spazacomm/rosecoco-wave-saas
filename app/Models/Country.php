@@ -9,6 +9,11 @@ class Country extends Model
 {
     use HasFactory;
 
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
+
     /**
      * Get the predefined escort types.
      *
