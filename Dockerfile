@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     vim \
     libicu-dev \
     libzip-dev \
+    libonig-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd bcmath mbstring pdo pdo_mysql exif pcntl intl zip
 
