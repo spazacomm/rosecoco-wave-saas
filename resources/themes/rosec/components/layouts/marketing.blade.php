@@ -3,7 +3,7 @@
 <head>
     @include('theme::partials.head', ['seo' => ($seo ?? null) ])
 </head>
-<body x-data class="flex flex-col min-h-screen overflow-x-hidden @if($bodyClass ?? false){{ $bodyClass }}@endif" x-cloak>
+<body x-data class="bg-main-bg @if($bodyClass ?? false){{ $bodyClass }}@endif" x-cloak>
 
     <x-marketing.elements.header />
 
