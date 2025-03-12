@@ -60,16 +60,5 @@ return [
         ],
         
     ],
-    'categories_fields' => [
-        
-        'categories' => [
-            'label' => 'Categories',
-            'type' => MultiSelect::class,
-            'required' => true,
-            'options' => fn() => Category::pluck('name'),
-            'rules' => 'required',
-        ],
-        
-        
-    ],
+    
 ];

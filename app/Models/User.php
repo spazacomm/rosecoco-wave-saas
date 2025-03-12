@@ -47,6 +47,19 @@ class User extends WaveUser
         return $this->belongsToMany(Service::class);
     }
 
+    // Define the services relationship
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    // Define the services relationship
+    public function towns(): BelongsToMany
+    {
+        return $this->belongsToMany(Town::class);
+    }
+
+
     protected static function boot()
     {
         parent::boot();

@@ -79,6 +79,7 @@
 						->options(Category::pluck('name', 'id'))
 						->reactive() // This makes it dynamic
 						->columnspan(2)
+						->default(fn () => auth()->user()->categories()->pluck('categories.id')->toArray())
 						->required(),
 
 					]),
@@ -96,9 +97,11 @@
 						->default(fn () => auth()->user()->services()->pluck('services.id')->toArray()),
 
 						\Filament\Forms\Components\Toggle::make('incall')
+						->default(fn () => auth()->user()->incall)
 						->inline(),
 
 						\Filament\Forms\Components\Toggle::make('outcall')
+						->default(fn () => auth()->user()->outcall)
 						->inline(),
 					]),
 
@@ -122,13 +125,14 @@
 					->required(),
 		
 					\Filament\Forms\Components\MultiSelect::make('locations')
-					->label('Towns')
+					->label('Locations')
 					->options(fn ($get) => 
 						$get('city') 
 							? Town::where('city_id', $get('city'))->pluck('name', 'id')
 							: []) // If no city is selected, return an empty array
 					->reactive()
 					->disabled(fn ($get) => !$get('city')) // Disable until city is selected
+					->default(fn () => auth()->user()->towns()->pluck('towns.id')->toArray())
 					->required(),
 
 					]),
@@ -184,19 +188,27 @@
 		private function saveFormFields($state){
 			auth()->user()->name = $state['name'];
 			auth()->user()->email = $state['email'];
+			auth()->user()->incall = $state['incall'];
+			auth()->user()->outcall = $state['outcall'];
+			// auth()->user()->country_id = $state['country'];
 			auth()->user()->save();
 			
 			if (isset($state['services'])) {
 				auth()->user()->services()->sync($state['services']);
 			}
 
+			if (isset($state['categories'])) {
+				auth()->user()->categories()->sync($state['categories']);
+			}
+
+			if (isset($state['locations'])) {
+				auth()->user()->towns()->sync($state['locations']);
+			}
+
 			$fieldsToSave = config('profile.attribute_fields');
 			$this->saveDynamicFields($fieldsToSave);
 
 			$fieldsToSave = config('profile.contact_fields');
-			$this->saveDynamicFields($fieldsToSave);
-
-			$fieldsToSave = config('profile.categories_fields');
 			$this->saveDynamicFields($fieldsToSave);
 		}
 
