@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    @include('theme::partials.head', ['seo' => ($seo ?? null) ])
+    @include('theme::partials.admin_head', ['seo' => ($seo ?? null) ])
     <!-- Used to add dark mode right away, adding here prevents any flicker -->
     <script>
         if (typeof(Storage) !== "undefined") {
