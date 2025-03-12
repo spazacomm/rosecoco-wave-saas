@@ -26,6 +26,14 @@ trait HasDynamicFields
                 $newField->label($field['label']);
             }
 
+            if(isset($field['placeholder'])){
+                $newField->placeholder($field['placeholder']);
+            }
+
+            if(isset($field['required']) && $field['required']){
+                $newField->required();
+            }
+
             if(isset($field['options'])){
                 $newField->options( $field['options'] );
             }

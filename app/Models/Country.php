@@ -11,23 +11,14 @@ class Country extends Model
 
     protected $fillable = ['name'];
 
+    protected $table = 'countries';
+
     public function cities()
     {
         return $this->hasMany(City::class);
     }
 
-    /**
-     * Get the predefined escort types.
-     *
-     * @return array
-     */
-    public static function getCountries()
-    {
-        return [
-            'Kenya',
-            'Uganda',
-            'Tanzania'
-            // Add more types as needed
-        ];
+    public static function getCountries(){
+        return ['kenya'];
     }
 }

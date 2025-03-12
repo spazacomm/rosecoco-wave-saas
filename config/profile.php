@@ -1,94 +1,75 @@
 <?php
 
-use App\Models\EscortType;
-use App\Models\Locations;
-use App\Models\Services;
+use App\Models\Category;
+use App\Models\Town;
+use App\Models\Service;
 use App\Models\Country;
 use App\Models\City;
 use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 
 return [
-	'fields' => [
-		'username' => [
-			'label' => 'Username',
-			'type' => 'TextInput',
-			'rules' => 'required'
-        ],
-		'about' => [
-			'label' => 'About',
-			'type' => 'MarkdownEditor',
-			'rules' => 'required'
-        ],
-		'phone_number' => [
-            'label' => 'phone Number',
+    'contact_fields' => [
+        
+        'phone_number' => [
+            'label' => 'Phone Number',
             'type' => 'TextInput',
-            'rules' => '',
+            'required' => true,
+            'placeholder' => '+254712123456',
+            'rules' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
         ],
-		'whatsapp_number' => [
+        'whatsapp_number' => [
             'label' => 'Whatsapp Number',
             'type' => 'TextInput',
-            'rules' => ''
+            'placeholder' => '+254712123456',
+            'rules' => 'regex:/^\+?[1-9]\d{1,14}$/',
         ],
-		'country' => [
-            'label' => 'Country',
-            'type' => 'Select',
-            'options' => Country::getCountries(), // Adjust 'name' and 'id' to your model's attributes
-            'rules' => ''
+        'telegram_number' => [
+            'label' => 'Telegram Number',
+            'type' => 'TextInput',
+            'placeholder' => '+254712123456',
+            'rules' => 'regex:/^\+?[1-9]\d{1,14}$/',
         ],
-		'city' => [
-            'label' => 'City',
-            'type' => 'Select',
-            'options' => City::getCities(), // Adjust 'name' and 'id' to your model's attributes
-            'rules' => ''
+        'address' => [
+            'label' => 'Address',
+            'type' => 'Textarea',
+            'placeholder' => '12 Rose avenue, Breezeville Complex, Langata',
+            'columnspan' => '2',
         ],
-		'address' => [
-			'label' => 'Address',
-			'type' => 'Textarea',
-			'rules' => ''
+        
+    ],
+    'attribute_fields' => [
+        
+        'age' => [
+            'label' => 'Age',
+            'type' => 'TextInput',
+            'rules' => 'required'
         ],
-		'categories' => [
+        'languages' => [
+            'label' => 'Languages',
+            'type' => MultiSelect::class,
+            'options' => ['English', 'Swahili', 'Spanish', 'French', 'Italian', 'Portugese', 'Arabic', 'Japanese', 'Chinese', 'German'],
+            'rules' => 'required'
+        ],
+        'body' => [
+            'label' => 'Body Type',
+            'type' => Select::class,
+            'options' => ['Curvy', 'Petite', 'Athletic', 'BBW'],
+            'rules' => 'required'
+        ],
+        
+    ],
+    'categories_fields' => [
+        
+        'categories' => [
             'label' => 'Categories',
             'type' => MultiSelect::class,
-            'options' => EscortType::getEscortTypes(), // Adjust 'name' and 'id' to your model's attributes
-            'rules' => ''
+            'required' => true,
+            'options' => fn() => Category::pluck('name'),
+            'rules' => 'required',
         ],
-		'services' => [
-            'label' => 'Services',
-            'type' => MultiSelect::class,
-            'options' => Services::getServices(), // Adjust 'name' and 'id' to your model's attributes
-            'rules' => ''
-        ],
-		'locations' => [
-            'label' => 'Locations',
-            'type' => MultiSelect::class,
-            'options' => Locations::getLocations(), // Adjust 'name' and 'id' to your model's attributes
-            'rules' => ''
-        ],
-		'gallery' => [
-            'label' => 'Gallery',
-            'type' => FileUpload::class,
-            'multiple' => true, // Allow multiple file uploads
-			'panelLayout' => 'grid',
-            'rules' => '', // Adjust the rules as needed
-            'minFiles' => 1,
-            'maxFiles' => 5, // Limit the number of files
-            'acceptedFileTypes' => [
-                'image/jpeg',
-                'image/png',
-                // Add other accepted file types as needed
-            ],
-        ],
-		'incall' => [
-			'label' => 'Incall',
-			'type' => 'Toggle',
-			'rules' => ''
-        ],
-		'outcall' => [
-			'label' => 'Outcall',
-			'type' => 'Toggle',
-			'rules' => '',
-			'columns' => 2,
-        ]
-	],
+        
+        
+    ],
 ];

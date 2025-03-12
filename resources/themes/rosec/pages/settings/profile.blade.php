@@ -8,6 +8,11 @@
 	use Livewire\Volt\Component;
 	use Wave\Traits\HasDynamicFields;
     use Wave\ApiKey;
+	use App\Models\Service;
+	use App\Models\Country;
+	use App\Models\City;
+	use App\Models\Town;
+	use App\Models\Category;
     
 	middleware('auth');
     name('settings.profile');
@@ -26,19 +31,121 @@
 
        public function form(Form $form): Form
         {
+
             return $form
                 ->schema([
-                    \Filament\Forms\Components\TextInput::make('name')
+
+					\Filament\Forms\Components\Fieldset::make('Profile Information')
+					->schema([
+						\Filament\Forms\Components\TextInput::make('name')
                         ->label('Name')
                         ->required()
 						->rules('required|string')
 						->default(auth()->user()->name),
+						\Filament\Forms\Components\TextInput::make('username')
+                        ->label('Username')
+                        ->required()
+						->rules('required|string')
+						->default(auth()->user()->username),
 					\Filament\Forms\Components\TextInput::make('email')
                         ->label('Email Address')
                         ->required()
 						->rules('sometimes|required|email|unique:users,email,' . auth()->user()->id)
 						->default(auth()->user()->email),
-					...($this->dynamicFields( config('profile.fields') ))
+					
+
+
+					]),
+
+					\Filament\Forms\Components\Fieldset::make('Attributes')
+					->schema([
+
+						...($this->dynamicFields( config('profile.attribute_fields') ))
+					]),
+
+					\Filament\Forms\Components\Fieldset::make('Contact Information')
+					->schema([
+
+						...($this->dynamicFields( config('profile.contact_fields') ))
+
+					]),
+
+					\Filament\Forms\Components\Fieldset::make('Categories')
+					->schema([
+
+						\Filament\Forms\Components\Select::make('categories')
+						->label('Categories')
+						->multiple()
+						->options(Category::pluck('name', 'id'))
+						->reactive() // This makes it dynamic
+						->columnspan(2)
+						->required(),
+
+					]),
+
+
+					\Filament\Forms\Components\Fieldset::make('Services')
+					->schema([
+						\Filament\Forms\Components\Select::make('services')
+						->label('Services')
+						->multiple()
+						->options(Service::pluck('name', 'id'))
+						->reactive() // This makes it dynamic
+						->required()
+						->columnspan(2)
+						->default(fn () => auth()->user()->services()->pluck('services.id')->toArray()),
+
+						\Filament\Forms\Components\Toggle::make('incall')
+						->inline(),
+
+						\Filament\Forms\Components\Toggle::make('outcall')
+						->inline(),
+					]),
+
+					\Filament\Forms\Components\Fieldset::make('Locations')
+					->schema([
+
+						\Filament\Forms\Components\Select::make('country')
+						->label('Country')
+						->options(Country::pluck('name', 'id'))
+						->reactive() // This makes it dynamic
+						->required(),
+
+					\Filament\Forms\Components\Select::make('city')
+					->label('City')
+					->options(fn ($get) => 
+						$get('country') 
+							? City::where('country_id', $get('country'))->pluck('name', 'id')
+							: []) // If no country is selected, return an empty array
+					->reactive()
+					->disabled(fn ($get) => !$get('country')) // Disable until country is selected
+					->required(),
+		
+					\Filament\Forms\Components\MultiSelect::make('locations')
+					->label('Towns')
+					->options(fn ($get) => 
+						$get('city') 
+							? Town::where('city_id', $get('city'))->pluck('name', 'id')
+							: []) // If no city is selected, return an empty array
+					->reactive()
+					->disabled(fn ($get) => !$get('city')) // Disable until city is selected
+					->required(),
+
+					]),
+
+					\Filament\Forms\Components\Fieldset::make('Gallery')
+					->schema([
+						\Filament\Forms\Components\FileUpload::make('gallery')
+                        ->label('Gallery Images')
+						->multiple()
+						->columnspan(2),
+					]),
+
+				
+
+                    
+					
+					
                 ])
                 ->statePath('data');
         }
@@ -78,7 +185,18 @@
 			auth()->user()->name = $state['name'];
 			auth()->user()->email = $state['email'];
 			auth()->user()->save();
-			$fieldsToSave = config('profile.fields');
+			
+			if (isset($state['services'])) {
+				auth()->user()->services()->sync($state['services']);
+			}
+
+			$fieldsToSave = config('profile.attribute_fields');
+			$this->saveDynamicFields($fieldsToSave);
+
+			$fieldsToSave = config('profile.contact_fields');
+			$this->saveDynamicFields($fieldsToSave);
+
+			$fieldsToSave = config('profile.categories_fields');
 			$this->saveDynamicFields($fieldsToSave);
 		}
 

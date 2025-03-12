@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Wave\User as WaveUser;
 use Illuminate\Notifications\Notifiable;
 use Wave\Traits\HasProfileKeyValues;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends WaveUser
 {
@@ -39,6 +40,12 @@ class User extends WaveUser
         'password',
         'remember_token',
     ];
+
+    // Define the services relationship
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class);
+    }
 
     protected static function boot()
     {

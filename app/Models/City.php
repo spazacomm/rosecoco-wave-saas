@@ -21,18 +21,5 @@ class City extends Model
         return $this->hasMany(Town::class);
     }
 
-    /**
-     * Get the predefined escort types.
-     *
-     * @return array
-     */
-    public static function getCities()
-    {
-        return [
-            'Nairobi',
-            'Mombasa',
-            'Nakuru'
-            // Add more types as needed
-        ];
-    }
+   
 }
