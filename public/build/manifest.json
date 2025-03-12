@@ -4,9 +4,20 @@
     "src": "resources/css/filament/admin/theme.css",
     "isEntry": true
   },
+  "resources/themes/rosec/assets/css/admin-app.css": {
+    "file": "assets/admin-app-C1ZqQilO.css",
+    "src": "resources/themes/rosec/assets/css/admin-app.css",
+    "isEntry": true
+  },
   "resources/themes/rosec/assets/css/app.css": {
-    "file": "assets/app-aQWdsW6_.css",
+    "file": "assets/app-OiUVsoYw.css",
     "src": "resources/themes/rosec/assets/css/app.css",
+    "isEntry": true
+  },
+  "resources/themes/rosec/assets/js/admin-app.js": {
+    "file": "assets/admin-app-CaUPGaqM.js",
+    "name": "admin-app",
+    "src": "resources/themes/rosec/assets/js/admin-app.js",
     "isEntry": true
   },
   "resources/themes/rosec/assets/js/app.js": {

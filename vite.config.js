@@ -12,9 +12,9 @@ export default defineConfig({
         laravel({
             input: [
                 `resources/themes/${activeTheme}/assets/css/app.css`,
-                // `resources/themes/${activeTheme}/assets/css/admin-app.css`,
+                `resources/themes/${activeTheme}/assets/css/admin-app.css`,
                 `resources/themes/${activeTheme}/assets/js/app.js`,
-                // `resources/themes/${activeTheme}/assets/js/admin-app.js`,
+                `resources/themes/${activeTheme}/assets/js/admin-app.js`,
                 'resources/css/filament/admin/theme.css',
             ],
             refresh: [
