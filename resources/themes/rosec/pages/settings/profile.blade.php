@@ -112,6 +112,7 @@
 						->label('Country')
 						->options(Country::pluck('name', 'id'))
 						->reactive() // This makes it dynamic
+						->default(fn () => auth()->user()->country_id)
 						->required(),
 
 					\Filament\Forms\Components\Select::make('city')
@@ -122,6 +123,7 @@
 							: []) // If no country is selected, return an empty array
 					->reactive()
 					->disabled(fn ($get) => !$get('country')) // Disable until country is selected
+					->default(fn () => auth()->user()->city_id)
 					->required(),
 		
 					\Filament\Forms\Components\MultiSelect::make('locations')
@@ -190,7 +192,8 @@
 			auth()->user()->email = $state['email'];
 			auth()->user()->incall = $state['incall'];
 			auth()->user()->outcall = $state['outcall'];
-			// auth()->user()->country_id = $state['country'];
+			auth()->user()->country_id = $state['country'];
+			auth()->user()->city_id = $state['city'];
 			auth()->user()->save();
 			
 			if (isset($state['services'])) {

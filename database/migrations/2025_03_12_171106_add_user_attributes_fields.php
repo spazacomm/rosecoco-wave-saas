@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('incall')->default(true);
             $table->boolean('outcall')->default(true);
-            // $$table->foreignId('country_id')->constrained()->onDelete('set null');
-            // $table->foreignId('city_id')->constrained()->onDelete('set null');
+            $table->integer('country_id')->nullable();
+            $table->integer('city_id')->nullable();
+           
         });
     }
 
@@ -27,8 +28,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('incall');
             $table->dropColumn('outcall');
-            // $table->dropColumn('country_id');
-            // $table->dropColumn('city_id');
+            $table->dropColumn('country_id');
+            $table->dropColumn('city_id');
         });
     }
 };
