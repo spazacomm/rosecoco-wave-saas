@@ -1,4 +1,4 @@
-<div class="container-fluid px-0 media-holder media-holder-overlay">
+<div class="container-fluid px-0 mb-5 media-holder media-holder-overlay">
         <div class="banner banner-home position-relative"
             >
             <link rel="preload" href="https://www.crushescorts.com/frontend/images/banner-m.webp" as="image">
@@ -9,13 +9,13 @@
             <div class="banner-bottom mb-b-bottom z-2 position-relative pb-3">
                 
             </div>
-            <div class="pt-lg-3 position-relative z-2 hero-text">
+            <div class="pt-lg-3 position-relative z-2 hero-text mt-5 ">
                 <div class="container pt-lg-5">
                     <div class="row m-0 pt-lg-5">
-                        <div class="col-lg-12 col-md-12 px-0">
-                            <h1>London Escorts</h1>
+                        <div class="col-lg-12 col-md-12 px-0 mt-5">
+                            <h1>Rosecoco Escorts</h1>
                             <div class="cms">
-                                                                    <p>Meet hot <strong>London escorts</strong> today!&nbsp;We have a huge range of companions available right now for incall and outcall escort services throughout the city. You&#39;re guaranteed to find the perfect escort by browsing the profiles below, each filled with genuine escort photos, selfies and videos as well as reviews, stats, rates, services and a detailed description of what each escort is personally like. Spend as long as you like exploring our beautiful girls, then when you have found someone you would like to meet, give us a call and we will help you book the ultimate London escort date.</p>
+                                                                    <p>Meet hot <strong> escorts</strong> today!&nbsp;We have a huge range of companions available right now for incall and outcall escort services. You&#39;re guaranteed to find the perfect escort by browsing the profiles below, each filled with genuine escort photos, selfies and videos as well as reviews, stats, rates, services and a detailed description of what each escort is personally like. </p>
                                                             </div>
                         </div>
                     </div>

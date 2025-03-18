@@ -27,10 +27,10 @@
                 <nav aria-label="breadcrumb" class="d-flex justify-content-center fs-7">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="https://www.crushescorts.com" class="text-decoration-none">London Escorts</a>
+                            <a href="/" class="text-decoration-none">London Escorts</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="https://www.crushescorts.com/escorts/kim" class="text-decoration-none">Kim</a>
+                            <a href="/profile/{{$this->user->username}}" class="text-decoration-none">{{$this->user->username}}</a>
                         </li>
                     </ol>
                 </nav>
@@ -56,7 +56,7 @@
 
 
                         <span class="text-small position-relative back-btn next-btn">
-                            <a class="d-flex flex-wrap align-items-center" href="https://www.crushescorts.com">
+                            <a class="d-flex flex-wrap align-items-center" href="/">
                                 <span class="d-md-block d-none">NEXT PROFILE</span>
                                 <span class="d-md-none">Next</span>
                                 <span class="fa-back ms-2 mb-1"></span>
@@ -79,8 +79,8 @@
                                     <div class="splide__slide">
                                         <a class="media-holder single-profile d-block" data-fancybox="gallery"
                                             data-caption=""
-                                            href="https://crushescorts.com/storage/1819/conversions/PHOTO-2024-12-20-19-26-09-large.webp">
-                                            <img src="https://crushescorts.com/storage/1819/conversions/PHOTO-2024-12-20-19-26-09-large.webp"
+                                            href="/storage/{{$this->user->avatar}}">
+                                            <img src="/storage/{{$this->user->avatar}}"
                                                 alt="Kim" loading="eager">
                                         </a>
                                     </div>

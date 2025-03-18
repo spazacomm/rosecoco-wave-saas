@@ -19,7 +19,7 @@ return [
 		'min_password_length' => 5,
 	],
 
-	'primary_color' => '#000000',
+	'primary_color' => '#FA93AA',
 
 	'user_model' => \App\Models\User::class,
 	'show_docs' => env('WAVE_DOCS', true),

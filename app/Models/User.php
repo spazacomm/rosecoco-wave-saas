@@ -60,6 +60,12 @@ class User extends WaveUser
     }
 
 
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+
     protected static function boot()
     {
         parent::boot();
