@@ -22,6 +22,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd bcmath mbstring pdo pdo_mysql exif pcntl intl zip
 
+RUN apt update && apt install -y nodejs npm
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
