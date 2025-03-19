@@ -37,7 +37,9 @@ USER root
 # RUN if [ ! -f .env ]; then cp .env.example .env; fi
 
 # # Install Laravel dependencies
-# RUN composer install --optimize-autoloader --no-dev
+RUN composer install --optimize-autoloader --no-dev
+RUN npm install
+RUN npm run build
 # RUN php artisan key:generate
 
 # # Set permissions

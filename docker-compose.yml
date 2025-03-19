@@ -17,6 +17,7 @@ services:
       - APP_ENV=local
       - APP_DEBUG=true
       - APP_KEY=${APP_KEY}
+      - DB_CONNECTION=${DB_CONNECTION}
     depends_on:
       - nginx
 
