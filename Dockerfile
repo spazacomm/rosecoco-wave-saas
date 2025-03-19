@@ -25,14 +25,15 @@ RUN apt-get update && apt-get install -y \
 RUN apt update && apt install -y nodejs npm
 
 # Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
+#COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/local/bin/composer /usr/local/bin/composer
+RUN chmod +x /usr/local/bin/composer
 
 # Copy existing application directory contents
 COPY . .
 
 
-USER root
+#USER root
 
 RUN ln -s $(which php) /usr/local/sbin/php
 
