@@ -30,7 +30,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 
 # Copy existing application directory contents
-COPY . .
+COPY . /var/www
 
 
 USER root
