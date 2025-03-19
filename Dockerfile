@@ -34,8 +34,8 @@ COPY . /var/www
 
 
 #USER root
-
-#RUN ln -s $(which php) /usr/local/sbin/php
+RUN $(which php)
+RUN ln -s $(which php) /usr/local/sbin/php
 
 
 
@@ -43,7 +43,7 @@ COPY . /var/www
 # RUN if [ ! -f .env ]; then cp .env.example .env; fi
 
 # # Install Laravel dependencies
-RUN composer install --optimize-autoloader --no-dev
+RUN composer install
 RUN npm install
 RUN npm run build
 # RUN php artisan key:generate
