@@ -29,8 +29,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy existing application directory contents
 COPY . .
 
-# Change current user to www-data
-USER www-data
+
+USER root
+
 
 # # Ensure .env file exists
 # RUN if [ ! -f .env ]; then cp .env.example .env; fi
@@ -42,6 +43,9 @@ USER www-data
 # # Set permissions
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 # RUN chmod 644 /var/www/.env
+
+# Change current user to www-data
+USER www-data
 
 
 # # Copy Nginx configuration
