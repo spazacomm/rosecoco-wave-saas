@@ -1,6 +1,9 @@
 # Use the official PHP image as base
 FROM php:8.4-fpm
 
+# Set working directory
+WORKDIR /var/www
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -22,11 +25,9 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
-WORKDIR /var/www
 
 # Copy existing application directory contents
-COPY . /var/www
+COPY . .
 
 # Change current user to www-data
 USER www-data
@@ -39,7 +40,7 @@ USER www-data
 # RUN php artisan key:generate
 
 # # Set permissions
-# RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 # RUN chmod 644 /var/www/.env
 
 
