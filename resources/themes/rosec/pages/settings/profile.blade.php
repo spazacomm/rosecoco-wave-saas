@@ -32,6 +32,7 @@
        public function form(Form $form): Form
         {
 
+			// dd(auth()->user()?->gallery()->pluck('path')->toArray());
             return $form
                 ->schema([
 
@@ -139,13 +140,19 @@
 
 					]),
 
+					
+
 					\Filament\Forms\Components\Fieldset::make('Gallery')
 					->schema([
 						\Filament\Forms\Components\FileUpload::make('gallery')
                         ->label('Gallery Images')
 						->multiple()
+						->default(fn () => auth()->user()?->gallery()->pluck('path')->map(fn ($path) => "/storage/{$path}")->toArray())
 						->columnspan(2),
 					]),
+
+			
+				
 
 				
 
@@ -171,6 +178,8 @@
 
 			$this->saveFormFields($state);
 
+			$this->saveGalleryImages();
+
 			Notification::make()
                 ->title('Successfully saved your profile settings')
                 ->success()
@@ -185,6 +194,32 @@
 			auth()->user()->save();
 			// This will update/refresh the avatar in the sidebar
 			$this->js('window.dispatchEvent(new CustomEvent("refresh-avatar"));');
+		}
+
+		private function saveGalleryImages()
+		{
+			dd($this->gallery);
+			if (!empty($this->gallery)) {
+				
+				foreach ($this->gallery as $image) {
+
+					$extension = $image->getClientOriginalExtension();
+
+					$filename = uniqid() . '.' . $extension;
+					$path = 'gallery/' . $filename;
+
+					//$path = uniqid() . '.png';
+					$image = \Intervention\Image\ImageManagerStatic::make($image)->resize(800, 800);
+					Storage::disk('public')->put($path, $image->encode());
+
+				
+					auth()->user()->gallery()->create([
+						'user_id' => auth()->id(), 
+						'path' => $path
+					]);
+					
+				}
+			}
 		}
 
 		private function saveFormFields($state){

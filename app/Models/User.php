@@ -66,6 +66,12 @@ class User extends WaveUser
     }
 
 
+    public function gallery()
+    {
+        return $this->hasMany(Gallery::class);
+    }
+
+
     protected static function boot()
     {
         parent::boot();
