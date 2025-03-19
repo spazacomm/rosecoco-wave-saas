@@ -34,6 +34,9 @@ COPY . .
 
 USER root
 
+RUN ln -s $(which php) /usr/local/sbin/php
+
+
 
 # # Ensure .env file exists
 # RUN if [ ! -f .env ]; then cp .env.example .env; fi
@@ -46,6 +49,8 @@ RUN npm run build
 
 # # Set permissions
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
 # RUN chmod 644 /var/www/.env
 
 # Change current user to www-data
