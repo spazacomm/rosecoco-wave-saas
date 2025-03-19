@@ -14,6 +14,22 @@
         {
             return config('wave.user_model')::where('username', '=', $this->username)->with('roles')->firstOrFail();
         }
+
+        #[Computed]
+        public function previousUser()
+        {
+            return config('wave.user_model')::where('id', '<', $this->user()->id)
+                ->orderBy('id', 'desc')
+                ->first();
+        }
+    
+        #[Computed]
+        public function nextUser()
+        {
+            return config('wave.user_model')::where('id', '>', $this->user()->id)
+                ->orderBy('id', 'asc')
+                ->first();
+        }
     }
 ?>
 
@@ -21,13 +37,13 @@
 
     @volt('wave.profile')
     <div>
-    <div class="gallery-single pt-lg-3 pt-1">
-        <div class="container-medium mx-auto">
+    <div class="gallery-single pt-lg-3 pt-1 ">
+        <div class="container-medium mx-auto mt-5">
             <div class="d-flex flex-wrap">
                 <nav aria-label="breadcrumb" class="d-flex justify-content-center fs-7">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="/" class="text-decoration-none">London Escorts</a>
+                            <a href="/" class="text-decoration-none">Rosecoco Escorts</a>
                         </li>
                         <li class="breadcrumb-item">
                             <a href="/profile/{{$this->user->username}}" class="text-decoration-none">{{$this->user->username}}</a>
@@ -38,15 +54,16 @@
                     <div class="d-flex justify-content-between align-items-center mb-3 mb-lg-4">
 
                         <span class="d-flex text-small align-items-center position-relative back-btn ">
-                            <a class="d-flex flex-wrap align-items-center"
-                                href="https://www.crushescorts.com/escorts/lorenza">
-                                <span class="fa-back me-2"></span>
-                                <span class="d-md-block d-none">PREVIOUS PROFILE</span>
-                                <span class="d-md-none">Prev</span>
-                            </a>
+                        @if($this->previousUser)
+                <a class="d-flex flex-wrap align-items-center" href="{{ url('/profile/' . $this->previousUser->username) }}">
+                    <span class="fa-back me-2"></span>
+                    <span class="d-md-block d-none">PREVIOUS PROFILE</span>
+                    <span class="d-md-none">Prev</span>
+                </a>
+            @endif
                         </span>
 
-                        <a href="https://www.crushescorts.com">
+                        <a href="/">
                             <img src="https://www.crushescorts.com/frontend/images/home.svg" width="25" height="25"
                                 alt="Home icon">
                         </a>
@@ -56,11 +73,13 @@
 
 
                         <span class="text-small position-relative back-btn next-btn">
-                            <a class="d-flex flex-wrap align-items-center" href="/">
+                        @if($this->nextUser)
+                            <a class="d-flex flex-wrap align-items-center" href="{{ url('/profile/' . $this->nextUser->username) }}">
                                 <span class="d-md-block d-none">NEXT PROFILE</span>
                                 <span class="d-md-none">Next</span>
                                 <span class="fa-back ms-2 mb-1"></span>
                             </a>
+                            @endif
                         </span>
                     </div>
                     <div class="gallery-single-slider-wrap position-relative">
@@ -84,110 +103,17 @@
                                                 alt="Kim" loading="eager">
                                         </a>
                                     </div>
+                                    @foreach($this->user->images as $image)
                                     <div class="splide__slide">
                                         <a class="media-holder single-profile d-block" data-fancybox="gallery"
                                             data-caption=""
-                                            href="https://crushescorts.com/storage/1808/conversions/PHOTO-2024-12-20-19-26-09-2-large.webp">
-                                            <img src="https://crushescorts.com/storage/1808/conversions/PHOTO-2024-12-20-19-26-09-2-large.webp"
-                                                alt="Kim" loading="lazy">
+                                            href="/storage/{{$image}}">
+                                            <img src="/storage/{{$image}}"
+                                                alt="{{$this->user->username}}" loading="lazy">
                                         </a>
                                     </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1810/conversions/PHOTO-2024-12-20-19-26-13-large.webp">
-                                            <img src="https://crushescorts.com/storage/1810/conversions/PHOTO-2024-12-20-19-26-13-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1811/conversions/PHOTO-2024-12-20-19-26-10-large.webp">
-                                            <img src="https://crushescorts.com/storage/1811/conversions/PHOTO-2024-12-20-19-26-10-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1812/conversions/PHOTO-2024-12-20-19-26-13-2-large.webp">
-                                            <img src="https://crushescorts.com/storage/1812/conversions/PHOTO-2024-12-20-19-26-13-2-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1813/conversions/PHOTO-2024-12-20-19-26-12-large.webp">
-                                            <img src="https://crushescorts.com/storage/1813/conversions/PHOTO-2024-12-20-19-26-12-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1814/conversions/PHOTO-2024-12-20-19-26-14-large.webp">
-                                            <img src="https://crushescorts.com/storage/1814/conversions/PHOTO-2024-12-20-19-26-14-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1815/conversions/PHOTO-2024-12-20-19-26-12-2-large.webp">
-                                            <img src="https://crushescorts.com/storage/1815/conversions/PHOTO-2024-12-20-19-26-12-2-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1816/conversions/PHOTO-2024-12-20-19-26-11-large.webp">
-                                            <img src="https://crushescorts.com/storage/1816/conversions/PHOTO-2024-12-20-19-26-11-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1817/conversions/PHOTO-2024-12-20-19-26-10-2-large.webp">
-                                            <img src="https://crushescorts.com/storage/1817/conversions/PHOTO-2024-12-20-19-26-10-2-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1818/conversions/PHOTO-2024-12-20-19-26-08-2-large.webp">
-                                            <img src="https://crushescorts.com/storage/1818/conversions/PHOTO-2024-12-20-19-26-08-2-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1820/conversions/PHOTO-2024-12-20-19-26-08-large.webp">
-                                            <img src="https://crushescorts.com/storage/1820/conversions/PHOTO-2024-12-20-19-26-08-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1821/conversions/PHOTO-2024-12-20-19-26-07-large.webp">
-                                            <img src="https://crushescorts.com/storage/1821/conversions/PHOTO-2024-12-20-19-26-07-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
-                                    <div class="splide__slide">
-                                        <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                            data-caption=""
-                                            href="https://crushescorts.com/storage/1809/conversions/PHOTO-2024-12-20-19-26-14-2-large.webp">
-                                            <img src="https://crushescorts.com/storage/1809/conversions/PHOTO-2024-12-20-19-26-14-2-large.webp"
-                                                alt="Kim" loading="lazy">
-                                        </a>
-                                    </div>
+                                    @endforeach
+                              
 
                                 </div>
                             </div>
@@ -221,35 +147,7 @@
                                 <div class="d-lg-flex flex-lg-column-reverse flex-lg-wrap">
                                     <span class="cms">
                                         <p class="my-lg-4 text-dark-gray-9">
-                                        <p>Kim is the epitome of a cheeky <a
-                                                href="https://www.crushescorts.com/categories/european-escorts"
-                                                target="_new">European escort</a> beauty with her dazzling brown eyes,
-                                            killer curves, and a <a
-                                                href="https://www.crushescorts.com/categories/busty-escorts"
-                                                target="_new">busty</a> 36D figure that turns heads wherever she goes.
-                                            Standing at 5ft4 with a petite dress size 8 frame, she&rsquo;s the perfect
-                                            mix of sultry and sweet. Kim has a warm personality to match her looks, with
-                                            a playful charm and flirtatious attitude that&rsquo;ll keep you grinning
-                                            from ear to ear.</p>
-
-                                        <p>Kim&rsquo;s services are designed to tantalize and tease, with offerings that
-                                            include OWO, <a
-                                                href="https://www.crushescorts.com/categories/role-play-escorts"
-                                                target="_new">roleplay</a>, and 69. Want to spice things up? Kim also
-                                            loves to indulge in adventurous options like rimming or a cheeky striptease.
-                                            Whether you&rsquo;re after a sensual <a
-                                                href="https://www.crushescorts.com/categories/tantric-massage-escorts"
-                                                target="_new">massage</a> to unwind or an unforgettable party companion,
-                                            she&rsquo;s here to make all your fantasies a reality.</p>
-
-                                        <p>You can find Kim in the vibrant <a
-                                                href="https://www.crushescorts.com/locations/queensway-escorts"
-                                                target="_new">Queensway</a>, ready to make your day (or night!) for just
-                                            &pound;200 an hour. She&rsquo;s the perfect mix of naughty and
-                                            sophisticated, making her the ideal choice for an unforgettable experience.
-                                            Want to explore more stunning companions? Visit our <a
-                                                href="https://www.crushescorts.com/" target="_new">London escort
-                                                gallery</a> and browse to your heart&#39;s content!</p>
+                                            {{$this->user()->profile('bio');}}
 
                                         </p>
 
@@ -259,13 +157,13 @@
                                         <span class="row">
                                             <span class="col-4 col-md-4 col-lg-3 py-2">
                                                 <h4 class="m-0 text-md-small f500">Age</h4>
-                                                <h6 class="m-0 text-small text-dark-gray-9 f500">26</h6>
+                                                <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">{{$this->user()->profile('age')}}</h6>
                                             </span>
-                                            <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                <h4 class="m-0 text-md-small f500">Bust Size</h4>
-                                                <h6 class="m-0 text-small text-dark-gray-9 f500">36D (natural)</h6>
-                                            </span>
-                                            <span class="col-4 col-md-4 col-lg-3 py-2">
+                                            <!-- <span class="col-4 col-md-4 col-lg-3 py-2">
+                                                <h4 class="m-0 text-md-small f500">Body</h4>
+                                                <h6 class="m-0 text-small text-dark-gray-9 f500">{{$this->user()->profile('body')}}</h6>
+                                            </span> -->
+                                            <!-- <span class="col-4 col-md-4 col-lg-3 py-2">
                                                 <h4 class="m-0 text-md-small f500">Eye Colour</h4>
                                                 <h6 class="m-0 text-small text-dark-gray-9 f500">Brown</h6>
                                             </span>
@@ -276,16 +174,16 @@
                                             <span class="col-4 col-md-4 col-lg-3 py-2">
                                                 <h4 class="m-0 text-md-small f500">Height</h4>
                                                 <h6 class="m-0 text-small text-dark-gray-9 f500">5ft 4in</h6>
-                                            </span>
-                                            <span class="col-4 col-md-4 col-lg-3 py-2">
+                                            </span> -->
+                                            <!-- <span class="col-4 col-md-4 col-lg-3 py-2">
                                                 <h4 class="m-0 text-md-small f500">Languages</h4>
-                                                <h6 class="m-0 text-small text-dark-gray-9 f500">English, Spanish</h6>
-                                            </span>
+                                                <h6 class="m-0 text-small text-dark-gray-9 f500">{{$this->user()->profile('languages.value')}}</h6>
+                                            </span> -->
                                             <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                <h4 class="m-0 text-md-small f500">Location</h4>
-                                                <h6 class="m-0 text-small text-dark-gray-9 f500">Queensway</h6>
+                                                <h4 class="m-0 text-md-small f500">Address</h4>
+                                                <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">{{$this->user()->profile('address')}}</h6>
                                             </span>
-                                            <span class="col-4 col-md-4 col-lg-3 py-2">
+                                            <!-- <span class="col-4 col-md-4 col-lg-3 py-2">
                                                 <h4 class="m-0 text-md-small f500">Nationality</h4>
                                                 <h6 class="m-0 text-small text-dark-gray-9 f500">Eastern European</h6>
                                             </span>
@@ -296,7 +194,7 @@
                                             <span class="col-4 col-md-4 col-lg-3 py-2">
                                                 <h4 class="m-0 text-md-small f500">Dress Size</h4>
                                                 <h6 class="m-0 text-small text-dark-gray-9 f500">8</h6>
-                                            </span>
+                                            </span> -->
                                         </span>
                                     </div>
                                 </div>
@@ -304,12 +202,12 @@
                             <div class="col-lg-5">
                                 <div
                                     class="border meeting-tab border-1 p-3 pt-4 pb-0 rounded-10 profile-meeting-tab gray-common-border gray-common-bg">
-                                    <h5 class="text-white f500 border-0 f500 bg-transparent shadow-none px-3">
+                                    <!-- <h5 class="text-white f500 border-0 f500 bg-transparent shadow-none px-3">
                                         Meeting rates
-                                    </h5>
+                                    </h5> -->
                                     <div class="">
                                         <div class="px-3 mb-4">
-                                            <div class="d-flex mb-1 pb-1">
+                                            <!-- <div class="d-flex mb-1 pb-1">
                                                 <div class="col-4 col-xl-6"></div>
                                                 <div class="col-4 col-xl-3 text-md-small f500 text-dark-gray-7">Incall
                                                 </div>
@@ -354,13 +252,13 @@
                                                     Dinner</div>
                                                 <div class="col-4 col-xl-3 text-md-small f500 text-white">£600</div>
                                                 <div class="col-4 col-xl-3 text-md-small f500 text-white">£750</div>
-                                            </div>
+                                            </div> -->
 
-                                            <a href="tel:+07478770704"
+                                            <a href="tel:{{$this->user()->profile('phone_number')}}"
                                                 class="d-flex mb-2 mt-4 align-items-center text-decoration-none bg-dark-primary-7 text-white rounded-10 call-info"
                                                 aria-label="Click Here to call us">
                                                 <span class="fa-phone-black fs-5"></span>
-                                                <span class="mx-auto">{{$this->user->phone_number}}</span>
+                                                <span class="mx-auto">{{$this->user()->profile('phone_number')}}</span>
                                             </a>
                                             <a target="_blank" class="d-flex align-items-center text-decoration-none bg-primary text-white rounded-10 call-info
                                         whatapp-bg"
@@ -385,20 +283,12 @@
                                 <div class="fonts-sub fs-4 f300 text-black-2 mb-3 f500">Listed in</div>
                                 <div class="d-flex flex-wrap align-content-start grid gap-2">
                                     
-                                    
+                                    @foreach($this->user->categories as $category)
                                     <a href="https://www.crushescorts.com/categories/busty-escorts" class="border gray-common-bg border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white"></a>
+                                    text-small text-white">{{$category->name}}</a>
+                                    @endforeach
                                    
-                                    <a href="https://www.crushescorts.com/categories/brunette-escorts" class="border gray-common-bg border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white">Brunette Escorts</a>
-                                    <a href="https://www.crushescorts.com/categories/high-class-escorts" class="border gray-common-bg border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white">High Class Escorts</a>
-                                    <a href="https://www.crushescorts.com/categories/european-escorts" class="border gray-common-bg border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white">European Escorts</a>
-                                    <a href="https://www.crushescorts.com/categories/curvy-escorts" class="border gray-common-bg border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white">Curvy Escorts</a>
-                                    <a href="https://www.crushescorts.com/categories/petite-escorts" class="border gray-common-bg border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white">Petite Escorts</a>
+                                 
                                 </div>
                             </div>
                         </div>
@@ -413,9 +303,11 @@
                             <div class="col-lg-12">
                                 <div class="fonts-sub fs-4 f300 text-black-2 mb-3 f500">Services Provided</div>
                                 <div class="d-flex flex-wrap align-content-start grid gap-2">
+                                @foreach($this->user->services as $service)
                                     <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white"> OWO Escorts</span>
-                                    <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
+                                    text-small text-white"> {{$service->name}}</span>
+                                    @endforeach
+                                    <!-- <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
                                     text-small text-white"> Role Play Escorts</span>
                                     <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
                                     text-small text-white"> 69 Escorts</span>
@@ -426,7 +318,7 @@
                                     <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
                                     text-small text-white"> Striptease Escorts</span>
                                     <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white"> Massage Escorts</span>
+                                    text-small text-white"> Massage Escorts</span> -->
                                 </div>
                             </div>
                         </div>
@@ -441,8 +333,10 @@
                             <div class="col-lg-12">
                                 <div class="fonts-sub fs-4 f300 text-black-2 mb-3 f500">Locations</div>
                                 <div class="d-flex flex-wrap align-content-start grid gap-2">
+                                @foreach($this->user->towns as $town)
                                     <a href="https://www.crushescorts.com/locations/queensway-escorts" class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white"> Queensway Escorts</a>
+                                    text-small text-white"> {{$town->name}}</a>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -722,6 +616,195 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade " id="reviewpop" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content bg-main-bg">
+            <div class="modal-header justify-content-center border-0 pt-4">
+                <button type="button" class="position-absolute start-0 border-0 bg-main-bg  px-3" data-bs-dismiss="modal" aria-label="Close"><span class="fa-close-small text-white"></span></button>
+                <button type="button" class="position-absolute start-0 border-0 bg-main-bg  px-3 d-lg-none" data-bs-dismiss="modal" aria-label="Close"><span class="fa-back text-white"></span></button>
+            </div>
+            <div class="modal-body px-5">
+                <div class="review-tab pb-2">
+                    <span class="text-center d-block">
+                        <img class="rounded-circle object-fit-cover" src="https://crushescorts.com/storage/1216/conversions/imagemOOcBX-thumb.webp" loading="lazy" width="76" height="76" alt="Abbie">
+                    </span>
+                    <form class="form py-3" id="reviews-form">
+                        <input type="hidden" name="_token" value="FGd5WYpI675N03XGwAdU5XsTdDr4e6CSJ4PSKp9Z" autocomplete="off">
+                        <input type="hidden" name="staff_id" value="132">
+                        <div id="message"></div>
+                        <div class="ratings-group">
+                            <h5 class="mt-3 mb-2 text-start">How was your experience with Abbie?</h5>
+                            <span class="user-rating justify-content-end">
+                              <input type="radio" name="rating" value="5"><span class="star"></span>
+                              <input type="radio" name="rating" value="4"><span class="star"></span>
+                              <input type="radio" name="rating" value="3"><span class="star"></span>
+                              <input type="radio" name="rating" value="2"><span class="star"></span>
+                              <input type="radio" name="rating" value="1" data-gtm-form-interact-field-id="0"><span class="star"></span>
+                            </span>
+                            <input id="review-rating" name="sel_service" hidden="" value="1">
+                        </div>
+                        <div class="form-group mb-3 position-relative">
+                            <input type="text" name="full_name" class="form-control rounded-10 text-white input__field" placeholder="">
+                            <span class="input__label">Your name</span>
+                        </div>
+                        <div class="form-group mb-3 position-relative">
+                            <input type="email" name="email" class="form-control rounded-10 text-white input__field" placeholder="">
+                            <span class="input__label">Your Email</span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="date" name="review_date" class="form-control rounded-10 form-control-date text-white flatpickr-input active">
+                        </div>
+                        <div class="form-group mb-3">
+                            <h5 class="mt-4 mb-2 text-start">Write a public review</h5>
+                            <p class="mb-2 text-start font-small text-white">Be honest, clear and detailed. Include all the good or bad, a future punter should know before booking.</p>
+                                <textarea name="message" cols="30" rows="10" class="form-control rounded-10 mt-3 text-white" placeholder="Write a public review"></textarea>
+                        </div>
+                        <input type="hidden" name="user_review" value="1">
+                        <div class="text-center">
+                            <button id="reviewSubmit" name="btn_post_review"
+                                    class="btn w-100 rounded-10 btn text-md-small f400 text-white bg-primary bg-hover-primary-dark review-btn rounded-2"
+                                    type="submit" value="Submit review">Submit review </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+</div>
+
+
+        
+<script>
+        $(document).ready(function() {
+
+            // Clear the form when the modal is opened
+            $('#revieweModal').on('shown.bs.modal', function () {
+                $('#reviews-form')[0].reset(); // Reset all form fields
+                $('.invalid-feedback').text(''); // Clear validation messages
+                $('.form-control').removeClass('is-invalid'); // Remove invalid class
+                $('#message').html(''); // Clear any messages
+            });
+
+
+            $("#reviews-form").validate({
+                errorClass: "text-danger", // Add the custom error class
+                rules: {
+                    rating: {
+                        required: true,
+                    },
+                    full_name: {
+                        required: true,
+                        minlength: 3,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                    },
+                    review_date: {
+                        required: true,
+                        date: true,
+                    },
+                    message: {
+                        required: true,
+                        minlength: 10,
+                    },
+                },
+                messages: {
+                    rating: "Please select a rating.",
+                    full_name: {
+                        required: "Your name is required.",
+                        minlength: "Your name must be at least 3 characters.",
+                    },
+                    email: {
+                        required: "Your email is required.",
+                        email: "Please enter a valid email address.",
+                    },
+                    review_date: "Please select a date.",
+                    message: {
+                        required: "Please write your review.",
+                        minlength: "Your review must be at least 10 characters long.",
+                    },
+                },
+                errorPlacement: function (error, element) {
+                    if (element.attr("name") == "rating") {
+                        error.insertAfter(".ratings-group"); // Place error message after the radio group
+                    } else {
+                        error.insertAfter(element); // Default placement
+                    }
+                },
+                submitHandler: function (form) {
+                    // Collect form data
+                    let formData = $(form).serialize();
+
+                    // Send AJAX request
+                    $.ajax({
+                        url: "https://www.crushescorts.com/review/store", // Get the form action URL
+                        type: 'POST', // Get the form method
+                        data: formData,
+                        beforeSend: function () {
+                            $("#reviewSubmit").prop("disabled", true).val("Submitting...");
+                        },
+                        success: function (response) {
+                            // Handle success
+                            $("#message").html(
+                                '<div class="alert alert-success">Your review has been submitted successfully!</div>'
+                            );
+                            $(form)[0].reset(); // Reset the form
+                        },
+                        error: function (xhr) {
+                            // Handle error
+                            let errors = xhr.responseJSON.errors;
+                            let errorHtml = '<div class="alert alert-danger"><ul>';
+                            $.each(errors, function (key, value) {
+                                errorHtml += `<li>${value}</li>`;
+                            });
+                            errorHtml += "</ul></div>";
+                            $("#message").html(errorHtml);
+                        },
+                        complete: function () {
+                            $("#reviewSubmit").prop("disabled", false).val("Submit review");
+                        },
+                    });
+                },
+            });
+
+
+            // Existing AJAX form submission code here
+            // $('#reviews-form').on('submit', function(event) {
+            //     event.preventDefault(); // Prevent the form from submitting via the browser
+            //
+            //     $.ajax({
+            //         url: $(this).attr('action'), // Use the form's action attribute as the URL
+            //         method: $(this).attr('method'), // Use the form's method attribute (POST)
+            //         data: $(this).serialize(), // Serialize the form data
+            //         success: function(response) {
+            //             if(response.status === 'success') {
+            //                 $('#message').html('<div class="alert alert-success">' + response.message + '</div>');
+            //                 $('#reviews-form')[0].reset(); // Reset the form
+            //             }
+            //         },
+            //         error: function(xhr) {
+            //             if(xhr.status === 422) { // Validation error
+            //                 let errors = xhr.responseJSON.errors;
+            //                 $.each(errors, function(key, value) {
+            //                     let input = $('[name="' + key + '"]');
+            //                     input.addClass('is-invalid');
+            //                     input.next('.invalid-feedback').text(value[0]);
+            //                 });
+            //             } else {
+            //                 $('#message').html('<div class="alert alert-danger">An error occurred. Please try again.</div>');
+            //             }
+            //         }
+            //     });
+            // });
+        });
+    </script>
+    
     @endvolt
 </x-dynamic-component>
+
+

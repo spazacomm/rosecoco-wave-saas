@@ -75,6 +75,11 @@ class User extends WaveUser
         return $this->hasMany(Gallery::class);
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
 
     protected static function boot()
     {

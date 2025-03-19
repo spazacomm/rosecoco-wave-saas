@@ -9,7 +9,7 @@
             <div class="banner-bottom mb-b-bottom z-2 position-relative pb-3">
                 
             </div>
-            <div class="pt-lg-3 position-relative z-2 hero-text mt-5 ">
+            <div class="pt-lg-3 position-relative z-2 hero-text  ">
                 <div class="container pt-lg-5">
                     <div class="row m-0 pt-lg-5">
                         <div class="col-lg-12 col-md-12 px-0 mt-5">

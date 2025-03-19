@@ -61,6 +61,13 @@
 
 					]),
 
+					\Filament\Forms\Components\Fieldset::make('bio')
+					->schema([
+
+						...($this->dynamicFields( config('profile.bio_fields') ))
+					]),
+
+
 					\Filament\Forms\Components\Fieldset::make('Attributes')
 					->schema([
 
@@ -229,6 +236,9 @@
 			$this->saveDynamicFields($fieldsToSave);
 
 			$fieldsToSave = config('profile.contact_fields');
+			$this->saveDynamicFields($fieldsToSave);
+
+			$fieldsToSave = config('profile.bio_fields');
 			$this->saveDynamicFields($fieldsToSave);
 		}
 

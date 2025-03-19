@@ -60,5 +60,17 @@ return [
         ],
         
     ],
+
+    'bio_fields' => [
+       
+        'bio' => [
+            'label' => 'Bio',
+            'type' => MarkdownEditor::class,
+            'rules' => 'required',
+            'columnSpan' => 2
+        ],
+        
+        
+    ],
     
 ];

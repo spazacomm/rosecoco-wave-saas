@@ -46,6 +46,10 @@ trait HasDynamicFields
                 $newField->rules( $field['rules'] );
             }
 
+            if(isset($field['columnSpan'])){
+                $newField->columnSpan( $field['columnSpan'] );
+            }
+
             $keyValue = auth()->user()->profileKeyValues->where('key', $key)->first();
             
             $value = $keyValue->value ?? '';
