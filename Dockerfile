@@ -26,7 +26,7 @@ RUN apt update && apt install -y nodejs npm
 
 # Install Composer
 # Install Composer manually
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/sbin/php-fpm/composer --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/sbin/php-fpm/ --filename=composer
 
 
 # Copy existing application directory contents
