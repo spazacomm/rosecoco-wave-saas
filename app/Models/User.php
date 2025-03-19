@@ -41,6 +41,10 @@ class User extends WaveUser
         'remember_token',
     ];
 
+    protected $casts = [
+        'images' => 'array',
+    ];
+
     // Define the services relationship
     public function services(): BelongsToMany
     {

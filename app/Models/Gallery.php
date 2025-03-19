@@ -10,9 +10,13 @@ class Gallery extends Model
     //
     use HasFactory;
 
-    protected $fillable = ['user_id', 'path'];
+    protected $fillable = ['user_id', 'images'];
 
     protected $table = 'gallery';
+
+    protected $casts = [
+        'images' => 'array', // Automatically convert JSON to array
+    ];
 
     public function user()
     {

@@ -13,7 +13,9 @@
 	use App\Models\City;
 	use App\Models\Town;
 	use App\Models\Category;
+    use App\Models\Gallery;
     
+
 	middleware('auth');
     name('settings.profile');
 
@@ -23,6 +25,7 @@
         
         public ?array $data = [];
 		public ?string $avatar = null;
+
 
 		public function mount(): void
         {
@@ -144,11 +147,14 @@
 
 					\Filament\Forms\Components\Fieldset::make('Gallery')
 					->schema([
-						\Filament\Forms\Components\FileUpload::make('gallery')
+						\Filament\Forms\Components\FileUpload::make('images')
                         ->label('Gallery Images')
 						->multiple()
-						->default(fn () => auth()->user()?->gallery()->pluck('path')->map(fn ($path) => "/storage/{$path}")->toArray())
-						->columnspan(2),
+						->directory('gallery')
+						->maxFiles(10) // Optional limit
+						->columnspan(2)
+						->default( fn() => auth()->user()->images )
+						
 					]),
 
 			
@@ -178,7 +184,7 @@
 
 			$this->saveFormFields($state);
 
-			$this->saveGalleryImages();
+	
 
 			Notification::make()
                 ->title('Successfully saved your profile settings')
@@ -196,32 +202,7 @@
 			$this->js('window.dispatchEvent(new CustomEvent("refresh-avatar"));');
 		}
 
-		private function saveGalleryImages()
-		{
-			dd($this->gallery);
-			if (!empty($this->gallery)) {
-				
-				foreach ($this->gallery as $image) {
-
-					$extension = $image->getClientOriginalExtension();
-
-					$filename = uniqid() . '.' . $extension;
-					$path = 'gallery/' . $filename;
-
-					//$path = uniqid() . '.png';
-					$image = \Intervention\Image\ImageManagerStatic::make($image)->resize(800, 800);
-					Storage::disk('public')->put($path, $image->encode());
-
-				
-					auth()->user()->gallery()->create([
-						'user_id' => auth()->id(), 
-						'path' => $path
-					]);
-					
-				}
-			}
-		}
-
+		
 		private function saveFormFields($state){
 			auth()->user()->name = $state['name'];
 			auth()->user()->email = $state['email'];
@@ -229,6 +210,7 @@
 			auth()->user()->outcall = $state['outcall'];
 			auth()->user()->country_id = $state['country'];
 			auth()->user()->city_id = $state['city'];
+			auth()->user()->images = $state['images'];
 			auth()->user()->save();
 			
 			if (isset($state['services'])) {
