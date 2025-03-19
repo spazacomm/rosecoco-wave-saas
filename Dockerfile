@@ -33,7 +33,7 @@ RUN chmod +x /usr/local/bin/composer
 COPY . .
 
 
-#USER root
+USER root
 
 RUN ln -s $(which php) /usr/local/sbin/php
 
