@@ -1,6 +1,12 @@
 # Use an official Ubuntu or Debian image as the base
 FROM ubuntu:22.04
 
+
+
+# Set environment variables to avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+
 # Set working directory
 WORKDIR /var/www
 
