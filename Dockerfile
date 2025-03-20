@@ -33,7 +33,6 @@ RUN apt-get update && apt-get install -y \
     php8.4-pdo \
     php8.4-mysql \
     php8.4-exif \
-    php8.4-pcntl \
     php8.4-intl \
     php8.4-zip \
     && apt-get clean
