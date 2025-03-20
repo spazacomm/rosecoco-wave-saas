@@ -36,6 +36,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Verify Composer installation
 RUN /usr/local/bin/composer/composer --version
 
+RUN chmod +x /usr/local/bin/composer/composer
+
 RUN composer --version
 # RUN export PATH="$PATH:/usr/local/sbin"
 # RUN composer --version
