@@ -25,14 +25,14 @@ RUN apt-get update && apt-get install -y \
 RUN apt update && apt install -y nodejs npm
 
 # Create the target directory
-RUN mkdir -p /usr/local/sbin/php-fpm
+#RUN mkdir -p /usr/local/sbin/php-fpm
 
 # Install Composer manually
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/sbin/php-fpm --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/sbin --filename=composer
 RUN chmod +x /usr/local/sbin/php-fpm/composer
 
 # Ensure the correct PATH is set
-ENV PATH="/usr/local/sbin/php-fpm:$PATH"
+ENV PATH="/usr/local/sbin:$PATH"
 
 # Verify Composer installation
 RUN composer --version
