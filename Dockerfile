@@ -25,24 +25,10 @@ RUN apt-get update && apt-get install -y \
 RUN apt update && apt install -y nodejs npm
 
 
-
-# Create the target directory
-RUN mkdir -p /usr/local/bin/composer
-
-# Install Composer
 # Install Composer manually
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/composer --filename=composer
-
-# Verify Composer installation
-RUN /usr/local/bin/composer/composer --version
-
-RUN chmod +x /usr/local/bin/composer/composer
-
-RUN export PATH="$PATH:/usr/local/bin/composer"
-
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN chmod +x /usr/local/bin/composer
 RUN composer --version
-# RUN export PATH="$PATH:/usr/local/sbin"
-# RUN composer --version
 
 # Copy existing application directory contents
 COPY . /var/www
