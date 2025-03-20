@@ -40,6 +40,7 @@ RUN composer --version
 # Copy existing application directory contents
 COPY . /var/www
 
+RUN ls -la /var/www
 
 #USER root
 RUN $(which php)
@@ -55,6 +56,8 @@ RUN composer install
 RUN npm install
 RUN npm run build
 # RUN php artisan key:generate
+
+RUN ls -la /var/www
 
 # # Set permissions
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
