@@ -1,11 +1,12 @@
-# Use the official PHP image as base
-FROM php:8.4-fpm
+# Use an official Ubuntu or Debian image as the base
+FROM ubuntu:22.04
 
 # Set working directory
 WORKDIR /var/www
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
+    software-properties-common \
     git \
     curl \
     libpng-dev \
@@ -14,26 +15,38 @@ RUN apt-get update && apt-get install -y \
     locales \
     zip \
     unzip \
-    jpegoptim optipng pngquant gifsicle \
+    jpegoptim \
+    optipng \
+    pngquant \
+    gifsicle \
     vim \
     libicu-dev \
     libzip-dev \
     libonig-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd bcmath mbstring pdo pdo_mysql exif pcntl intl zip
+    && add-apt-repository ppa:ondrej/php \
+    && apt-get update && apt-get install -y \
+    php8.4-fpm \
+    php8.4-cli \
+    php8.4-gd \
+    php8.4-bcmath \
+    php8.4-mbstring \
+    php8.4-pdo \
+    php8.4-mysql \
+    php8.4-exif \
+    php8.4-pcntl \
+    php8.4-intl \
+    php8.4-zip \
+    && apt-get clean
 
-RUN apt update && apt install -y nodejs npm
-
-# Create the target directory
-#RUN mkdir -p /usr/local/sbin/php-fpm
-RUN ls -la /usr/local/sbin
+# Install Node.js and npm
+RUN apt-get update && apt-get install -y nodejs npm
 
 # Install Composer manually
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/sbin --filename=composer
-RUN chmod +x /usr/local/sbin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN chmod +x /usr/local/bin/composer
 
 # Ensure the correct PATH is set
-ENV PATH="/usr/local/sbin:$PATH"
+ENV PATH="/usr/local/bin:$PATH"
 
 # Verify Composer installation
 RUN composer --version
@@ -41,37 +54,17 @@ RUN composer --version
 # Copy existing application directory contents
 COPY . /var/www
 
-RUN ls -la /var/www
-
-#USER root
-RUN $(which php)
-RUN ln -s $(which php) /usr/local/sbin/php
-
-
-
-# # Ensure .env file exists
-# RUN if [ ! -f .env ]; then cp .env.example .env; fi
-
-# # Install Laravel dependencies
+# Install Laravel dependencies
 RUN composer install
 RUN npm install
 RUN npm run build
-# RUN php artisan key:generate
 
-RUN ls -la /var/www
-
-# # Set permissions
+# Set permissions
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# RUN chmod 644 /var/www/.env
-
 # Change current user to www-data
 USER www-data
-
-
-# # Copy Nginx configuration
-# COPY nginx.conf /etc/nginx/sites-available/default
 
 # Expose port
 EXPOSE 9000
