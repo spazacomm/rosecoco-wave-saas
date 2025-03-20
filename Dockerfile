@@ -1,11 +1,9 @@
 # Use an official Ubuntu or Debian image as the base
 FROM ubuntu:22.04
 
-
-
 # Set environment variables to avoid interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=Etc/UTC
+ENV TZ=Africa/Nairobi
 
 # Set working directory
 WORKDIR /var/www
@@ -29,6 +27,8 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libzip-dev \
     libonig-dev \
+    && ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata \
     && add-apt-repository ppa:ondrej/php \
     && apt-get update && apt-get install -y \
     php8.4-fpm \
@@ -47,11 +47,11 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update && apt-get install -y nodejs npm
 
 # Install Composer manually
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN chmod +x /usr/local/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/sbin --filename=composer
+RUN chmod +x /usr/local/sbin/composer
 
 # Ensure the correct PATH is set
-ENV PATH="/usr/local/bin:$PATH"
+ENV PATH="/usr/local/sbin:$PATH"
 
 # Verify Composer installation
 RUN composer --version
