@@ -38,6 +38,8 @@ RUN /usr/local/bin/composer/composer --version
 
 RUN chmod +x /usr/local/bin/composer/composer
 
+RUN export PATH="$PATH:/usr/local/bin/composer"
+
 RUN composer --version
 # RUN export PATH="$PATH:/usr/local/sbin"
 # RUN composer --version
