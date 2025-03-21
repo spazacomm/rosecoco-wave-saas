@@ -65,7 +65,7 @@ return [
        
         'bio' => [
             'label' => 'Bio',
-            'type' => MarkdownEditor::class,
+            'type' => RichEditor::class,
             'rules' => 'required',
             'columnSpan' => 2
         ],
