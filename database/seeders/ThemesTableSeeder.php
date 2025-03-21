@@ -24,12 +24,12 @@ class ThemesTableSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Anchor Theme',
                 'folder' => 'anchor',
-                'active' => 1,
+                'active' => 0,
                 'version' => 1.0
             ),
             1 => 
             array (
-                'id' => 1,
+                'id' => 2,
                 'name' => 'Rosec Theme',
                 'folder' => 'rosec',
                 'active' => 1,
