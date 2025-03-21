@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id'); // Auto-incrementing UNSIGNED INTEGER (primary key)
             $table->unsignedBigInteger('author_id'); // UNSIGNED INTEGER for the foreign key to the users table
-            $table->unsignedInteger('category_id')->nullable(); // UNSIGNED INTEGER for the foreign key to the categories table, nullable
+            $table->unsignedBigInteger('category_id')->nullable(); // UNSIGNED INTEGER for the foreign key to the categories table, nullable
             $table->string('title', 191); // VARCHAR equivalent column
             $table->string('seo_title', 191)->nullable(); // VARCHAR equivalent column, nullable
             $table->text('excerpt')->nullable(); // TEXT column, nullable
