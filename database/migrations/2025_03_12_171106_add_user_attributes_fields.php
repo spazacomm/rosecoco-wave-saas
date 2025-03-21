@@ -16,6 +16,7 @@ return new class extends Migration
             $table->boolean('outcall')->default(true);
             $table->integer('country_id')->nullable();
             $table->integer('city_id')->nullable();
+            $table->boolean('is_approved')->default(false);
            
         });
     }
@@ -30,6 +31,7 @@ return new class extends Migration
             $table->dropColumn('outcall');
             $table->dropColumn('country_id');
             $table->dropColumn('city_id');
+            $table->dropColumn('is_approved');
         });
     }
 };
