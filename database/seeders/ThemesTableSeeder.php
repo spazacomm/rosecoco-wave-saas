@@ -26,6 +26,14 @@ class ThemesTableSeeder extends Seeder
                 'folder' => 'anchor',
                 'active' => 1,
                 'version' => 1.0
+            ),
+            1 => 
+            array (
+                'id' => 1,
+                'name' => 'Rosec Theme',
+                'folder' => 'rosec',
+                'active' => 1,
+                'version' => 1.0
             )
         ));
         
