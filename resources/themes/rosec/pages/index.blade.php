@@ -2,17 +2,23 @@
     use function Laravel\Folio\{name};
     use Livewire\Volt\Component;
     use Livewire\Attributes\Computed;
+  
     name('home');
 
     new class extends Component
     {
         public $escorts;
+     
 
         #[Computed]
         public function escorts()
         {
             return config('wave.user_model')->get();
         }
+
+      
+
+
     }
 ?>
 
@@ -27,7 +33,7 @@
         
         <x-marketing.sections.banner />
         <x-marketing.sections.escort_list />
-        <x-marketing.sections.home_content />
+        <!-- <x-marketing.sections.home_content /> -->
       
 
 </x-layouts.marketing>

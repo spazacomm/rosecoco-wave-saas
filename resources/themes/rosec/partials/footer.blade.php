@@ -1,7 +1,7 @@
 <div class="divider mx-auto d-lg-none border-top border-dark-gray-1 my-5 d-md-block d-none w-100"></div>
 
 <footer class="footer mt-5 inline-block w-100">
-    <div class="container mt-md-5 mb-4 mb-lg-0 position-relative">
+    <!-- <div class="container mt-md-5 mb-4 mb-lg-0 position-relative">
         <div class="row m-0 me-xl-0 position-relative footerRow pe-0">
             <div class="col-lg-5 col-xl-4 position-relative accordion-custome">
                 <input class="d-lg-none position-absolute w-100 h-100 accordion-custome-target opacity-0 start-0 top-0" type="checkbox" name="Explore" aria-label="Navigation">
@@ -53,13 +53,13 @@
                     <div class="col-12 order-lg-4">
                             </div>
                 
-    </div>
+    </div> -->
     <div class="divider mx-auto border-top border-dark-gray-1 d-md-block d-none w-100"></div>
     <div class="container">
         <div class="row mt-lg-4 pt-3 mb-3">
             <div class="col-lg-6">
                 <div class="">
-                    <span class="d-block text-light-black-4 f300">&copy; Crush Escorts 2025. </span>
+                    <span class="d-block text-light-black-4 f300">&copy; Rosecoco {{date('Y')}}. </span>
                     <ol class="breadcrumb mb-0 mb-md-4 me-lg-3 pt-lg-0 pt-3">
                         <li class="breadcrumb-item"><a class="text-light-black-4 text-hover-white text-small f300" href="https://www.crushescorts.com/terms-conditions">Terms & Conditions</a></li>
                         <li class="breadcrumb-item"><a class="text-light-black-4 text-hover-white text-small f300" href="https://www.crushescorts.com/privacy-policy">Privacy Policy</a></li>
@@ -67,9 +67,9 @@
 
                 </div>
             </div>
-            <div class="col-lg-6 text-lg-end">
+            <!-- <div class="col-lg-6 text-lg-end">
                 <span class="d-block text-light-black-4 f300">Design and Development by <a target="_blank" class="text-light-black-4 text-hover-primary" href="https://adultcreative.com">Adult Creative</a></span>
-            </div>
+            </div> -->
         </div>
     </div>
 </footer>
