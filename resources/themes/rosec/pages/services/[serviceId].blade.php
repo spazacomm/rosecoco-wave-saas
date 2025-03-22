@@ -1,27 +1,45 @@
-
 <?php
 
-use function Laravel\Folio\{middleware, name};
-    use Livewire\Volt\Component;
-    use Livewire\Attributes\Computed;
-    name('wave.escorts');
-   
+use function Laravel\Folio\name;
+use Livewire\Volt\Component;
+use App\Models\Service;
 
-    new class extends Component
+name('services/{serviceId}');
+
+new class extends Component
+{
+    public int $serviceId;
+    public Service $service;
+    public $escorts;
+
+    public function mount($serviceId)
     {
-       // public $escorts;
-
-
-        #[Computed]
-        public function escorts()
-        {
-            return config('wave.user_model')::query()->get();
-        }
+        $this->serviceId = (int) $serviceId;
+        $this->service = Service::findOrFail($this->serviceId);
+        $this->escorts = $this->service->users()->get();
     }
-?>
 
-<div class="container">
-@volt('wave.escorts')
+    
+};
+
+?>
+@volt('services/{serviceId}')
+<div>
+<x-layouts.marketing
+    :seo="[
+        'title'         => setting('site.title', 'Rosecoco'),
+        'description'   => setting('site.description', 'Escort Listing Directory'),
+        'image'         => url('/og_image.png'),
+        'type'          => 'website'
+    ]"
+>
+    <x-marketing.sections.banner 
+        :title="$service->name" 
+        :description="$service->description" 
+    />
+
+    <div class="container">
+
    <div class="row m-0" id="profile-gallery">
         @foreach($this->escorts as $escort)
         
@@ -51,5 +69,10 @@ use function Laravel\Folio\{middleware, name};
       @endforeach
       
    </div>
-@endvolt
+
 </div>
+
+    <!-- <x-marketing.sections.home_content /> -->
+</x-layouts.marketing>
+    </div>
+    @endvolt

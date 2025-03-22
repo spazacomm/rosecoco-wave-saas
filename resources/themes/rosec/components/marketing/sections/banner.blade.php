@@ -1,7 +1,7 @@
 
 <?php
 
-use function Laravel\Folio\{middleware, name};
+    use function Laravel\Folio\{middleware, name};
     use Livewire\Volt\Component;
     use Livewire\Attributes\Computed;
     use App\Models\City;
@@ -11,6 +11,16 @@ use function Laravel\Folio\{middleware, name};
     new class extends Component
     {
        // public $cities;
+
+        public  $banner_title;
+        public  $banner_description;
+
+        public function mount($title = 'Rosecoco Escorts', $description = 'Looking for escorts near you? We have a wide range of local escorts available 24/7 for incall and outcall escort services. Browse our full selection to find the perfect escort. Each escort offers a selection of services they specialise in and enjoy providing, including kinks, fetishes, dates and experiences. To book, simply find an escort who matches your desires, then give them a call.')
+        {
+            $this->banner_title = $title;
+            $this->banner_description = $description;
+        }
+
 
        #[Computed]
        public function cities()
@@ -36,13 +46,9 @@ use function Laravel\Folio\{middleware, name};
             <div class="container pt-lg-5">
                 <div class="row m-0 pt-lg-5">
                     <div class="col-lg-12 col-md-12 px-0 mt-5">
-                        <h1>Rosecoco Escorts</h1>
+                        <h1>{{$banner_title}} Escorts</h1>
                         <div class="cms">
-                            <p>Meet hot <strong> escorts</strong> today!&nbsp;We have a huge range of companions
-                                available right now for incall and outcall escort services. You&#39;re guaranteed to
-                                find the perfect escort by browsing the profiles below, each filled with genuine escort
-                                photos, selfies and videos as well as reviews, stats, rates, services and a detailed
-                                description of what each escort is personally like. </p>
+                            <p>{{$banner_description}}</p>
                         </div>
                     </div>
                 </div>
