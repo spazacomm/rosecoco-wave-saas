@@ -655,7 +655,7 @@ use function Laravel\Folio\{middleware, name};
                     <ul class="locations">
                         @foreach($group as $category)
                             <li class="mb-3 mb-lg-1">
-                                <a href="{{ url('/categories/' . $category->id) }}" aria-label="{{ $category->name }}" class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $location->name }}</a>
+                                <a href="{{ url('/categories/' . $category->id) }}" aria-label="{{ $category->name }}" class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $category->name }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -887,7 +887,7 @@ use function Laravel\Folio\{middleware, name};
                     <ul class="locations">
                         @foreach($group as $service)
                             <li class="mb-3 mb-lg-1">
-                                <a href="{{ url('/services/' . $service->id) }}" aria-label="{{ $service->name }}" class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $location->name }}</a>
+                                <a href="{{ url('/services/' . $service->id) }}" aria-label="{{ $service->name }}" class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $service->name }}</a>
                             </li>
                         @endforeach
                     </ul>
