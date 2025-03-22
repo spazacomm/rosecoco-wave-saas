@@ -1,3 +1,45 @@
+
+<?php
+
+use function Laravel\Folio\{middleware, name};
+    use Livewire\Volt\Component;
+    use Livewire\Attributes\Computed;
+    use App\Models\City;
+    use App\Models\Category;
+    use App\Models\Service;
+    name('header');
+   
+
+    new class extends Component
+    {
+       // public $cities;
+
+       #[Computed]
+       public function cities()
+       {
+           return City::all()->groupBy(function($city) {
+            return strtoupper($city->name[0]);
+        });
+       }
+
+       #[Computed]
+       public function categories()
+       {
+           return Category::all()->groupBy(function($city) {
+            return strtoupper($city->name[0]);
+        });
+       }
+
+       #[Computed]
+       public function services()
+       {
+           return Service::all()->groupBy(function($city) {
+            return strtoupper($city->name[0]);
+        });
+       }
+    }
+?>
+@volt('header')
 <header class="header header-min">
     <nav class="navbar navbar-expand-lg py-0">
         <div class="container">
@@ -33,7 +75,7 @@
                                         <div class="container">
                                             <span class="have-child-Loc d-block d-lg-none">Locations</span>
                                             <div class="row">
-                                                <div class="colm-list colm-xl-7 colm-lg-4">
+                                                <!-- <div class="colm-list colm-xl-7 colm-lg-4">
                                                     <div class="colm-list-item mb-2">
                                                         <h5 class="text-uppercase d-flex fs-5 text-primary"><b>B</b>
                                                         </h5>
@@ -382,7 +424,34 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                </div>
+                                                </div> -->
+                                                @php
+    // Determine the number of columns you want
+    $numColumns = 2;
+
+    // Split the groups into chunks for each column
+    $columns = $this->cities->chunk(ceil(count($this->cities) / $numColumns));
+@endphp
+
+<div class="row">
+    @foreach($columns as $column)
+        <div class="colm-list colm-xl-7 colm-lg-4">
+            @foreach($column as $letter => $group)
+                <div class="colm-list-item mb-2">
+                    <h5 class="text-uppercase d-flex fs-5 text-primary"><b>{{ $letter }}</b></h5>
+                    <ul class="locations">
+                        @foreach($group as $location)
+                            <li class="mb-3 mb-lg-1">
+                                <a href="{{ url('/locations/' . $location->id) }}" aria-label="{{ $location->name }}" class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $location->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+</div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -393,7 +462,7 @@
                                         <div class="container">
                                             <span class="have-child-Loc d-block d-lg-none">Categories</span>
                                             <div class="row">
-                                                <div class="colm-list colm-xl-7 colm-lg-4">
+                                                <!-- <div class="colm-list colm-xl-7 colm-lg-4">
                                                     <div class="colm-list-item mb-2">
                                                         <h5 class="text-uppercase d-flex fs-5 text-primary"><b>B</b>
                                                         </h5>
@@ -568,7 +637,34 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                </div>
+                                                </div> -->
+                                                @php
+    // Determine the number of columns you want
+    $numColumns = 3;
+
+    // Split the groups into chunks for each column
+    $columns = $this->categories->chunk(ceil(count($this->categories) / $numColumns));
+@endphp
+
+<div class="row">
+    @foreach($columns as $column)
+        <div class="colm-list colm-xl-7 colm-lg-4">
+            @foreach($column as $letter => $group)
+                <div class="colm-list-item mb-2">
+                    <h5 class="text-uppercase d-flex fs-5 text-primary"><b>{{ $letter }}</b></h5>
+                    <ul class="locations">
+                        @foreach($group as $category)
+                            <li class="mb-3 mb-lg-1">
+                                <a href="{{ url('/categories/' . $category->id) }}" aria-label="{{ $category->name }}" class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $location->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+</div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -579,7 +675,7 @@
                                         <div class="container">
                                             <span class="have-child-Loc d-block d-lg-none">Services</span>
                                             <div class="row">
-                                                <div class="colm-list colm-xl-7 colm-lg-4">
+                                                <!-- <div class="colm-list colm-xl-7 colm-lg-4">
 
                                                     <div class="colm-list-item mb-2">
                                                         <h5 class="text-uppercase d-flex fs-5 text-primary"><b>#</b>
@@ -772,7 +868,36 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                </div>
+                                                </div> -->
+
+                                                @php
+    // Determine the number of columns you want
+    $numColumns = 3;
+
+    // Split the groups into chunks for each column
+    $columns = $this->services->chunk(ceil(count($this->services) / $numColumns));
+@endphp
+
+<div class="row">
+    @foreach($columns as $column)
+        <div class="colm-list colm-xl-7 colm-lg-4">
+            @foreach($column as $letter => $group)
+                <div class="colm-list-item mb-2">
+                    <h5 class="text-uppercase d-flex fs-5 text-primary"><b>{{ $letter }}</b></h5>
+                    <ul class="locations">
+                        @foreach($group as $service)
+                            <li class="mb-3 mb-lg-1">
+                                <a href="{{ url('/services/' . $service->id) }}" aria-label="{{ $service->name }}" class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $location->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+</div>
+
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -806,3 +931,4 @@
         </div>
     </nav>
 </header> <!-- header End -->
+@endvolt
