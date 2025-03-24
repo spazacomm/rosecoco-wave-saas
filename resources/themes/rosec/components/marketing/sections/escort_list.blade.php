@@ -24,6 +24,8 @@ use function Laravel\Folio\{middleware, name};
 @volt('wave.escorts')
    <div class="row m-0" id="profile-gallery">
         @foreach($this->escorts as $escort)
+
+        @if(!$escort->hasRole('admin'))
         
       <div class="col-md-4 col-lg-3 col-6 mb-4 pb-md-2 px-md-2 px-2 gallery-item">
          <div class="d-block position-relative">
@@ -49,6 +51,7 @@ use function Laravel\Folio\{middleware, name};
          </span>
       </div>
 
+      @endif
      
       @endforeach
       
