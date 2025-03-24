@@ -35,7 +35,9 @@ use function Laravel\Folio\{middleware, name};
          </div>
          <span class="d-block mt-3 position-relative">
          <span class="d-block f400 mb-1 pe-4 me-2"><a class="h4 text-primary-light f500 text-uppercase" href="/profile/{{$escort->username}}">{{$escort->username}}</a></span>
-         <span class="d-block text-small text-uppercase f500 text-white lh-1 mb-1 tagline"> {{$escort->city->name}} </span>
+         <span class="d-block text-small text-uppercase f500 text-white lh-1 mb-1 tagline">
+    {{ $escort->city ? $escort->city->name : '' }}
+</span>
          <span class="text-md-small text-white f500 lh-1 text-uppercase d-block location">@if($escort->incall)Incall @endif / @if($escort->outcall)Outcall @else <span class="line-through text-red-500">Outcall</span> @endif </span>
          <span class="favourites d-flex justify-content-center align-items-center top-0 end-0 position-absolute">
          <i class="fa-star me-md-1"></i>

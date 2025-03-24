@@ -43,6 +43,9 @@
     <meta name="description" content="{{ $seo->description }}">
 @endif
 
+<link rel="preload" href="/css/fonts/crushscortsfontsicon.ttf" as="font">
+        <link rel="preload" href="https://www.crushescorts.com/frontend/css/fonts.min.css" as="style">
+
 @filamentStyles
 @livewireStyles
 @vite(['resources/themes/rosec/assets/css/app.css', 'resources/themes/rosec/assets/js/app.js'])
