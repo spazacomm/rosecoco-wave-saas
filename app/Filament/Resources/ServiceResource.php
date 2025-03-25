@@ -26,6 +26,9 @@ class ServiceResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(191),
+                Forms\Components\Textarea::make('description')
+                    ->required()
+                    ->maxLength(191),
             ]);
     }
 
@@ -34,6 +37,8 @@ class ServiceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('description')
                     ->searchable(),
             ])
             ->filters([

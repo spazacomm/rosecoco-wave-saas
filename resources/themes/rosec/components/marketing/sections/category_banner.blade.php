@@ -5,7 +5,8 @@
     use Livewire\Volt\Component;
     use Livewire\Attributes\Computed;
     use App\Models\City;
-    name('home_banner');
+    use App\Models\Category;
+    name('category_banner');
    
 
     new class extends Component
@@ -23,13 +24,13 @@
 
 
        #[Computed]
-       public function cities()
+       public function categories()
        {
-           return City::all();
+           return Category::all();
        }
     }
 ?>
-@volt('home_banner')
+@volt('category_banner')
 <div class="container-fluid px-0 mb-5 media-holder media-holder-overlay">
 
 
@@ -47,8 +48,9 @@
                 <div class="row m-0 pt-lg-5">
                     <div class="col-lg-12 col-md-12 px-0 mt-5">
                         <h1>{{$banner_title}}</h1>
-                        <div class="cms">
-                            <p>{{$banner_description}}</p>
+                        <div class="cms pt-3">
+                            <p>Discover the best <strong>{{$banner_title}}</strong> tailored to your preferences. We offer a curated selection of verified listings to ensure quality, safety, and discretion. Whether you're seeking companionship, professional services, or a unique experience, our platform makes it easy to find exactly what you need. Browse through our listings by country, city, or region and connect with trusted providers today. Your perfect experience is just a click away</p>
+                            <!-- <p>Explore the finest {{$banner_title}} available near you. Our verified listings ensure quality, discretion, and a seamless experience. Browse now and find exactly what you’re looking for!</p> -->
                         </div>
                     </div>
                 </div>
@@ -68,16 +70,11 @@
             <div class="container">
                 <div class="row m-0 mb-1">
                     <span class="d-flex gap gap-2 sub-menu-wrap position-relative align-items-center">
-                        @foreach($this->cities as $city)
+                        @foreach($this->categories as $category)
                         <a class="py-2 px-3 text-white text-small text-nowrap border border-dark-gray-5 rounded-pill"
-                            href="/locations/{{$city->id}}">{{$city->name}} </a>
+                            href="/categories/{{$category->id}}">{{$category->name}} </a>
                         @endforeach
-                        <!-- <a class="py-2 px-3 text-white text-small text-nowrap border border-dark-gray-5 rounded-pill"
-                            href="https://www.crushescorts.com/categories/brazilian-escorts">Brazilian </a>
-                        <a class="py-2 px-3 text-white text-small text-nowrap border border-dark-gray-5 rounded-pill"
-                            href="https://www.crushescorts.com/categories/brunette-escorts">Brunette </a>
-                        <a class="py-2 px-3 text-white text-small text-nowrap border border-dark-gray-5 rounded-pill"
-                            href="https://www.crushescorts.com/categories/busty-escorts">Busty </a> -->
+                       
                     </span>
                     <!-- <a href="/locations"
                         class="position-absolute sm-fixed d-flex align-items-center text-center border border-dark-gray-5 rounded-circle top-0 text-lg-small">+14

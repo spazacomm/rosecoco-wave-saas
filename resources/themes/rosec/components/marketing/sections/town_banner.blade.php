@@ -4,8 +4,9 @@
     use function Laravel\Folio\{middleware, name};
     use Livewire\Volt\Component;
     use Livewire\Attributes\Computed;
+    use App\Models\Town;
     use App\Models\City;
-    name('home_banner');
+    name('banner');
    
 
     new class extends Component
@@ -14,22 +15,25 @@
 
         public  $banner_title;
         public  $banner_description;
+       
+        public $city_id;
 
-        public function mount($title = 'Rosecoco Escorts', $description = 'Looking for escorts near you? We have a wide range of local escorts available 24/7 for incall and outcall escort services. Browse our full selection to find the perfect escort. Each escort offers a selection of services they specialise in and enjoy providing, including kinks, fetishes, dates and experiences. To book, simply find an escort who matches your desires, then give them a call.')
+        public function mount($title = 'Rosecoco Escorts', $description = 'Looking for escorts near you? We have a wide range of local escorts available 24/7 for incall and outcall escort services. Browse our full selection to find the perfect escort. Each escort offers a selection of services they specialise in and enjoy providing, including kinks, fetishes, dates and experiences. To book, simply find an escort who matches your desires, then give them a call.', $cityId = null)
         {
             $this->banner_title = $title;
             $this->banner_description = $description;
+            $this->city_id = $cityId;
         }
 
 
        #[Computed]
-       public function cities()
+       public function towns()
        {
-           return City::all();
+           return City::find($this->city_id)->towns;
        }
     }
 ?>
-@volt('home_banner')
+@volt('banner')
 <div class="container-fluid px-0 mb-5 media-holder media-holder-overlay">
 
 
@@ -48,7 +52,8 @@
                     <div class="col-lg-12 col-md-12 px-0 mt-5">
                         <h1>{{$banner_title}}</h1>
                         <div class="cms">
-                            <p>{{$banner_description}}</p>
+                        <p>Discover the best escorts in <strong>{{$banner_title}}</strong> tailored to your preferences. We offer a curated selection of verified listings to ensure quality, safety, and discretion. Browse through our listings, Your perfect experience is just a click away</p>
+                            
                         </div>
                     </div>
                 </div>
@@ -68,18 +73,13 @@
             <div class="container">
                 <div class="row m-0 mb-1">
                     <span class="d-flex gap gap-2 sub-menu-wrap position-relative align-items-center">
-                        @foreach($this->cities as $city)
+                        @foreach($this->towns as $town)
                         <a class="py-2 px-3 text-white text-small text-nowrap border border-dark-gray-5 rounded-pill"
-                            href="/locations/{{$city->id}}">{{$city->name}} </a>
+                            href="/towns/{{$town->id}}">{{$town->name}} </a>
                         @endforeach
-                        <!-- <a class="py-2 px-3 text-white text-small text-nowrap border border-dark-gray-5 rounded-pill"
-                            href="https://www.crushescorts.com/categories/brazilian-escorts">Brazilian </a>
-                        <a class="py-2 px-3 text-white text-small text-nowrap border border-dark-gray-5 rounded-pill"
-                            href="https://www.crushescorts.com/categories/brunette-escorts">Brunette </a>
-                        <a class="py-2 px-3 text-white text-small text-nowrap border border-dark-gray-5 rounded-pill"
-                            href="https://www.crushescorts.com/categories/busty-escorts">Busty </a> -->
+                     
                     </span>
-                    <!-- <a href="/locations"
+                    <!-- <a href="/towns"
                         class="position-absolute sm-fixed d-flex align-items-center text-center border border-dark-gray-5 rounded-circle top-0 text-lg-small">+14
                         more</a> -->
                 </div>
@@ -89,7 +89,7 @@
 
     </div>
 
-    <!-- <div class="banner-bottom desktop-view z-2 position-relative pb-3 mb-1 mb-lg-4">
+    <div class="banner-bottom desktop-view z-2 position-relative pb-3 mb-1 mb-lg-4">
         <div class="container">
             <div class="row m-0">
                 <div class="col-lg-12">
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- Modal -->
     <div class="modal fade filter-caoffcanvas offcanvas-filter" id="filtermodal" aria-hidden="true" tabindex="-1">
         <div class="modal-dialog">
