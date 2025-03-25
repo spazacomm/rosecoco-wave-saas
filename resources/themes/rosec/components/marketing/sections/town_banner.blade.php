@@ -89,7 +89,7 @@
 
     </div>
 
-    <div class="banner-bottom desktop-view z-2 position-relative pb-3 mb-1 mb-lg-4">
+    <!-- <div class="banner-bottom desktop-view z-2 position-relative pb-3 mb-1 mb-lg-4">
         <div class="container">
             <div class="row m-0">
                 <div class="col-lg-12">
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Modal -->
     <div class="modal fade filter-caoffcanvas offcanvas-filter" id="filtermodal" aria-hidden="true" tabindex="-1">
         <div class="modal-dialog">
