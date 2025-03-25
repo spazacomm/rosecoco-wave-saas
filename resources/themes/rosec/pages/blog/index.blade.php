@@ -12,7 +12,11 @@
         'description' => 'Our Blog',
     ]"
 >
-    <x-container>
+    <x-container >
+
+    <div class="common-section">
+            <div class="container-medium mx-auto">
+
         <div class="relative pt-6">
             <x-marketing.elements.heading
                 title="From The Blog"
@@ -30,6 +34,9 @@
         <div class="flex justify-center my-10">
             {{ $posts->links('theme::partials.pagination') }}
         </div>
+
+    </div>
+    </div>
 
     </x-container>
 </x-layouts.marketing>

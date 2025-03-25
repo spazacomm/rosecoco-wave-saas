@@ -1,4 +1,3 @@
-
 <?php
 
 use function Laravel\Folio\{middleware, name};
@@ -58,7 +57,7 @@ use function Laravel\Folio\{middleware, name};
 
                         <a class="brand" title="" href="https://www.rosecoco.co.ke" aria-label="Crush Escorts Home">
                             <x-logo class=""></x-logo>
-                       
+
                         </a>
                         <!-- <h5 class="pt-5">Mon-Fri 10am-10pm, Sat-Sun 12pm-12am<br/> <a href="/cdn-cgi/l/email-protection#3c55525a537c5f4e494f54594f5f534e484f125f5351" aria-label="Click Here to email us"><span class="__cf_email__" data-cfemail="20494e464f6043525553484553434f5254530e434f4d">[email&#160;protected]</span></a><br/> <a href="tel:07478770704" aria-label="Click Here to call us">07478770704</a></h5> -->
                     </div>
@@ -426,31 +425,35 @@ use function Laravel\Folio\{middleware, name};
                                                     </div>
                                                 </div> -->
                                                 @php
-    // Determine the number of columns you want
-    $numColumns = 2;
+                                                // Determine the number of columns you want
+                                                $numColumns = 2;
 
-    // Split the groups into chunks for each column
-    $columns = $this->cities->chunk(ceil(count($this->cities) / $numColumns));
-@endphp
+                                                // Split the groups into chunks for each column
+                                                $columns = $this->cities->chunk(ceil(count($this->cities) /
+                                                $numColumns));
+                                                @endphp
 
-<div class="row">
-    @foreach($columns as $column)
-        <div class="colm-list colm-xl-7 colm-lg-4">
-            @foreach($column as $letter => $group)
-                <div class="colm-list-item mb-2">
-                    <h5 class="text-uppercase d-flex fs-5 text-primary"><b>{{ $letter }}</b></h5>
-                    <ul class="locations">
-                        @foreach($group as $location)
-                            <li class="mb-3 mb-lg-1">
-                                <a href="{{ url('/locations/' . $location->id) }}" aria-label="{{ $location->name }}" class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $location->name }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endforeach
-        </div>
-    @endforeach
-</div>
+                                                <div class="row">
+                                                    @foreach($columns as $column)
+                                                    <div class="colm-list colm-xl-7 colm-lg-4">
+                                                        @foreach($column as $letter => $group)
+                                                        <div class="colm-list-item mb-2">
+                                                            <h5 class="text-uppercase d-flex fs-5 text-primary">
+                                                                <b>{{ $letter }}</b></h5>
+                                                            <ul class="locations">
+                                                                @foreach($group as $location)
+                                                                <li class="mb-3 mb-lg-1">
+                                                                    <a href="{{ url('/locations/' . $location->id) }}"
+                                                                        aria-label="{{ $location->name }}"
+                                                                        class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $location->name }}</a>
+                                                                </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                    @endforeach
+                                                </div>
 
                                             </div>
                                         </div>
@@ -639,31 +642,35 @@ use function Laravel\Folio\{middleware, name};
                                                     </div>
                                                 </div> -->
                                                 @php
-    // Determine the number of columns you want
-    $numColumns = 3;
+                                                // Determine the number of columns you want
+                                                $numColumns = 3;
 
-    // Split the groups into chunks for each column
-    $columns = $this->categories->chunk(ceil(count($this->categories) / $numColumns));
-@endphp
+                                                // Split the groups into chunks for each column
+                                                $columns = $this->categories->chunk(ceil(count($this->categories) /
+                                                $numColumns));
+                                                @endphp
 
-<div class="row">
-    @foreach($columns as $column)
-        <div class="colm-list colm-xl-7 colm-lg-4">
-            @foreach($column as $letter => $group)
-                <div class="colm-list-item mb-2">
-                    <h5 class="text-uppercase d-flex fs-5 text-primary"><b>{{ $letter }}</b></h5>
-                    <ul class="locations">
-                        @foreach($group as $category)
-                            <li class="mb-3 mb-lg-1">
-                                <a href="{{ url('/categories/' . $category->id) }}" aria-label="{{ $category->name }}" class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $category->name }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endforeach
-        </div>
-    @endforeach
-</div>
+                                                <div class="row">
+                                                    @foreach($columns as $column)
+                                                    <div class="colm-list colm-xl-7 colm-lg-4">
+                                                        @foreach($column as $letter => $group)
+                                                        <div class="colm-list-item mb-2">
+                                                            <h5 class="text-uppercase d-flex fs-5 text-primary">
+                                                                <b>{{ $letter }}</b></h5>
+                                                            <ul class="locations">
+                                                                @foreach($group as $category)
+                                                                <li class="mb-3 mb-lg-1">
+                                                                    <a href="{{ url('/categories/' . $category->id) }}"
+                                                                        aria-label="{{ $category->name }}"
+                                                                        class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $category->name }}</a>
+                                                                </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                    @endforeach
+                                                </div>
 
                                             </div>
                                         </div>
@@ -871,33 +878,37 @@ use function Laravel\Folio\{middleware, name};
                                                 </div> -->
 
                                                 @php
-    // Determine the number of columns you want
-    $numColumns = 3;
+                                                // Determine the number of columns you want
+                                                $numColumns = 3;
 
-    // Split the groups into chunks for each column
-    $columns = $this->services->chunk(ceil(count($this->services) / $numColumns));
-@endphp
+                                                // Split the groups into chunks for each column
+                                                $columns = $this->services->chunk(ceil(count($this->services) /
+                                                $numColumns));
+                                                @endphp
 
-<div class="row">
-    @foreach($columns as $column)
-        <div class="colm-list colm-xl-7 colm-lg-4">
-            @foreach($column as $letter => $group)
-                <div class="colm-list-item mb-2">
-                    <h5 class="text-uppercase d-flex fs-5 text-primary"><b>{{ $letter }}</b></h5>
-                    <ul class="locations">
-                        @foreach($group as $service)
-                            <li class="mb-3 mb-lg-1">
-                                <a href="{{ url('/services/' . $service->id) }}" aria-label="{{ $service->name }}" class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $service->name }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endforeach
-        </div>
-    @endforeach
-</div>
+                                                <div class="row">
+                                                    @foreach($columns as $column)
+                                                    <div class="colm-list colm-xl-7 colm-lg-4">
+                                                        @foreach($column as $letter => $group)
+                                                        <div class="colm-list-item mb-2">
+                                                            <h5 class="text-uppercase d-flex fs-5 text-primary">
+                                                                <b>{{ $letter }}</b></h5>
+                                                            <ul class="locations">
+                                                                @foreach($group as $service)
+                                                                <li class="mb-3 mb-lg-1">
+                                                                    <a href="{{ url('/services/' . $service->id) }}"
+                                                                        aria-label="{{ $service->name }}"
+                                                                        class="text-white text-hover-primary fs-5 fs-md-down-6 d-block fonts-secondary">{{ $service->name }}</a>
+                                                                </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                    @endforeach
+                                                </div>
 
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -905,7 +916,7 @@ use function Laravel\Folio\{middleware, name};
 
                                 <li><a href="/recruitment">Work with us</a></li>
                                 <li><a href="/faqs">FAQS</a></li>
-                                <li><a href="/news">News</a></li>
+                                <li><a href="/blog">News</a></li>
                             </ul>
                         </nav>
                     </div>
