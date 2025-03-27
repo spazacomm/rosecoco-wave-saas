@@ -44,7 +44,7 @@ use function Laravel\Folio\{middleware, name};
          <span class="favourites d-flex justify-content-center align-items-center top-0 end-0 position-absolute">
          <i class="fa-star me-md-1"></i>
          <span class="favourites-message">
-         <span class="text">2.5</span>
+         <span class="text">{{$this->user->averageRating()}}</span>
          <span class="favourites-close"></span>
          </span>
          </span>

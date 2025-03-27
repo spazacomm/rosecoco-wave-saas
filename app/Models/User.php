@@ -85,6 +85,11 @@ class User extends WaveUser
         return $this->hasMany(Review::class);
     }
 
+    public function averageRating()
+    {
+        return $this->reviews()->avg('rating');
+    }
+
 
     protected static function boot()
     {
