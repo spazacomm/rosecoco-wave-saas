@@ -12,20 +12,21 @@ use Filament\Forms\Components\Select;
 return [
     'contact_fields' => [
         
-        'phone_number' => [
+        'phone' => [
             'label' => 'Phone Number',
             'type' => 'TextInput',
             'required' => true,
             'placeholder' => '+254712123456',
-            'rules' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
+            // 'rules' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
         ],
-        'whatsapp_number' => [
+       
+        'whatsapp' => [
             'label' => 'Whatsapp Number',
             'type' => 'TextInput',
             'placeholder' => '+254712123456',
             'rules' => 'regex:/^\+?[1-9]\d{1,14}$/',
         ],
-        'telegram_number' => [
+        'telegram' => [
             'label' => 'Telegram Number',
             'type' => 'TextInput',
             'placeholder' => '+254712123456',
@@ -40,11 +41,18 @@ return [
         
     ],
     'attribute_fields' => [
-        
+
         'age' => [
             'label' => 'Age',
             'type' => 'TextInput',
             'rules' => 'required'
+        ],
+        'tel' => [
+            'label' => 'Tel Number',
+            'type' => 'TextInput',
+            // 'required' => false,
+            // 'placeholder' => '+254712123456',
+            // 'rules' => 'required|regex:/^\+?[1-9]\d{1,14}$/',
         ],
         'languages' => [
             'label' => 'Languages',

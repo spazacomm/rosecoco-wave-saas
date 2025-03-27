@@ -38,6 +38,7 @@
                     </x-app.sidebar-dropdown> -->
                     <x-app.sidebar-link href="/settings/profile" icon="phosphor-user" :active="Request::is('settings/profile')">Profile</x-app.sidebar-link>
                     <x-app.sidebar-link href="/bookings" icon="phosphor-bell-duotone" :active="Request::is('bookings')">Bookings</x-app.sidebar-link>
+                    <x-app.sidebar-link href="/reviews" icon="phosphor-bell-duotone" :active="Request::is('reviews')">Reviews</x-app.sidebar-link>
                     <x-app.sidebar-link href="/settings/subscription" icon="phosphor-credit-card" :active="Request::is('settings/subscription')">Subscriptions</x-app.sidebar-link>
                     <!-- <x-app.sidebar-link onclick="event.preventDefault(); new FilamentNotification().title('Modify this button inside of sidebar.blade.php').send()" icon="phosphor-user" active="false">Profile</x-app.sidebar-link>
                     <x-app.sidebar-link onclick="event.preventDefault(); new FilamentNotification().title('Modify this button inside of sidebar.blade.php').send()" icon="phosphor-pencil-line" active="false">Gallery</x-app.sidebar-link>

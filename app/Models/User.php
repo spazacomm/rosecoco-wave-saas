@@ -80,6 +80,11 @@ class User extends WaveUser
         return $this->hasMany(Booking::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 
     protected static function boot()
     {
