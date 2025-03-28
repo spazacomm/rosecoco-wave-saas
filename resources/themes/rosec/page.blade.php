@@ -1,12 +1,13 @@
-rve<x-layouts.marketing>
+<x-layouts.marketing>
+<x-container class="py-10 mt-3">
 
-    <x-elements.back-button
+    <!-- <x-elements.back-button
         class="max-w-3xl mx-auto mt-4 md:mt-8"
         text="Return Back Home"
         :href="route('home')"
-    />
+    /> -->
     
-    <article id="post-{{ $page['id'] }}" class="max-w-3xl px-5 mx-auto mb-32 prose prose-lg lg:prose-xl lg:px-0">
+    <article id="post-{{ $page['id'] }}" class="max-w-3xl px-5 mx-auto mb-32 mt-5 prose prose-lg lg:prose-xl lg:px-0 text-white">
 
         <meta property="name" content="{{ $page['title'] }}">
         <meta property="author" typeof="Person" content="admin">
@@ -33,5 +34,6 @@ rve<x-layouts.marketing>
         </div>
 
     </article>
+</x-container>
 
 </x-layouts.marketing>

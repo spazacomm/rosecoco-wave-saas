@@ -61,8 +61,8 @@
                 <div class="">
                     <span class="d-block text-light-black-4 f300">&copy; Rosecoco {{date('Y')}}. </span>
                     <ol class="breadcrumb mb-0 mb-md-4 me-lg-3 pt-lg-0 pt-3">
-                        <li class="breadcrumb-item"><a class="text-light-black-4 text-hover-white text-small f300" href="https://www.crushescorts.com/terms-conditions">Terms & Conditions</a></li>
-                        <li class="breadcrumb-item"><a class="text-light-black-4 text-hover-white text-small f300" href="https://www.crushescorts.com/privacy-policy">Privacy Policy</a></li>
+                        <li class="breadcrumb-item"><a class="text-light-black-4 text-hover-white text-small f300" href="/terms-conditions">Terms & Conditions</a></li>
+                        <li class="breadcrumb-item"><a class="text-light-black-4 text-hover-white text-small f300" href="/privacy-policy">Privacy Policy</a></li>
                     </ol>
 
                 </div>

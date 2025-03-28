@@ -76,12 +76,15 @@ svg {
     @apply py-3 border-l-4 bg-zinc-100 border-zinc-300;
   }
 } */
-/* 
+
 html, body{
   p{
     @apply text-gray-500 dark:text-gray-400;
   }
-} */
+  h1{
+    @apply text-white dark:text-gray-400;
+  }
+}
 
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
@@ -93,3 +96,14 @@ html, body{
   scrollbar-width: none;  /* Firefox */
 }
 
+.prose h1 {
+  color: white;
+}
+.prose h3 {
+  color: white;
+}
+
+.prose :where(strong):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: white;
+  font-weight: 600;
+}
