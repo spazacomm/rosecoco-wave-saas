@@ -15,7 +15,7 @@ use function Laravel\Folio\{middleware, name};
         #[Computed]
         public function escorts()
         {
-            return User::all();
+            return User::where('is_approved', true)->get();
         }
     }
 ?>

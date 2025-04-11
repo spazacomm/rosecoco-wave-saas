@@ -3,6 +3,7 @@
 use function Laravel\Folio\{middleware, name};
     use Livewire\Volt\Component;
     use Livewire\Attributes\Computed;
+    use App\Models\User;
     name('wave.recommended_escorts');
    
 
@@ -14,7 +15,7 @@ use function Laravel\Folio\{middleware, name};
         #[Computed]
         public function escorts()
         {
-            return config('wave.user_model')::query()->get();
+            return User::where('is_approved', true)->get();
         }
     }
 ?>

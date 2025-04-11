@@ -15,6 +15,11 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\Service;
+use App\Models\Town;
+use App\Models\Category;
+use App\Models\Country;
+use App\Models\City;
 
 class UserResource extends Resource
 {
@@ -47,12 +52,120 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('whatsapp_number'),
                 Forms\Components\TextInput::make('telegram_number'),
                 Forms\Components\TextInput::make('nationality'),
-                Forms\Components\Select::make('gender')->options(['male', 'female']),
-                Forms\Components\Select::make('orientation')->options(['straight', 'bisexual', 'lesbian', 'gay']),
-                Forms\Components\Select::make('body_type')->options(['curvy', 'petite', 'thick', 'slim-thick', 'athletic', 'BBW']),
-                Forms\Components\Select::make('languages')->multiple()->options(['English', 'Swahili', 'French', 'German', 'Italia', 'Spanish', 'Arabic', 'Chinese', 'Japanese', 'Portugese', 'Russian']),
+                Forms\Components\Select::make('gender')
+    ->options([
+        'Male' => 'Male',
+        'Female' => 'Female',
+    ]),
+    Forms\Components\Select::make('orientation')
+    ->options([
+        'straight' => 'Straight',
+        'bisexual' => 'Bisexual',
+        'lesbian' => 'Lesbian',
+        'gay' => 'Gay',
+    ])
+    ->placeholder('Select Orientation'),
+
+Forms\Components\Select::make('body_type')
+    ->options([
+        'curvy' => 'Curvy',
+        'petite' => 'Petite',
+        'thick' => 'Thick',
+        'slim-thick' => 'Slim Thick',
+        'athletic' => 'Athletic',
+        'BBW' => 'BBW',
+    ])
+    ->placeholder('Select Body Type'),
+
+                //Forms\Components\Select::make('languages')->multiple()->options(['English', 'Swahili', 'French', 'German', 'Italia', 'Spanish', 'Arabic', 'Chinese', 'Japanese', 'Portugese', 'Russian']),
+                
+                Forms\Components\MultiSelect::make('languages')
+    ->options(config('languages'))
+    ->afterStateHydrated(function ($component, $state) {
+        // When loading from database, split the string into an array
+        if (is_string($state)) {
+            $component->state(explode(',', $state));
+        }
+    })
+    ->dehydrateStateUsing(function ($state) {
+        // When saving to database, join array into a string of values (not keys)
+        if (is_array($state)) {
+            $languages = config('languages');
+
+            // Map selected keys to their full language names
+            $values = array_map(function ($key) use ($languages) {
+                return $languages[$key] ?? $key;
+            }, $state);
+
+            return implode(',', $values);
+        }
+
+        return $state;
+    }),
+
+
+                Forms\Components\Fieldset::make('Categories')
+					->schema([
+
+						Forms\Components\Select::make('categories')
+						->label('Categories')
+						->multiple()
+						->options(Category::pluck('name', 'id'))
+						->reactive() // This makes it dynamic
+						->columnspan(2)
+						->default(fn () => auth()->user()->categories()->pluck('categories.id')->toArray())
+						->required(),
+
+					]),
+
                 Forms\Components\Toggle::make('incall'),
+                Forms\Components\Textarea::make('address')->label('Incall Address')->columnspan(2),
                 Forms\Components\Toggle::make('outcall'),
+
+                Forms\Components\Select::make('services')
+						->label('Services')
+						->multiple()
+						->options(Service::pluck('name', 'id'))
+						->reactive() // This makes it dynamic
+						->required()
+						->columnspan(2)
+						->default(fn () => auth()->user()->services()->pluck('services.id')->toArray()),
+                
+                Forms\Components\Fieldset::make('Locations')
+                        ->schema([
+
+                        Forms\Components\Select::make('country')
+						->label('Country')
+						->options(Country::pluck('name', 'id'))
+						->reactive() // This makes it dynamic
+						->default(fn () => auth()->user()->country_id)
+						->required(),
+
+					Forms\Components\Select::make('city')
+					->label('City')
+					->options(fn ($get) => 
+						$get('country') 
+							? City::where('country_id', $get('country'))->pluck('name', 'id')
+							: []) // If no country is selected, return an empty array
+					->reactive()
+					->disabled(fn ($get) => !$get('country')) // Disable until country is selected
+					->default(fn () => auth()->user()->city_id)
+					->required(),
+		
+					Forms\Components\MultiSelect::make('locations')
+					->label('Locations')
+					->options(fn ($get) => 
+						$get('city') 
+							? Town::where('city_id', $get('city'))->pluck('name', 'id')
+							: []) // If no city is selected, return an empty array
+					->reactive()
+					->disabled(fn ($get) => !$get('city')) // Disable until city is selected
+					->default(fn () => auth()->user()->towns()->pluck('towns.id')->toArray())
+                    ->columnspan(2)
+					->required(),
+
+                ]),
+
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
                     ->password()
@@ -87,6 +200,10 @@ class UserResource extends Resource
                     ->circular()
                     ->defaultImageUrl(url('storage/demo/default.png')),
                 Tables\Columns\TextColumn::make('username')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('is_approved')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('is_claimed')
                     ->searchable()
             ])
             ->filters([

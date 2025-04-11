@@ -27,6 +27,9 @@
         public function previousUser()
         {
             return config('wave.user_model')::where('id', '<', $this->user()->id)
+            ->whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'admin');
+            })
                 ->orderBy('id', 'desc')
                 ->first();
         }
@@ -35,6 +38,9 @@
         public function nextUser()
         {
             return config('wave.user_model')::where('id', '>', $this->user()->id)
+            ->whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'admin');
+            })
                 ->orderBy('id', 'asc')
                 ->first();
         }
@@ -136,6 +142,7 @@
                                                 <img src="/storage/{{$this->user->avatar}}" alt="Kim" loading="eager">
                                             </a>
                                         </div>
+                                     
                                         @foreach($this->user->images as $image)
                                         <div class="splide__slide">
                                             <a class="media-holder single-profile d-block" data-fancybox="gallery"
@@ -145,6 +152,7 @@
                                             </a>
                                         </div>
                                         @endforeach
+                                       
 
 
                                     </div>
@@ -180,7 +188,7 @@
                                     <div class="d-lg-flex flex-lg-column-reverse flex-lg-wrap">
                                         <span class="cms">
                                             <p class="my-lg-4 text-dark-gray-9">
-                                                {{$this->user()->profile('bio');}}
+                                                {{$this->user->bio}}
 
                                             </p>
 
@@ -191,14 +199,63 @@
                                                 <span class="col-4 col-md-4 col-lg-3 py-2">
                                                     <h4 class="m-0 text-md-small f500">Age</h4>
                                                     <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                        {{$this->user()->profile('age')}}</h6>
+                                                    {{ \Carbon\Carbon::parse($this->user->dob)->age }}</h6>
                                                 </span>
 
                                                 <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                    <h4 class="m-0 text-md-small f500">Address</h4>
+                                                    <h4 class="m-0 text-md-small f500">Gender</h4>
                                                     <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                        {{$this->user()->profile('address')}}</h6>
+                                                    {{ $this->user->gender }}</h6>
                                                 </span>
+
+                                                <span class="col-4 col-md-4 col-lg-3 py-2">
+                                                    <h4 class="m-0 text-md-small f500">Orientation</h4>
+                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
+                                                    {{ $this->user->orientation }}</h6>
+                                                </span>
+
+                                                <span class="col-4 col-md-4 col-lg-3 py-2">
+                                                    <h4 class="m-0 text-md-small f500">Body Type</h4>
+                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
+                                                        {{$this->user->body_type}}</h6>
+                                                </span>
+
+                                            </span>
+                                            <span class="row mt-3">
+                                                <span class="col-8 col-md-4 col-lg-6 py-2">
+                                                    <h4 class="m-0 text-md-small f500">Languages</h4>
+                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
+                                                    {{ $this->user->languages }}</h6>
+                                                </span>
+
+                                                <span class="col-4 col-md-4 col-lg-3 py-2">
+                                                    <h4 class="m-0 text-md-small f500">nationality</h4>
+                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
+                                                    {{ $this->user->nationality }}</h6>
+                                                </span>
+                                            </span>
+                                            <span class="row mt-3">
+
+                                                <span class="col-4 col-md-4 col-lg-3 py-2">
+                                                    <h4 class="m-0 text-md-small f500">Outcall</h4>
+                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
+                                                    {{ $this->user->outcall ? 'Yes' : 'No' }}</h6>
+                                                </span>
+
+                                                <span class="col-4 col-md-4 col-lg-3 py-2">
+                                                    <h4 class="m-0 text-md-small f500">Incall</h4>
+                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
+                                                    {{ $this->user->incall ? 'Yes' : 'No' }}</h6>
+                                                </span>
+
+                                                
+                                                @if($this->user->incall )
+                                                <span class="col-4 col-md-4 col-lg-3 py-2">
+                                                    <h4 class="m-0 text-md-small f500">Incall Address</h4>
+                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
+                                                        {{$this->user->address}}</h6>
+                                                </span>
+                                                @endif
 
                                             </span>
                                         </div>
@@ -263,14 +320,14 @@
                                             class="d-flex   btn text-md-small f500 text-white bg-dark-primary-7 bg-hover-primary-dark review-btn rounded-2"
                                             data-bs-toggle="modal" data-bs-target="#reviewpop">Book {{$this->user->username}}</button> -->
 
-                                                <a href="tel:0712345678"
+                                                <a href="tel:{{$this->user->phone_number}}"
                                                     class="d-flex mb-2 mt-4 align-items-center text-decoration-none bg-dark-primary-7 text-white rounded-10 call-info"
                                                     aria-label="Click Here to call us">
                                                     <span class="fa-phone-black fs-5"></span>
-                                                    <span class="mx-auto">0712345678</span>
+                                                    <span class="mx-auto">{{$this->user->phone_number}}</span>
                                                 </a>
                                                 <a target="_blank" class="d-flex align-items-center text-decoration-none bg-primary text-white rounded-10 call-info
-                                        whatapp-bg" href="https://wa.me/254712345678?text=Hey, I’d like to book {{$this->user->username}}. When is she available?"
+                                        whatapp-bg" href="https://wa.me/{{$this->user->whatsapp_number}}?text=Hey, I’d like to book {{$this->user->username}}. When is she available?"
                                                     aria-label="Click Here to chat/bookonline">
                                                     <span class="fa-whatsapp fs-5"></span>
                                                     <span class="mx-auto">Chat with us on WhatsApp</span>

@@ -4,6 +4,7 @@
     use Livewire\Volt\Component;
     use Livewire\Attributes\Computed;
     use App\Models\Review;
+    use App\Models\User;
     name('wave.claim');
 
     new class extends Component
@@ -20,13 +21,13 @@
         #[Computed]
         public function user()
         {
-            return config('wave.user_model')::where('username', '=', $this->username)->with('roles')->firstOrFail();
+            return cUser::where('username', '=', $this->username)->with('roles')->firstOrFail();
         }
 
         #[Computed]
         public function previousUser()
         {
-            return config('wave.user_model')::where('id', '<', $this->user()->id)
+            return User::where('id', '<', $this->user()->id)
                 ->orderBy('id', 'desc')
                 ->first();
         }
@@ -34,7 +35,7 @@
         #[Computed]
         public function nextUser()
         {
-            return config('wave.user_model')::where('id', '>', $this->user()->id)
+            return User::where('id', '>', $this->user()->id)
                 ->orderBy('id', 'asc')
                 ->first();
         }
@@ -104,6 +105,7 @@
                                                 <img src="/storage/{{$this->user->avatar}}" alt="Kim" loading="eager">
                                             </a>
                                         </div>
+                                     
                                         @foreach($this->user->images as $image)
                                         <div class="splide__slide">
                                             <a class="media-holder single-profile d-block" data-fancybox="gallery"
@@ -113,6 +115,7 @@
                                             </a>
                                         </div>
                                         @endforeach
+                                      
 
 
                                     </div>

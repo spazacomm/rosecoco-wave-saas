@@ -64,20 +64,92 @@
 					\Filament\Forms\Components\Fieldset::make('bio')
 					->schema([
 
-						...($this->dynamicFields( config('profile.bio_fields') ))
+						\Filament\Forms\Components\MarkdownEditor::make('bio')
+                        ->label('About Escort')
+						->columnspan(2)
 					]),
 
 
 					\Filament\Forms\Components\Fieldset::make('Attributes')
 					->schema([
 
-						...($this->dynamicFields( config('profile.attribute_fields') ))
+						\Filament\Forms\Components\DateTimePicker::make('dob'),
+
+						\Filament\Forms\Components\TextInput::make('nationality')
+                        ->label('Nationality'),
+
+						\Filament\Forms\Components\Select::make('gender')
+						->options([
+							'Male' => 'Male',
+							'Female' => 'Female',
+						]),
+						\Filament\Forms\Components\Select::make('orientation')
+						->options([
+							'straight' => 'Straight',
+							'bisexual' => 'Bisexual',
+							'lesbian' => 'Lesbian',
+							'gay' => 'Gay',
+						])
+						->placeholder('Select Orientation'),
+					
+						\Filament\Forms\Components\Select::make('body_type')
+						->options([
+							'curvy' => 'Curvy',
+							'petite' => 'Petite',
+							'thick' => 'Thick',
+							'slim-thick' => 'Slim Thick',
+							'athletic' => 'Athletic',
+							'BBW' => 'BBW',
+						])
+						->placeholder('Select Body Type'),
+
+						// \Filament\Forms\Components\Select::make('languages')
+                        // ->label('Languages')
+						// ->multiple()
+						// ->options(['english', 'french', 'spanish', 'german', 'swahili', 'portugese', 'arabic'])
+						// ->columnspan(2),
+
+						\Filament\Forms\Components\MultiSelect::make('languages')
+						->options(config('languages'))
+						->afterStateHydrated(function ($component, $state) {
+							// When loading from database, split the string into an array
+							if (is_string($state)) {
+								$component->state(explode(',', $state));
+							}
+						})
+						->dehydrateStateUsing(function ($state) {
+							// When saving to database, join array into a string of values (not keys)
+							if (is_array($state)) {
+								$languages = config('languages');
+					
+								// Map selected keys to their full language names
+								$values = array_map(function ($key) use ($languages) {
+									return $languages[$key] ?? $key;
+								}, $state);
+					
+								return implode(',', $values);
+							}
+					
+							return $state;
+						}),
+
 					]),
 
 					\Filament\Forms\Components\Fieldset::make('Contact Information')
 					->schema([
 
-						...($this->dynamicFields( config('profile.contact_fields') ))
+						\Filament\Forms\Components\TextInput::make('phone_number')
+                        ->label('Phone Number'),
+
+						\Filament\Forms\Components\TextInput::make('whatsapp_number')
+                        ->label('Whatsapp Number'),
+
+						\Filament\Forms\Components\TextInput::make('telegram_number')
+                        ->label('Telegram Number'),
+
+						\Filament\Forms\Components\Textarea::make('address')
+                        ->label('Adress')
+						->columnspan(2),
 
 					]),
 
@@ -218,6 +290,20 @@
 			auth()->user()->country_id = $state['country'];
 			auth()->user()->city_id = $state['city'];
 			auth()->user()->images = $state['images'];
+
+			auth()->user()->bio = $state['bio'];
+			auth()->user()->gender = $state['gender'];
+			auth()->user()->orientation = $state['orientation'];
+			auth()->user()->nationality = $state['nationality'];
+			auth()->user()->body_type = $state['body_type'];
+			auth()->user()->dob = $state['dob'];
+			auth()->user()->languages = $state['languages'];
+
+			auth()->user()->phone_number = $state['phone_number'];
+			auth()->user()->whatsapp_number = $state['whatsapp_number'];
+			auth()->user()->telegram_number = $state['telegram_number'];
+			auth()->user()->address = $state['address'];
+
 			auth()->user()->save();
 			
 			if (isset($state['services'])) {
