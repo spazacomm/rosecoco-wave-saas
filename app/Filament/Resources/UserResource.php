@@ -41,6 +41,18 @@ class UserResource extends Resource
                 Forms\Components\FileUpload::make('avatar')
                     ->required()
                     ->image(),
+                Forms\Components\DateTimePicker::make('dob'),
+                Forms\Components\MarkdownEditor::make('bio'),
+                Forms\Components\TextInput::make('phone_number'),
+                Forms\Components\TextInput::make('whatsapp_number'),
+                Forms\Components\TextInput::make('telegram_number'),
+                Forms\Components\TextInput::make('nationality'),
+                Forms\Components\Select::make('gender')->options(['male', 'female']),
+                Forms\Components\Select::make('orientation')->options(['straight', 'bisexual', 'lesbian', 'gay']),
+                Forms\Components\Select::make('body_type')->options(['curvy', 'petite', 'thick', 'slim-thick', 'athletic', 'BBW']),
+                Forms\Components\Select::make('languages')->multiple()->options(['English', 'Swahili', 'French', 'German', 'Italia', 'Spanish', 'Arabic', 'Chinese', 'Japanese', 'Portugese', 'Russian']),
+                Forms\Components\Toggle::make('incall'),
+                Forms\Components\Toggle::make('outcall'),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
                     ->password()
@@ -56,7 +68,9 @@ class UserResource extends Resource
                 Forms\Components\DateTimePicker::make('trial_ends_at'),
                 Forms\Components\TextInput::make('verification_code')
                     ->maxLength(191),
-                Forms\Components\Toggle::make('verified')
+                Forms\Components\Toggle::make('verified'),
+                Forms\Components\Toggle::make('is_approved'),
+                Forms\Components\Toggle::make('is_claimed')
             ]);
     }
 

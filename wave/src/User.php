@@ -38,6 +38,7 @@ class User extends AuthUser implements JWTSubject, HasAvatar, FilamentUser
         'verification_code',
         'verified',
         'trial_ends_at',
+      
     ];
 
     /**

@@ -29,6 +29,21 @@ class User extends WaveUser
         'verification_code',
         'verified',
         'trial_ends_at',
+        'is_approved',
+        'incall',
+        'outcall',
+        'address',
+        'phone_number',
+        'whatsapp_number',
+        'telegram_number',
+        'bio',
+        'dob',
+        'gender',
+        'orientation',
+        'nationality',
+        'languages',
+        'body_type',
+        'height',
     ];
 
     /**
