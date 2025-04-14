@@ -44,6 +44,8 @@ class User extends WaveUser
         'languages',
         'body_type',
         'height',
+        'city_id',
+        'country_id',
     ];
 
     /**

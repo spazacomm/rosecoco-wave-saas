@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 
+
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,4 +26,9 @@ Wave::api();
 // Posts Example API Route
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/posts', '\App\Http\Controllers\Api\ApiController@posts');
+    
 });
+
+Route::post('/users', [UserController::class, 'store']);
+
+

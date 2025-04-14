@@ -143,15 +143,18 @@
                                             </a>
                                         </div>
                                      
-                                        @foreach($this->user->images as $image)
-                                        <div class="splide__slide">
-                                            <a class="media-holder single-profile d-block" data-fancybox="gallery"
-                                                data-caption="" href="/storage/{{$image}}">
-                                                <img src="/storage/{{$image}}" alt="{{$this->user->username}}"
-                                                    loading="lazy">
-                                            </a>
-                                        </div>
-                                        @endforeach
+                                        @if(is_array($this->user->images) && count($this->user->images) > 0)
+    @foreach($this->user->images as $image)
+        <div class="splide__slide">
+            <a class="media-holder single-profile d-block" data-fancybox="gallery"
+               data-caption="" href="/storage/{{$image}}">
+                <img src="/storage/{{$image}}" alt="{{$this->user->username}}"
+                     loading="lazy">
+            </a>
+        </div>
+    @endforeach
+@endif
+
                                        
 
 
@@ -264,61 +267,10 @@
                                 <div class="col-lg-5">
                                     <div
                                         class="border meeting-tab border-1 p-3 pt-4 pb-0 rounded-10 profile-meeting-tab gray-common-border gray-common-bg">
-                                        <!-- <h5 class="text-white f500 border-0 f500 bg-transparent shadow-none px-3">
-                                        Meeting rates
-                                    </h5> -->
+                                        
                                         <div class="">
                                             <div class="px-3 mb-4">
-                                                <!-- <div class="d-flex mb-1 pb-1">
-                                                <div class="col-4 col-xl-6"></div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-dark-gray-7">Incall
-                                                </div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-dark-gray-7">Outcall
-                                                </div>
-                                            </div>
-                                            <div class="d-flex py-2 border-bottom gray-common-border">
-                                                <div
-                                                    class="col-4 col-xl-6 text-md-small f500 text-white text-uppercase">
-                                                    1 Hour</div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-white">£200</div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-white">£250</div>
-                                            </div>
-
-                                            <div class="d-flex py-2 border-bottom gray-common-border">
-                                                <div
-                                                    class="col-4 col-xl-6 text-md-small f500 text-white text-uppercase">
-                                                    90 Mins</div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-white">£350</div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-white">£450</div>
-                                            </div>
-
-                                            <div class="d-flex py-2 border-bottom gray-common-border">
-                                                <div
-                                                    class="col-4 col-xl-6 text-md-small f500 text-white text-uppercase">
-                                                    2 Hours</div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-white">£400</div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-white">£500</div>
-                                            </div>
-
-                                            <div class="d-flex py-2 border-bottom gray-common-border">
-                                                <div
-                                                    class="col-4 col-xl-6 text-md-small f500 text-white text-uppercase">
-                                                    3 Hours</div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-white">£600</div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-white">£750</div>
-                                            </div>
-
-                                            <div class="d-flex py-2 border-bottom gray-common-border">
-                                                <div
-                                                    class="col-4 col-xl-6 text-md-small f500 text-white text-uppercase">
-                                                    Dinner</div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-white">£600</div>
-                                                <div class="col-4 col-xl-3 text-md-small f500 text-white">£750</div>
-                                            </div> -->
-
-                                                <!-- <button
-                                            class="d-flex   btn text-md-small f500 text-white bg-dark-primary-7 bg-hover-primary-dark review-btn rounded-2"
-                                            data-bs-toggle="modal" data-bs-target="#reviewpop">Book {{$this->user->username}}</button> -->
+                                               
 
                                                 <a href="tel:{{$this->user->phone_number}}"
                                                     class="d-flex mb-2 mt-4 align-items-center text-decoration-none bg-dark-primary-7 text-white rounded-10 call-info"
@@ -350,7 +302,7 @@
                                     <div class="d-flex flex-wrap align-content-start grid gap-2">
 
                                         @foreach($this->user->categories as $category)
-                                        <a href="https://www.crushescorts.com/categories/busty-escorts" class="border gray-common-bg border-dark-gray-5 rounded py-2 px-3
+                                        <a href="/categories/{{$category->id}}" class="border gray-common-bg border-dark-gray-5 rounded py-2 px-3
                                     text-small text-white">{{$category->name}}</a>
                                         @endforeach
 
@@ -373,18 +325,7 @@
                                         <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
                                     text-small text-white"> {{$service->name}}</span>
                                         @endforeach
-                                        <!-- <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white"> Role Play Escorts</span>
-                                    <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white"> 69 Escorts</span>
-                                    <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white"> Rimming Escorts</span>
-                                    <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white"> Watersports Escorts</span>
-                                    <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white"> Striptease Escorts</span>
-                                    <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
-                                    text-small text-white"> Massage Escorts</span> -->
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -400,7 +341,7 @@
                                     <div class="fonts-sub fs-4 f300 text-black-2 mb-3 f500">Locations</div>
                                     <div class="d-flex flex-wrap align-content-start grid gap-2">
                                         @foreach($this->user->towns as $town)
-                                        <a href="https://www.crushescorts.com/locations/queensway-escorts" class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
+                                        <a href="/locations/{{$town->id}}" class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
                                     text-small text-white"> {{$town->name}}</a>
                                         @endforeach
                                     </div>
@@ -464,10 +405,8 @@
 
                                                          @for($i = 1; $i <= $review->rating; $i++)
                                                         <span class="fa fa-star text-lg-small me-1"></span>
-                                                @endfor 
-                                                            
+                                                        @endfor 
 
-                                                            <!-- Loop for empty stars -->
                                                         </span>
                                                         <p class="text-dark-gray-9 f300 mt-2 mb-2">
                                                            {{$review->review}}
