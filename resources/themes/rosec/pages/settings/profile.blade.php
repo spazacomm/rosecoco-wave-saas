@@ -66,6 +66,7 @@
 
 						\Filament\Forms\Components\MarkdownEditor::make('bio')
                         ->label('About Escort')
+						->default(auth()->user()->bio)
 						->columnspan(2)
 					]),
 
@@ -73,23 +74,24 @@
 					\Filament\Forms\Components\Fieldset::make('Attributes')
 					->schema([
 
-						\Filament\Forms\Components\DateTimePicker::make('dob'),
+						\Filament\Forms\Components\DateTimePicker::make('dob')->default(auth()->user()->dob),
 
 						\Filament\Forms\Components\TextInput::make('nationality')
+						->default(auth()->user()->nationality)
                         ->label('Nationality'),
 
 						\Filament\Forms\Components\Select::make('gender')
 						->options([
 							'Male' => 'Male',
 							'Female' => 'Female',
-						]),
+						])->default(auth()->user()->gender),
 						\Filament\Forms\Components\Select::make('orientation')
 						->options([
 							'straight' => 'Straight',
 							'bisexual' => 'Bisexual',
 							'lesbian' => 'Lesbian',
 							'gay' => 'Gay',
-						])
+						])->default(auth()->user()->orientation)
 						->placeholder('Select Orientation'),
 					
 						\Filament\Forms\Components\Select::make('body_type')
@@ -100,7 +102,7 @@
 							'slim-thick' => 'Slim Thick',
 							'athletic' => 'Athletic',
 							'BBW' => 'BBW',
-						])
+						])->default(auth()->user()->body_type)
 						->placeholder('Select Body Type'),
 
 						// \Filament\Forms\Components\Select::make('languages')
@@ -111,6 +113,7 @@
 
 						\Filament\Forms\Components\MultiSelect::make('languages')
 						->options(config('languages'))
+						->default(auth()->user()->languages)
 						->afterStateHydrated(function ($component, $state) {
 							// When loading from database, split the string into an array
 							if (is_string($state)) {
@@ -139,16 +142,20 @@
 					->schema([
 
 						\Filament\Forms\Components\TextInput::make('phone_number')
+						->default(auth()->user()->phone_number)
                         ->label('Phone Number'),
 
 						\Filament\Forms\Components\TextInput::make('whatsapp_number')
+						->default(auth()->user()->whatsapp_number)
                         ->label('Whatsapp Number'),
 
 						\Filament\Forms\Components\TextInput::make('telegram_number')
+						->default(auth()->user()->telegram_number)
                         ->label('Telegram Number'),
 
 						\Filament\Forms\Components\Textarea::make('address')
-                        ->label('Adress')
+                        ->label('Address')
+						->default(auth()->user()->address)
 						->columnspan(2),
 
 					]),
