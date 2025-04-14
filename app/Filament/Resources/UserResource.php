@@ -104,67 +104,67 @@ Forms\Components\Select::make('body_type')
     }),
 
 
-                Forms\Components\Fieldset::make('Categories')
-					->schema([
+                // Forms\Components\Fieldset::make('Categories')
+				// 	->schema([
 
-						Forms\Components\Select::make('categories')
-						->label('Categories')
-						->multiple()
-						->options(Category::pluck('name', 'id'))
-						->reactive() // This makes it dynamic
-						->columnspan(2)
-						->default(fn () => auth()->user()->categories()->pluck('categories.id')->toArray())
-						->required(),
+				// 		Forms\Components\Select::make('categories')
+				// 		->label('Categories')
+				// 		->multiple()
+				// 		->options(Category::pluck('name', 'id'))
+				// 		->reactive() // This makes it dynamic
+				// 		->columnspan(2)
+				// 		->default(fn () => auth()->user()->categories()->pluck('categories.id')->toArray())
+				// 		->required(),
 
-					]),
+				// 	]),
 
                 Forms\Components\Toggle::make('incall'),
                 Forms\Components\Textarea::make('address')->label('Incall Address')->columnspan(2),
                 Forms\Components\Toggle::make('outcall'),
 
-                Forms\Components\Select::make('services')
-						->label('Services')
-						->multiple()
-						->options(Service::pluck('name', 'id'))
-						->reactive() // This makes it dynamic
-						->required()
-						->columnspan(2)
-						->default(fn () => auth()->user()->services()->pluck('services.id')->toArray()),
+                // Forms\Components\Select::make('services')
+				// 		->label('Services')
+				// 		->multiple()
+				// 		->options(Service::pluck('name', 'id'))
+				// 		->reactive() // This makes it dynamic
+				// 		->required()
+				// 		->columnspan(2)
+				// 		->default(fn () => auth()->user()->services()->pluck('services.id')->toArray()),
                 
-                Forms\Components\Fieldset::make('Locations')
-                        ->schema([
+                // Forms\Components\Fieldset::make('Locations')
+                //         ->schema([
 
-                        Forms\Components\Select::make('country')
-						->label('Country')
-						->options(Country::pluck('name', 'id'))
-						->reactive() // This makes it dynamic
-						->default(fn () => auth()->user()->country_id)
-						->required(),
+                //         Forms\Components\Select::make('country')
+				// 		->label('Country')
+				// 		->options(Country::pluck('name', 'id'))
+				// 		->reactive() // This makes it dynamic
+				// 		->default(fn () => auth()->user()->country_id)
+				// 		->required(),
 
-					Forms\Components\Select::make('city')
-					->label('City')
-					->options(fn ($get) => 
-						$get('country') 
-							? City::where('country_id', $get('country'))->pluck('name', 'id')
-							: []) // If no country is selected, return an empty array
-					->reactive()
-					->disabled(fn ($get) => !$get('country')) // Disable until country is selected
-					->default(fn () => auth()->user()->city_id)
-					->required(),
+				// 	Forms\Components\Select::make('city')
+				// 	->label('City')
+				// 	->options(fn ($get) => 
+				// 		$get('country') 
+				// 			? City::where('country_id', $get('country'))->pluck('name', 'id')
+				// 			: []) // If no country is selected, return an empty array
+				// 	->reactive()
+				// 	->disabled(fn ($get) => !$get('country')) // Disable until country is selected
+				// 	->default(fn () => auth()->user()->city_id)
+				// 	->required(),
 		
-					Forms\Components\MultiSelect::make('locations')
-					->label('Locations')
-					->options(fn ($get) => 
-						$get('city') 
-							? Town::where('city_id', $get('city'))->pluck('name', 'id')
-							: []) // If no city is selected, return an empty array
-					->reactive()
-					->disabled(fn ($get) => !$get('city')) // Disable until city is selected
-					->default(fn () => auth()->user()->towns()->pluck('towns.id')->toArray())
-                    ->columnspan(2)
-					->required(),
+				// 	Forms\Components\MultiSelect::make('locations')
+				// 	->label('Locations')
+				// 	->options(fn ($get) => 
+				// 		$get('city') 
+				// 			? Town::where('city_id', $get('city'))->pluck('name', 'id')
+				// 			: []) // If no city is selected, return an empty array
+				// 	->reactive()
+				// 	->disabled(fn ($get) => !$get('city')) // Disable until city is selected
+				// 	->default(fn () => auth()->user()->towns()->pluck('towns.id')->toArray())
+                //     ->columnspan(2)
+				// 	->required(),
 
-                ]),
+                // ]),
 
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
