@@ -16,7 +16,10 @@ new class extends Component
     {
         $this->locationId = (int) $locationId;
         $this->city = City::findOrFail($this->locationId);
-        $this->escorts = $this->city->users()->get();
+        $this->escorts = $this->city->users()
+    ->where('is_approved', true)
+    ->inRandomOrder()
+    ->get();
     }
 
     

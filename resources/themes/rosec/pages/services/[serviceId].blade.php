@@ -16,7 +16,10 @@ new class extends Component
     {
         $this->serviceId = (int) $serviceId;
         $this->service = Service::findOrFail($this->serviceId);
-        $this->escorts = $this->service->users()->get();
+        $this->escorts = $this->service->users()
+    ->where('is_approved', true)
+    ->inRandomOrder()
+    ->get();
     }
 
     

@@ -16,7 +16,10 @@ new class extends Component
     {
         $this->categoryId = (int) $categoryId;
         $this->category = Category::findOrFail($this->categoryId);
-        $this->escorts = $this->category->users()->get();
+        $this->escorts = $this->category->users()
+    ->where('is_approved', true)
+    ->inRandomOrder()
+    ->get();
     }
 
     
