@@ -7,8 +7,7 @@
 <x-layouts.app>
 	<x-app.container x-data class="lg:space-y-6" x-cloak>
         
-		<!-- <x-app.alert id="dashboard_alert" class="hidden lg:flex">This is the user dashboard where users can manage settings and access features. <a href="https://devdojo.com/wave/docs" target="_blank" class="mx-1 underline">View the docs</a> to learn more.</x-app.alert> -->
-
+		
         <x-app.heading
                 title="Dashboard"
                 description="Welcome to rosecoco."
