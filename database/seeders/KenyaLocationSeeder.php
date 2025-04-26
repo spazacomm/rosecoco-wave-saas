@@ -25,7 +25,6 @@ class KenyaLocationSeeder extends Seeder
         // Create Kenya
         $kenya = Country::create([
             'name' => 'Kenya',
-            'code' => 'KE',
         ]);
 
         // Cities and their towns
