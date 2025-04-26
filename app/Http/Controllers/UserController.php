@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\City;
+use App\Models\Town;
+use App\Models\Service;
+use App\Models\Category;
 
 class UserController extends Controller
 {

@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -17,182 +19,21 @@ class CategoriesTableSeeder extends Seeder
         
 
         \DB::table('categories')->delete();
-        
-        \DB::table('categories')->insert(array(
-            array(
-                'id' => 1,
-                'parent_id' => NULL,
-                'order' => 1,
-                'name' => 'Arab',
-                'slug' => 'arab',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 2,
-                'parent_id' => NULL,
-                'order' => 2,
-                'name' => 'Somali',
-                'slug' => 'somali',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 3,
-                'parent_id' => NULL,
-                'order' => 3,
-                'name' => 'Busty',
-                'slug' => 'busty',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 4,
-                'parent_id' => NULL,
-                'order' => 4,
-                'name' => 'Curvy',
-                'slug' => 'curvy',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 5,
-                'parent_id' => NULL,
-                'order' => 5,
-                'name' => 'Petite',
-                'slug' => 'petite',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 6,
-                'parent_id' => NULL,
-                'order' => 6,
-                'name' => 'Slim',
-                'slug' => 'slim',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 7,
-                'parent_id' => NULL,
-                'order' => 7,
-                'name' => 'Mature',
-                'slug' => 'mature',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 8,
-                'parent_id' => NULL,
-                'order' => 8,
-                'name' => 'Young',
-                'slug' => 'young',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 9,
-                'parent_id' => NULL,
-                'order' => 9,
-                'name' => 'Tanzanian',
-                'slug' => 'tanzanian',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 10,
-                'parent_id' => NULL,
-                'order' => 10,
-                'name' => 'Ugandan',
-                'slug' => 'ugandan',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 11,
-                'parent_id' => NULL,
-                'order' => 11,
-                'name' => 'Kenyan',
-                'slug' => 'kenyan',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 12,
-                'parent_id' => NULL,
-                'order' => 12,
-                'name' => 'Rwandese',
-                'slug' => 'rwandese',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 13,
-                'parent_id' => NULL,
-                'order' => 13,
-                'name' => 'High Class',
-                'slug' => 'high-class',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 14,
-                'parent_id' => NULL,
-                'order' => 14,
-                'name' => 'Pornstar',
-                'slug' => 'pornstar',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 15,
-                'parent_id' => NULL,
-                'order' => 15,
-                'name' => 'Dominatrix',
-                'slug' => 'dominatrix',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 16,
-                'parent_id' => NULL,
-                'order' => 16,
-                'name' => 'Couple',
-                'slug' => 'couple',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 17,
-                'parent_id' => NULL,
-                'order' => 17,
-                'name' => 'Party',
-                'slug' => 'party',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 18,
-                'parent_id' => NULL,
-                'order' => 18,
-                'name' => 'Video',
-                'slug' => 'video',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 19,
-                'parent_id' => NULL,
-                'order' => 19,
-                'name' => 'Indian',
-                'slug' => 'indian',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-        ));
-        
-        
+
+        // Define services as an array
+        $Categories = [
+            'Escorts', 'Massage', 'BDSM', 'Roleplay', 'Fetish', 'Threesome', 'Lingerie', 'Private Sessions',
+            'Fantasy', 'Cuddling', 'Escort for Couples', 'Luxury Escorts', 'Escort Services for Men', 'Gay Escorts',
+            'Lesbian Escorts', 'Bisexual Escorts', 'Asian Escorts', 'Indian Escorts', 'Black Escorts', 'Escort Escorts'
+        ];
+
+        // Loop through and create each service
+        foreach ($Categories as $category) {
+            Category::create([
+                'name' => $category,
+                'slug' => \Str::slug($category),
+            ]);
+        }   
         
     }
 }
