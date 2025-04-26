@@ -8,14 +8,14 @@ name('services/{serviceId}');
 
 new class extends Component
 {
-    public int $serviceId;
+    public  $service_slug;
     public Service $service;
     public $escorts;
 
     public function mount($serviceId)
     {
-        $this->serviceId = (int) $serviceId;
-        $this->service = Service::findOrFail($this->serviceId);
+        $this->service_slug = $serviceId;
+        $this->service = Service::where('slug', $this->service_slug)->firstOrFail();
         $this->escorts = $this->service->users()
     ->where('is_approved', true)
     ->inRandomOrder()

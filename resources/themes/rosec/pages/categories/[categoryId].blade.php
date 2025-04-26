@@ -8,14 +8,14 @@ name('categories/{categoryId}');
 
 new class extends Component
 {
-    public int $categoryId;
+    public  $category_slug;
     public Category $category;
     public $escorts;
 
     public function mount($categoryId)
     {
-        $this->categoryId = (int) $categoryId;
-        $this->category = Category::findOrFail($this->categoryId);
+        $this->category_slug = $categoryId;
+        $this->category = Category::where('slug', $this->category_slug)->firstOrFail();
         $this->escorts = $this->category->users()
     ->where('is_approved', true)
     ->inRandomOrder()
