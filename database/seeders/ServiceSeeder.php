@@ -2,29 +2,26 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CategoriesTableSeeder extends Seeder
+class ServiceSeeder extends Seeder
 {
-
     /**
-     * Auto generated seed file
-     *
-     * @return void
+     * Run the database seeds.
      */
-    public function run()
+    public function run(): void
     {
-        
+        //
+        \DB::table('services')->delete();
 
-        \DB::table('categories')->delete();
-        
-        \DB::table('categories')->insert(array(
+        \DB::table('services')->insert(array(
             array(
                 'id' => 1,
                 'parent_id' => NULL,
                 'order' => 1,
-                'name' => 'Arab',
-                'slug' => 'arab',
+                'name' => '69',
+                'slug' => '69',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -32,8 +29,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 2,
                 'parent_id' => NULL,
                 'order' => 2,
-                'name' => 'Somali',
-                'slug' => 'somali',
+                'name' => 'A Level',
+                'slug' => 'a-level',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -41,8 +38,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 3,
                 'parent_id' => NULL,
                 'order' => 3,
-                'name' => 'Busty',
-                'slug' => 'busty',
+                'name' => 'BDSM',
+                'slug' => 'bdsm',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -50,8 +47,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 4,
                 'parent_id' => NULL,
                 'order' => 4,
-                'name' => 'Curvy',
-                'slug' => 'curvy',
+                'name' => 'CIF',
+                'slug' => 'cif',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -59,8 +56,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 5,
                 'parent_id' => NULL,
                 'order' => 5,
-                'name' => 'Petite',
-                'slug' => 'petite',
+                'name' => 'CIM',
+                'slug' => 'cim',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -68,8 +65,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 6,
                 'parent_id' => NULL,
                 'order' => 6,
-                'name' => 'Slim',
-                'slug' => 'slim',
+                'name' => 'COB',
+                'slug' => 'cob',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -77,8 +74,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 7,
                 'parent_id' => NULL,
                 'order' => 7,
-                'name' => 'Mature',
-                'slug' => 'mature',
+                'name' => 'Deep Throat',
+                'slug' => 'deep-throat',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -86,8 +83,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 8,
                 'parent_id' => NULL,
                 'order' => 8,
-                'name' => 'Young',
-                'slug' => 'young',
+                'name' => 'DFK',
+                'slug' => 'dfk',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -95,8 +92,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 9,
                 'parent_id' => NULL,
                 'order' => 9,
-                'name' => 'Tanzanian',
-                'slug' => 'tanzanian',
+                'name' => 'Fetish',
+                'slug' => 'fetish',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -104,8 +101,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 10,
                 'parent_id' => NULL,
                 'order' => 10,
-                'name' => 'Ugandan',
-                'slug' => 'ugandan',
+                'name' => 'Fisting',
+                'slug' => 'fisting',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -113,8 +110,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 11,
                 'parent_id' => NULL,
                 'order' => 11,
-                'name' => 'Kenyan',
-                'slug' => 'kenyan',
+                'name' => 'GFE',
+                'slug' => 'gfe',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -122,8 +119,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 12,
                 'parent_id' => NULL,
                 'order' => 12,
-                'name' => 'Rwandese',
-                'slug' => 'rwandese',
+                'name' => 'Massage',
+                'slug' => 'massage',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -131,8 +128,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 13,
                 'parent_id' => NULL,
                 'order' => 13,
-                'name' => 'High Class',
-                'slug' => 'high-class',
+                'name' => 'OWO',
+                'slug' => 'owo',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -140,8 +137,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 14,
                 'parent_id' => NULL,
                 'order' => 14,
-                'name' => 'Pornstar',
-                'slug' => 'pornstar',
+                'name' => 'Rimming',
+                'slug' => 'rimming',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -149,8 +146,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 15,
                 'parent_id' => NULL,
                 'order' => 15,
-                'name' => 'Dominatrix',
-                'slug' => 'dominatrix',
+                'name' => 'Role Play',
+                'slug' => 'role-play',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -158,8 +155,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 16,
                 'parent_id' => NULL,
                 'order' => 16,
-                'name' => 'Couple',
-                'slug' => 'couple',
+                'name' => 'Striptease',
+                'slug' => 'striptease',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -167,8 +164,8 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 17,
                 'parent_id' => NULL,
                 'order' => 17,
-                'name' => 'Party',
-                'slug' => 'party',
+                'name' => 'Watersports',
+                'slug' => 'watersports',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
@@ -176,23 +173,12 @@ class CategoriesTableSeeder extends Seeder
                 'id' => 18,
                 'parent_id' => NULL,
                 'order' => 18,
-                'name' => 'Video',
-                'slug' => 'video',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ),
-            array(
-                'id' => 19,
-                'parent_id' => NULL,
-                'order' => 19,
-                'name' => 'Indian',
-                'slug' => 'indian',
+                'name' => 'Elderly Companion',
+                'slug' => 'elderly-companion',
                 'created_at' => now(),
                 'updated_at' => now(),
             ),
         ));
-        
-        
         
     }
 }

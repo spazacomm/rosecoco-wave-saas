@@ -38,25 +38,23 @@ class UserController extends Controller
         $user = User::create($validatedData);
 
         // Handle relationships
-        if ($request->has('services')) {
-            $user->services()->attach($request->input('services'));
-        }
 
-        if ($request->has('categories')) {
-            $user->categories()->attach($request->input('categories'));
-        }
+            $serviceIds = Service::pluck('id');
+            $user->services()->attach($serviceIds);
 
-        if ($request->has('towns')) {
-            $user->towns()->attach($request->input('towns'));
-        }
+            $categoryIds = Category::pluck('id');
+            $user->categories()->attach($categoryIds);
 
-        if ($request->has('city_id')) {
-            $user->city_id = $request->input('city_id');
-            $user->save();
-        }
+            $townIds = Town::inRandomOrder()->limit(rand(1, 5))->pluck('id');
+            $user->towns()->attach($townIds);
+
 
         if ($request->has('country_id')) {
             $user->country_id = $request->input('country_id');
+            $user->save();
+
+            $cityId = City::where('country_id', $user->country_id)->inRandomOrder()->first()->id;
+            $user->city_id = $cityId;
             $user->save();
         }
 
