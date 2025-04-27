@@ -21,7 +21,7 @@
         #[Computed]
         public function user()
         {
-            return cUser::where('username', '=', $this->username)->with('roles')->firstOrFail();
+            return User::where('username', '=', $this->username)->with('roles')->firstOrFail();
         }
 
         #[Computed]

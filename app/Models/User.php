@@ -46,6 +46,7 @@ class User extends WaveUser
         'height',
         'city_id',
         'country_id',
+        'is_claimed',
     ];
 
     /**

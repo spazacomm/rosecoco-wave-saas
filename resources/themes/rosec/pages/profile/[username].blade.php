@@ -165,8 +165,11 @@
                         <div class="gallery-single-about ms-auto pe-lg-0 pt-lg-4 mt-2">
                             <div class="row">
                                 <div class="col-lg-7">
+                                    
                                     <span
                                         class="d-flex rounded-10 recom-text align-items-center border-bottom border-lg p-3 border-dark-gray-2">
+
+                                        @if($this->user->is_claimed)
                                         <span class="fa-stars-recommend fs-3 me-3"></span>
                                         <span>
                                             <h5 class="m-0">This is escort is recommended</h5>
@@ -174,7 +177,20 @@
                                                 reviewed
                                             </h6>
                                         </span>
+                                       
+
+                                      @else
+                                        <span class="px-5">
+                                        <a href="/claim/{{$this->user->username }}"
+                                                    class=" align-items-center text-decoration-none bg-dark-primary-7 text-white rounded-10 call-info"
+                                                    aria-label="Click Here to claim this profile">
+                                                    <!-- <span class="fa-phone-black fs-5"></span> -->
+                                                    <span class="mx-auto">Claim this profile</span>
+                                                </a>
+</span>
+@endif
                                     </span>
+                                  
 
 
                                     <span class="d-flex align-items-center justify-content-between py-3">
