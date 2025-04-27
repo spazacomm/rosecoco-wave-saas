@@ -142,20 +142,20 @@
                                                 <img src="/storage/{{$this->user->avatar}}" alt="Kim" loading="eager">
                                             </a>
                                         </div>
-                                     
-                                        @if(is_array($this->user->images) && count($this->user->images) > 0)
-    @foreach($this->user->images as $image)
-        <div class="splide__slide">
-            <a class="media-holder single-profile d-block" data-fancybox="gallery"
-               data-caption="" href="/storage/{{$image}}">
-                <img src="/storage/{{$image}}" alt="{{$this->user->username}}"
-                     loading="lazy">
-            </a>
-        </div>
-    @endforeach
-@endif
 
-                                       
+                                        @if(is_array($this->user->images) && count($this->user->images) > 0)
+                                        @foreach($this->user->images as $image)
+                                        <div class="splide__slide">
+                                            <a class="media-holder single-profile d-block" data-fancybox="gallery"
+                                                data-caption="" href="/storage/{{$image}}">
+                                                <img src="/storage/{{$image}}" alt="{{$this->user->username}}"
+                                                    loading="lazy">
+                                            </a>
+                                        </div>
+                                        @endforeach
+                                        @endif
+
+
 
 
                                     </div>
@@ -163,148 +163,55 @@
                             </div>
                         </div>
                         <div class="gallery-single-about ms-auto pe-lg-0 pt-lg-4 mt-2">
+                      
+
                             <div class="row">
                                 <div class="col-lg-7">
-                                    
-                                    <span
-                                        class="d-flex rounded-10 recom-text align-items-center border-bottom border-lg p-3 border-dark-gray-2">
 
-                                        @if($this->user->is_claimed)
-                                        <span class="fa-stars-recommend fs-3 me-3"></span>
-                                        <span>
-                                            <h5 class="m-0">This is escort is recommended</h5>
-                                            <h6 class="m-0 text-small f500 text-dark-gray-9">Popular escort, highly
-                                                reviewed
-                                            </h6>
-                                        </span>
-                                       
+                                <span class="d-flex rounded-10 recom-text align-items-center border-bottom border-lg p-3 border-dark-gray-2 justify-content-between flex-wrap">
 
-                                      @else
-                                        <span class="px-5">
-                                        <a href="/claim/{{$this->user->username }}"
-                                                    class=" align-items-center text-decoration-none bg-dark-primary-7 text-white rounded-10 call-info"
-                                                    aria-label="Click Here to claim this profile">
-                                                    <!-- <span class="fa-phone-black fs-5"></span> -->
-                                                    <span class="mx-auto">Claim this profile</span>
-                                                </a>
+    @if(!$this->user->is_claimed)
+    <div class="d-flex align-items-center mb-2 mb-md-0">
+        <span class="fa-stars-recommend fs-3 me-3"></span>
+        <div>
+            <h5 class="m-0">This escort is recommended</h5>
+            <h6 class="m-0 text-small f500 text-dark-gray-9">Popular escort, highly reviewed</h6>
+        </div>
+    </div>
+
+    @else
+
+    <div class="d-flex align-items-center mb-2 mb-md-0">
+        <span class="fa-stars-recommend fs-3 me-3"></span>
+        <div>
+            <h5 class="m-0">This profile has not been officially claimed</h5>
+            <h6 class="m-0 text-small f500 text-dark-gray-9">Popular and Widely reviewed. Awaiting official verification</h6>
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <a target="_blank" 
+           class="text-decoration-none bg-dark-primary-7 text-white rounded-10 px-3 py-2 small" 
+           href="https://wa.me/+254794535789?text=Hey, I’d like to claim this profile: https://rosecoco.co.ke/profile/{{$this->user->username}}" 
+           aria-label="Click Here to chat/book online">
+            Claim this profile
+        </a>
+
+        <a target="_blank" 
+           class="text-decoration-none bg-dark-primary-7 text-white rounded-10 px-3 py-2 small" 
+           href="https://wa.me/+254794535789?text=Hey, I’d like to report this profile: https://rosecoco.co.ke/profile/{{$this->user->username}}" 
+           aria-label="Click Here to chat/report online">
+            Report profile
+        </a>
+    </div>
+    @endif
+
 </span>
-@endif
-                                    </span>
-                                  
 
 
-                                    <span class="d-flex align-items-center justify-content-between py-3">
-                                        <span>
-                                            <h4 class="m-0 fs-4 h-fonts">{{$this->user->username }}</h4>
-                                            <h6 class="m-0 f500 text-small text-dark-gray-9"></h6>
-                                        </span>
-                                        <span>
-                                            <h4 class="m-0 fs-5 d-flex f500 align-items-center"><span
-                                                    class="fa-star text-small pe-1"></span> {{$this->user->averageRating()}}</h4>
-                                            <h6 class="m-0 text-small text-dark-gray-9">{{$this->user->reviews->count()}} Reviews</h6>
-                                        </span>
-                                    </span>
-                                    <div class="d-lg-flex flex-lg-column-reverse flex-lg-wrap">
-                                        <span class="cms">
-                                            <p class="my-lg-4 text-dark-gray-9">
-                                                {{$this->user->bio}}
-
-                                            </p>
-
-                                        </span>
-                                        <div
-                                            class="profile-info border my-4 my-lg-0 mt-lg-2 px-2 px-lg-4 py-2 rounded-10 gray-common-border gray-common-bg">
-                                            <span class="row">
-                                                <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                    <h4 class="m-0 text-md-small f500">Age</h4>
-                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                    {{ \Carbon\Carbon::parse($this->user->dob)->age }}</h6>
-                                                </span>
-
-                                                <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                    <h4 class="m-0 text-md-small f500">Gender</h4>
-                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                    {{ $this->user->gender }}</h6>
-                                                </span>
-
-                                                <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                    <h4 class="m-0 text-md-small f500">Orientation</h4>
-                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                    {{ $this->user->orientation }}</h6>
-                                                </span>
-
-                                                <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                    <h4 class="m-0 text-md-small f500">Body Type</h4>
-                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                        {{$this->user->body_type}}</h6>
-                                                </span>
-
-                                            </span>
-                                            <span class="row mt-3">
-                                                <span class="col-8 col-md-4 col-lg-6 py-2">
-                                                    <h4 class="m-0 text-md-small f500">Languages</h4>
-                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                    {{ $this->user->languages }}</h6>
-                                                </span>
-
-                                                <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                    <h4 class="m-0 text-md-small f500">nationality</h4>
-                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                    {{ $this->user->nationality }}</h6>
-                                                </span>
-                                            </span>
-                                            <span class="row mt-3">
-
-                                                <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                    <h4 class="m-0 text-md-small f500">Outcall</h4>
-                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                    {{ $this->user->outcall ? 'Yes' : 'No' }}</h6>
-                                                </span>
-
-                                                <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                    <h4 class="m-0 text-md-small f500">Incall</h4>
-                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                    {{ $this->user->incall ? 'Yes' : 'No' }}</h6>
-                                                </span>
-
-                                                
-                                                @if($this->user->incall )
-                                                <span class="col-4 col-md-4 col-lg-3 py-2">
-                                                    <h4 class="m-0 text-md-small f500">Incall Address</h4>
-                                                    <h6 class="m-0 text-small text-dark-gray-9 f500 pt-3">
-                                                        {{$this->user->address}}</h6>
-                                                </span>
-                                                @endif
-
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <div
-                                        class="border meeting-tab border-1 p-3 pt-4 pb-0 rounded-10 profile-meeting-tab gray-common-border gray-common-bg">
-                                        
-                                        <div class="">
-                                            <div class="px-3 mb-4">
-                                               
-
-                                                <a href="tel:{{$this->user->phone_number}}"
-                                                    class="d-flex mb-2 mt-4 align-items-center text-decoration-none bg-dark-primary-7 text-white rounded-10 call-info"
-                                                    aria-label="Click Here to call us">
-                                                    <span class="fa-phone-black fs-5"></span>
-                                                    <span class="mx-auto">{{$this->user->phone_number}}</span>
-                                                </a>
-                                                <a target="_blank" class="d-flex align-items-center text-decoration-none bg-primary text-white rounded-10 call-info
-                                        whatapp-bg" href="https://wa.me/{{$this->user->whatsapp_number}}?text=Hey, I’d like to book {{$this->user->username}}. When is she available?"
-                                                    aria-label="Click Here to chat/bookonline">
-                                                    <span class="fa-whatsapp fs-5"></span>
-                                                    <span class="mx-auto">Chat with us on WhatsApp</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div
@@ -341,7 +248,7 @@
                                         <span class="border gray-common-bg bg-hover-primary border-dark-gray-5 rounded py-2 px-3
                                     text-small text-white"> {{$service->name}}</span>
                                         @endforeach
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -389,11 +296,11 @@
                                         <span class="text-center">
                                             <h4 class="mb-2 fs-4">{{$this->user->averageRating()}}</h4>
                                             <span class="d-flex">
-                                                 @for($i = 1; $i <= $this->user->reviews->count(); $i++)
-                                                <span class="fa-star me-1"></span>
-                                                @endfor 
-                                                
-                                                <!-- Loop for empty stars -->
+                                                @for($i = 1; $i <= $this->user->reviews->count(); $i++)
+                                                    <span class="fa-star me-1"></span>
+                                                    @endfor
+
+                                                    <!-- Loop for empty stars -->
 
                                             </span>
                                         </span>
@@ -419,16 +326,16 @@
                                                         class="py-4 py-3 border p-3 pt-4 rounded-10 gray-common-border gray-common-bg review_tab-col">
                                                         <span class="d-flex pb-2">
 
-                                                         @for($i = 1; $i <= $review->rating; $i++)
-                                                        <span class="fa fa-star text-lg-small me-1"></span>
-                                                        @endfor 
+                                                            @for($i = 1; $i <= $review->rating; $i++)
+                                                                <span class="fa fa-star text-lg-small me-1"></span>
+                                                                @endfor
 
                                                         </span>
                                                         <p class="text-dark-gray-9 f300 mt-2 mb-2">
-                                                           {{$review->review}}
+                                                            {{$review->review}}
                                                         </p>
                                                         <p class="text-dark-gray-9 f300 mt-2 mb-2">
-                                                           - {{$review->name}}
+                                                            - {{$review->name}}
                                                         </p>
 
 
@@ -437,7 +344,7 @@
                                                     </div>
                                                 </div>
                                                 @endforeach
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -465,7 +372,7 @@
         <x-marketing.sections.recommended />
 
 
-        <div class="modal fade" id="reviewpop" aria-hidden="true" tabindex="-1" >
+        <div class="modal fade" id="reviewpop" aria-hidden="true" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content bg-main-bg">
                     <div class="modal-header justify-content-center border-0 pt-4">
