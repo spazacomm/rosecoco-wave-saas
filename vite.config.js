@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import fs from 'fs';
 import path from 'path';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const themeFilePath = path.resolve(__dirname, 'theme.json');
 const activeTheme = fs.existsSync(themeFilePath) ? JSON.parse(fs.readFileSync(themeFilePath, 'utf8')).name : 'anchor';
@@ -21,10 +22,13 @@ export default defineConfig({
                 `resources/themes/${activeTheme}/**/*`,
             ],
         }),
+        viteStaticCopy({
+            targets: [
+                {
+                    src: 'public/css/fonts/*',
+                    dest: 'fonts'
+                }
+            ]
+        })
     ],
-    resolve: {
-        alias: {
-            '@font': '/public/css/fonts',
-        },
-    },
 });
