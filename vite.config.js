@@ -28,7 +28,10 @@ export default defineConfig({
                     src: 'public/css/fonts/*',
                     dest: 'fonts'
                 }
-            ]
+            ],
+            options: {
+                flatten: false
+            }
         })
     ],
 });
