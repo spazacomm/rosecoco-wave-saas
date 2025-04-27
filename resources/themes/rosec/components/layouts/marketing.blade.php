@@ -15,7 +15,7 @@
     @include('theme::partials.footer')
     @include('theme::partials.footer-scripts')
     {{ $javascript ?? '' }}
-    <script src="//ma.rosecoco.co.ke/focus/1.js" type="text/javascript" charset="utf-8" async="async"></script>
+    <!-- <script src="//ma.rosecoco.co.ke/focus/1.js" type="text/javascript" charset="utf-8" async="async"></script>
 
     <script>
     (function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;
@@ -24,7 +24,7 @@
     })(window,document,'script','http://ma.rosecoco.co.ke/mtc.js','mt');
 
     mt('send', 'pageview');
-</script>
+</script> -->
 
 </body>
 </html>
