@@ -16,6 +16,7 @@ export default defineConfig({
                 `resources/themes/${activeTheme}/assets/js/app.js`,
                 `resources/themes/${activeTheme}/assets/js/admin-app.js`,
                 'resources/css/filament/admin/theme.css',
+                `resources/themes/${activeTheme}/assets/fonts/crushscortsfontsicon.ttf`,
             ],
             refresh: [
                 `resources/themes/${activeTheme}/**/*`,
