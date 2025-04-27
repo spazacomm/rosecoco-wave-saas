@@ -2,6 +2,7 @@
 @charset "UTF-8";
 
 @import './component-styles.css';
+@import './fonts.min.css';
 @import './main.min.css';
 @tailwind base;
 @tailwind components;
