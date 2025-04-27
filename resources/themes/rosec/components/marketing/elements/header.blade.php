@@ -55,11 +55,16 @@ use function Laravel\Folio\{middleware, name};
                             <span class="fa-close-small text-white"></span>
                         </button>
 
+                    
+
                         <a class="brand" title="" href="https://www.rosecoco.co.ke" aria-label="Crush Escorts Home">
                             <x-logo class=""></x-logo>
 
                         </a>
-                        <!-- <h5 class="pt-5">Mon-Fri 10am-10pm, Sat-Sun 12pm-12am<br/> <a href="/cdn-cgi/l/email-protection#3c55525a537c5f4e494f54594f5f534e484f125f5351" aria-label="Click Here to email us"><span class="__cf_email__" data-cfemail="20494e464f6043525553484553434f5254530e434f4d">[email&#160;protected]</span></a><br/> <a href="tel:07478770704" aria-label="Click Here to call us">07478770704</a></h5> -->
+                        <p class="pt-5">
+                            <a href="/auth/login" class="m-3 btn text-md-small f400 text-white bg-dark-primary-7 bg-hover-primary-dark rounded-2">Login </a>  <a href="/auth/register" class="m-3 btn text-md-small f400 text-white bg-dark-primary-7 bg-hover-primary-dark review-btn rounded-2">Create Account </a> 
+                        </p>
+                        <!-- <h5 class="pt-5"> <a href="/cdn-cgi/l/email-protection#3c55525a537c5f4e494f54594f5f534e484f125f5351" aria-label="Click Here to email us"><span class="__cf_email__" data-cfemail="20494e464f6043525553484553434f5254530e434f4d">[email&#160;protected]</span></a><br/> <a href="tel:07478770704" aria-label="Click Here to call us">07478770704</a></h5> -->
                     </div>
                     <div class="offcanvas-body">
                         <nav class="nav nav-min">
@@ -205,15 +210,17 @@ use function Laravel\Folio\{middleware, name};
                     </div>
                 </div>
                 <div class="d-flex align-items-end flex-column desk-view">
-                    <a class="header-min-phone d-flex align-items-center lh-lg" href="/dashboard">
-                        <i class="fa-whatsapp"></i>
-                        <span class="f400">Dashboard</span>
+                    <a class="header-min-phone d-flex align-items-center lh-lg btn text-md-small f400 text-white bg-dark-primary-7 bg-hover-dark-primary-7 review-btn rounded-2" href="/dashboard">
+                        Login
                     </a>
                     <!-- <a class="header-min-phone d-flex align-items-center lh-lg" href="tel:07478770704">
         <i class="fa-phone-black"></i>
         <span class="f400">07478770704</span>
     </a> -->
                 </div>
+
+                
+
                 <button
                     class="text-white text-hover-primary py-3 mx-auto border-0 flex-column d-flex d-lg-none justify-content-center align-items-center text-md-small f400 position-absolute end-0 bg-transparent"
                     type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
