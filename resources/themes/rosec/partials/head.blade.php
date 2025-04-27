@@ -43,7 +43,9 @@
     <meta name="description" content="{{ $seo->description }}">
 @endif
 
-<link rel="preload" href="/css/fonts/crushscortsfontsicon.ttf" as="font">
+<!-- <link rel="preload" href="/css/fonts/crushscortsfontsicon.ttf" as="font"> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
         <link rel="preload" href="https://www.crushescorts.com/frontend/css/fonts.min.css" as="style">
 
 @filamentStyles
