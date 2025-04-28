@@ -303,7 +303,7 @@
 
                                 <div class="col-lg-5">
                                     <div
-                                        class="border meeting-tab border-1 p-3 pt-4 pb-0 rounded-10 profile-meeting-tab gray-common-border gray-common-bg">
+                                        class="border  border-1 p-3 pt-4 pb-3 rounded-10 profile-meeting-tab gray-common-border gray-common-bg">
                                         
                                         <div class="">
                                             <div class="px-3 mb-4">
