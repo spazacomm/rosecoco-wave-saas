@@ -20,7 +20,6 @@ class ApiController extends Controller
         // Validate the request data
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'required|string',
             'excerpt' => 'required|string',
             'author_id' => 'required|exists:users,id',  // Assuming there's an 'author_id' field
         ]);
