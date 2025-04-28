@@ -29,6 +29,7 @@ class ApiController extends Controller
         $post->title = $validated['title'];
         $post->slug = Str::slug($validated['title']);
         $post->author_id = $validated['author_id'];
+        $post->body = 'pending';
         $post->status = 'DRAFT';
         $post->save();
 
