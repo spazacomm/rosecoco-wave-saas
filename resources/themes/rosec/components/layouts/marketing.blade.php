@@ -11,6 +11,8 @@
   gtag('config', 'G-P7W5YK22Q5');
 </script>
 
+<script defer data-domain="rosecoco.co.ke" src="https://plausible.spazacloud.com/js/script.js"></script>
+
     @include('theme::partials.head', ['seo' => ($seo ?? null) ])
 </head>
 <body x-data class="bg-main-bg @if($bodyClass ?? false){{ $bodyClass }}@endif" x-cloak>
