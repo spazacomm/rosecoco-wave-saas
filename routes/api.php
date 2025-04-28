@@ -26,6 +26,7 @@ Wave::api();
 // Posts Example API Route
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/posts', '\App\Http\Controllers\Api\ApiController@posts');
+    Route::post('/posts', '\App\Http\Controllers\Api\ApiController@createPost');
     
 });
 
