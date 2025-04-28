@@ -2,7 +2,7 @@
     use function Laravel\Folio\{name};
     name('blog');
 
-    $posts = \Wave\Post::inRandomOrder()->paginate(20);
+    $posts = \Wave\Post::where('status', '=', 'PUBLISHED')->orderBy('created_at', 'ASC')->paginate(20);
     $categories = \Wave\Category::all();
 ?>
 
