@@ -64,9 +64,9 @@ class ApiController extends Controller
         
         $post->body = $validated['body'];
         $post->status = $validated['status'];
-        $post->seo_title = $validated['seo_title'];
-        $post->meta_description = $validated['meta_description'];
-        $post->meta_keywords = $validated['meta_keywords'];
+        // $post->seo_title = $validated['seo_title'];
+        // $post->meta_description = $validated['meta_description'];
+        // $post->meta_keywords = $validated['meta_keywords'];
         $post->save();
 
         // Return the updated post
