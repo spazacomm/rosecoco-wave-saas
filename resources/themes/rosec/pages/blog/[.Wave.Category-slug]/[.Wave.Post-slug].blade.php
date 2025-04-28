@@ -1,5 +1,6 @@
 <?php
     use function Laravel\Folio\{name};
+    use Illuminate\Support\Str;
     name('blog.post');
 ?>
 
@@ -36,7 +37,7 @@
         </div>
 
         <div class="max-w-4xl mx-auto text-white">
-            {!! $post->body !!}
+        {!! Str::markdown($post->body) !!}
         </div>
 
     </article>
