@@ -39,4 +39,40 @@ class ApiController extends Controller
             'post' => $post
         ], 201);
     }
+
+
+      // Update an existing post
+      public function updatePost(Request $request, $id){
+        // Find the post by ID
+        $post = Post::find($id);
+
+        if (!$post) {
+            return response()->json([
+                'message' => 'Post not found'
+            ], 404);
+        }
+
+        // Validate the request data
+        $validated = $request->validate([
+            'body' => 'sometimes|string',
+            'seo_title' => 'sometimes|string',
+            'meta_description' => 'sometimes|string',
+            'meta_keywords' => 'sometimes|string',
+            'status' => 'sometimes|string|in:DRAFT,PUBLISHED',
+        ]);
+
+        
+        $post->body = $validated['body'];
+        $post->status = $validated['status'];
+        $post->seo_title = $validated['seo_title'];
+        $post->meta_description = $validated['meta_description'];
+        $post->meta_keywords = $validated['meta_keywords'];
+        $post->save();
+
+        // Return the updated post
+        return response()->json([
+            'message' => 'Post updated successfully',
+            'post' => $post
+        ], 200);
+    }
 }
