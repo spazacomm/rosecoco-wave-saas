@@ -176,8 +176,8 @@
                                             <span class="fa-stars-recommend fs-3 me-3"></span>
                                             <div>
                                                 <h5 class="m-0">This escort is recommended</h5>
-                                                <h6 class="m-0 text-small f500 text-dark-gray-9">Popular escort, highly
-                                                    reviewed</h6>
+                                                <h6 class="m-0 text-small f500 text-dark-gray-9">Popular escort and highly
+                                                    rated</h6>
                                             </div>
                                         </div>
 
