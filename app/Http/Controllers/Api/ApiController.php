@@ -8,9 +8,15 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Models\Post;
+use App\Models\User;
 
 class ApiController extends Controller
 {
+
+    public function users(){
+        return User::all();
+    }
+
     public function posts(){
         return Post::all();
     }

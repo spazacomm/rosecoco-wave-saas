@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/posts', '\App\Http\Controllers\Api\ApiController@posts');
     Route::post('/posts', '\App\Http\Controllers\Api\ApiController@createPost');
     Route::post('/posts/{id}', '\App\Http\Controllers\Api\ApiController@updatePost');
+
+    Route::get('/users', '\App\Http\Controllers\Api\ApiController@users');
     
 });
 
