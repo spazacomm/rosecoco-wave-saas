@@ -187,8 +187,8 @@
                                             <span class="fa-stars-recommend fs-3 me-3"></span>
                                             <div>
                                                 <h5 class="m-0">This profile has not been officially claimed</h5>
-                                                <h6 class="m-0 text-small f500 text-dark-gray-9">Popular and Widely
-                                                    reviewed. Awaiting official verification</h6>
+                                                <h6 class="m-0 text-small f500 text-dark-gray-9">Popular and highly
+                                                    rated. Awaiting official verification</h6>
                                             </div>
                                         </div>
 
