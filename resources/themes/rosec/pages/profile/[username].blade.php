@@ -212,7 +212,7 @@
                                     </span>
                                     <span class="d-flex align-items-center justify-content-between py-3">
                                         <span>
-                                            <h4 class="m-0 fs-4 h-fonts">{{this->user->username}}</h4>
+                                            <h4 class="m-0 fs-4 h-fonts">{{$this->user->username}}</h4>
                                             <h6 class="m-0 f500 text-small text-dark-gray-9"></h6>
                                         </span>
                                         <!-- <span>
