@@ -20,7 +20,7 @@
         #[Computed]
         public function user()
         {
-            return config('wave.user_model')::where('username', '=', $this->username)->with('roles')->firstOrFail();
+            return config('wave.user_model')::where('username', '=', $this->username)->where('is_approved', true)->with('roles')->firstOrFail();
         }
 
         #[Computed]
