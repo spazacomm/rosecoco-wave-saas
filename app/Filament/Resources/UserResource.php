@@ -201,6 +201,8 @@ Forms\Components\Select::make('body_type')
                     ->defaultImageUrl(url('storage/demo/default.png')),
                 Tables\Columns\TextColumn::make('username')
                     ->searchable(),
+                    Tables\Columns\TextColumn::make('whatsapp_number')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('is_approved')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('is_claimed')
