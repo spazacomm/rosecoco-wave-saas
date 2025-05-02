@@ -27,6 +27,15 @@
     @include('theme::partials.footer')
     @include('theme::partials.footer-scripts')
     {{ $javascript ?? '' }}
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        // Initialize Telegram WebApp
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand(); // Make the app full-screen
+        Telegram.WebApp.MainButton.hide(); // Hide main button (optional)
+    </script>
+    
     <!-- <script src="//ma.rosecoco.co.ke/focus/1.js" type="text/javascript" charset="utf-8" async="async"></script>
 
     <script>
