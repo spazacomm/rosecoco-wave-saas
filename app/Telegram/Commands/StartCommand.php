@@ -14,6 +14,9 @@ class StartCommand extends Command
 
     public function handle()
     {
+
+        \Log::info('in the start command');
+
         $chatId = $update->getMessage()->getChat()->getId();
         $user = BotUser::where('telegram_id', $chatId)->first();
 

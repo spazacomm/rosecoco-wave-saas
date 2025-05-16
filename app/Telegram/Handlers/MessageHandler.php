@@ -14,7 +14,7 @@ class MessageHandler
 
     public function handle(Update $update): void
     {
-        
+        \Log::info('in the message handler');
     }
 
   

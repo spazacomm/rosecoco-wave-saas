@@ -13,6 +13,9 @@ class CallbackQueryHandler
 
     public function handle(Update $update): void
     {
+
+        \Log::info('in the query handler');
+
         $callbackQuery = $update->getCallbackQuery();
         $callbackData = $callbackQuery->getData();
         $chatId = $callbackQuery->getMessage()->getChat()->getId();
