@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Wave\Facades\Wave;
+use App\Http\Controllers\TelegramController;
 
 // Wave routes
 Wave::routes();
