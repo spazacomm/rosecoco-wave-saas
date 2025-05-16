@@ -31,6 +31,11 @@ class StartCommand extends Command
 
             if(empty($user->role)){
                 // ask to select role
+                Telegram::sendMessage([
+                    'chat_id' => $chatId,
+                    'text' => 'Who are you in this story?',
+                    'reply_markup' => $this->replyMarkup()
+                ]);
             }
     
             if($user->role == 'client'){
@@ -51,6 +56,34 @@ class StartCommand extends Command
 
         
     }
+
+
+        public function replyMarkup(){
+
+            $reply_markup = Keyboard::make()
+                ->setResizeKeyboard(true)
+                ->setOneTimeKeyboard(true)
+                ->row([
+                    Keyboard::button('1'),
+                    Keyboard::button('2'),
+                    Keyboard::button('3'),
+                ])
+                ->row([
+                    Keyboard::button('4'),
+                    Keyboard::button('5'),
+                    Keyboard::button('6'),
+                ])
+                ->row([
+                    Keyboard::button('7'),
+                    Keyboard::button('8'),
+                    Keyboard::button('9'),
+                ])
+                ->row([
+                    Keyboard::button('0'),
+                ]);
+
+            return $reply_markup;
+        }
 
     
 }
