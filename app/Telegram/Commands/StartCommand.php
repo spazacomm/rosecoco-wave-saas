@@ -18,7 +18,7 @@ class StartCommand extends Command
 
         \Log::info('in the start command');
 
-        $chatId = $update->getMessage()->getChat()->getId();
+        $chatId = $this->getUpdate()->getMessage()->getChat()->getId();
         $user = BotUser::where('telegram_id', $chatId)->first();
 
         Telegram::sendPhoto([
