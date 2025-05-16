@@ -5,6 +5,7 @@ namespace App\Telegram\Commands;
 use Telegram\Bot\Commands\Command;
 use Telegram\Bot\Keyboard\Keyboard;
 use App\Models\BotUser;
+use Telegram;
 
 
 class StartCommand extends Command
@@ -20,7 +21,7 @@ class StartCommand extends Command
         $chatId = $update->getMessage()->getChat()->getId();
         $user = BotUser::where('telegram_id', $chatId)->first();
 
-        $telegram->sendPhoto([
+        Telegram::sendPhoto([
             'chat_id' => $chatId,
             'photo' => 'https://rosecoco.co.ke/themes/rosec/images/rose_logo_bg.png',
             'caption' => 'Welcome to Rosecoco'
@@ -38,10 +39,7 @@ class StartCommand extends Command
             // give the cleint the browse escorts button.
         }
 
-        $telegram->sendMessage([
-            'chat_id' => $chatId,
-            'text' => 'Welcome to Rosecoco.'
-        ]); 
+        
     }
 
     
