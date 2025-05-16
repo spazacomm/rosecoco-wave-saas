@@ -17,7 +17,7 @@ class HelpCommand extends Command
 
         \Log::info('in the help command');
 
-        $chatId = $update->getMessage()->getChat()->getId();
+        $chatId = $this->getUpdate()->getMessage()->getChat()->getId();
         
         Telegram::sendPhoto([
             'chat_id' => $chatId,
