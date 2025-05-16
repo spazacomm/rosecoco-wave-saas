@@ -20,10 +20,9 @@ class HelpCommand extends Command
         $chatId = $this->getUpdate()->getMessage()->getChat()->getId();
         
         try {
-            Telegram::sendPhoto([
+            Telegram::sendMessage([
                 'chat_id' => $chatId,
-                'photo' => 'https://rosecoco.co.ke/themes/rosec/images/rose_logo_bg.png',
-                'caption' => 'Welcome to Rosecoco'
+                'text' => 'Welcome to Rosecoco help center'
             ]);
         } catch (\Exception $e) {
             Log::error('Telegram Error: ' . $e->getMessage());

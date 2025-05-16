@@ -6,6 +6,7 @@ use Telegram\Bot\Commands\Command;
 use Telegram\Bot\Keyboard\Keyboard;
 use App\Models\BotUser;
 use Telegram;
+use Telegram\Bot\FileUpload\InputFile;
 
 
 class StartCommand extends Command
@@ -24,7 +25,7 @@ class StartCommand extends Command
         try {
             Telegram::sendPhoto([
                 'chat_id' => $chatId,
-                'photo' => 'https://rosecoco.co.ke/themes/rosec/images/rose_logo_bg.png',
+                'photo' => InputFile::create('https://rosecoco.co.ke/themes/rosec/images/rose_logo_bg.png'),
                 'caption' => 'Welcome to Rosecoco'
             ]);
 
@@ -39,7 +40,7 @@ class StartCommand extends Command
             if($user->role == 'escort'){
                 // give the cleint the browse escorts button.
             }
-            
+
         } catch (\Exception $e) {
             Log::error('Telegram Error: ' . $e->getMessage());
             dd($e->getMessage());
