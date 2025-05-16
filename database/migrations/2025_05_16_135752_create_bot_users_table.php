@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('bot_users', function (Blueprint $table) {
+        Schema::create('bot_users', function (Blueprint $table) {
             $table->id();
             $table->string('ref')->nullable();
             $table->string('telegram_id')->nullable();
@@ -25,7 +25,12 @@ return new class extends Migration
             $table->json('media')->nullable();
             $table->boolean('is_banned')->default(false); 
             $table->boolean('is_onboarded')->default(false); 
-            $table->boolean('is_boosted')->default(false);  
+            $table->boolean('is_boosted')->default(false);
+            $table->text('bio')->nullable();
+            $table->boolean('incall')->default(true);
+            $table->boolean('outcall')->default(true);
+            $table->integer('country_id')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -34,21 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('bot_users', function (Blueprint $table) {
-            $table->dropColumn('ref');
-            $table->dropColumn('name');
-            $table->dropColumn('username');
-            $table->dropColumn('is_banned');
-            $table->dropColumn('is_onboarded');
-            $table->dropColumn('is_boosted');
-            $table->dropColumn('media');
-            $table->dropColumn('telegram_id');
-            $table->dropColumn('role');
-            $table->dropColumn('locations');
-            $table->dropColumn('services');
-            $table->dropColumn('rates');
-            $table->dropColumn('media');
-            $table->dropColumn('phone_number');
-        });
+        Schema::dropIfExists('bot_users');
     }
 };
