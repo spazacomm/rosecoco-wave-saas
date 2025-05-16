@@ -29,18 +29,23 @@ class TelegramController extends Controller
         $chatId = $update->getMessage()->getChat()->getId();
         $user = $this->getUser($chatId);
 
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => 'Welcome to Rosecoco.'
+        ]); 
+
         // Handle commands
-        Telegram::commandsHandler(true);
+       // Telegram::commandsHandler(true);
 
         // Handle callback queries
-        if ($update->getCallbackQuery()) {
-            $this->callbackQueryHandler->handle($update);
-        }
+        // if ($update->getCallbackQuery()) {
+        //     $this->callbackQueryHandler->handle($update);
+        // }
 
         // Handle messages (text, media, location)
-        if ($update->getMessage()) {
-            $this->messageHandler->handle($update);
-        }
+        // if ($update->getMessage()) {
+        //     $this->messageHandler->handle($update);
+        // }
 
         return response('OK', 200);
     }
