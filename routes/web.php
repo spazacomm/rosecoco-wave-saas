@@ -18,4 +18,4 @@ use App\Http\Controllers\TelegramController;
 // Wave routes
 Wave::routes();
 
-Route::match(['get', 'post'], '/botman', [TelegramController::class, 'handle']);
+Route::match(['get', 'post'], '/bot', [TelegramController::class, 'handle']);
