@@ -25,7 +25,7 @@ class StartCommand extends Command
         try {
             Telegram::sendPhoto([
                 'chat_id' => $chatId,
-                'photo' => InputFile::create('https://rosecoco.co.ke/themes/rosec/images/rose_logo_bg.png'),
+                'photo' => InputFile::create('https://rosecoco.co.ke/wave/img/rosec_logo.png'),
                 'caption' => 'Welcome to Rosecoco'
             ]);
 
