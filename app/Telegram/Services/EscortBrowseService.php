@@ -6,6 +6,7 @@ use App\Models\User;
 use Telegram\Bot\Objects\Update;
 use Telegram;
 use Telegram\Bot\FileUpload\InputFile;
+use Illuminate\Support\Facades\Storage;
 
 class EscortBrowseService
 {
@@ -45,7 +46,7 @@ class EscortBrowseService
         $text .= "{$escort->bio}";
 
         //$imageUrl = is_array($escort->avatar) ? $escort->media[0] ?? null : json_decode($escort->media)[0] ?? null;
-        $imageUrl  = storage_path('app/'.$escort->avatar);
+        $imageUrl  = Storage::url($escort->avatar);
         $keyboard = [
             'inline_keyboard' => [
                 [['text' => '➡️ Next', 'callback_data' => 'browse_next_escort']]
