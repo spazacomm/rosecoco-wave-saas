@@ -27,6 +27,8 @@ class EscortBrowseService
         $chatId = $update->getCallbackQuery()->getMessage()->getChat()->getId();
         $escort = User::inRandomOrder()->first();
 
+        \Log::info(['escort'=> $escort]);
+
         if (!$escort) {
             Telegram::editMessageText([
                 'chat_id' => $chatId,
