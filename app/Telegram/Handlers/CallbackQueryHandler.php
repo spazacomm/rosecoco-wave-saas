@@ -42,7 +42,6 @@ class CallbackQueryHandler
             match ($callbackData) {
                 'role_client' => $this->handleClientRole($chatId, $user),
                 'role_escort' => $this->handleEscortRole($chatId, $user),
-                'browse_escorts' => $this->handleBrowseEscorts($chatId),
                 'browse_escorts' => fn() => $this->escortBrowseService->startBrowsing($update),
                 'browse_next_escort' => fn() => $this->escortBrowseService->browseNext($update),
                 default => $this->handleUnknown($chatId)
