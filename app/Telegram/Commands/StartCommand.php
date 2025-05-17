@@ -50,6 +50,19 @@ class StartCommand extends Command
     
             if($user->role == 'client'){
                 // give the cleint the browse escorts button.
+
+                Telegram::sendMessage([
+                    'chat_id' => $chatId,
+                    'text' => "Let's help you find the perfect companion.",
+                    'parse_mode' => 'Markdown',
+                    'reply_markup' => json_encode([
+                        'inline_keyboard' => [
+                            [
+                                ['text' => 'Browse Escorts', 'callback_data' => 'browse_escorts']
+                            ]
+                        ]
+                    ])
+                ]);
             }
     
             if($user->role == 'escort'){
