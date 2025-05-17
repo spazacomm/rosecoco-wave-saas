@@ -48,7 +48,7 @@ class StartCommand extends Command
                 
             }
     
-            if($user->role == 'client'){
+            if($user->role === 'client'){
                 // give the cleint the browse escorts button.
 
                 Telegram::sendMessage([
@@ -65,7 +65,7 @@ class StartCommand extends Command
                 ]);
             }
     
-            if($user->role == 'escort'){
+            if($user->role === 'escort'){
                 // give the cleint the browse escorts button.
             }
 
