@@ -59,7 +59,7 @@ class EscortBrowseService
                 'message_id' => $messageId,
                 'media' => json_encode([
                     'type' => 'photo',
-                    'media' => InputFile::create($imageUrl),
+                    'media' => $imageUrl,
                     'caption' => $text,
                     'parse_mode' => 'Markdown',
                 ]),
