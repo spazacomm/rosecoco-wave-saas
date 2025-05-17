@@ -10,17 +10,20 @@ class EscortBrowseService
 {
     public function startBrowsing(Update $update): void
     {
+        \Log::info('start browsing escorts');
         $this->sendRandomEscort($update);
     }
 
     public function browseNext(Update $update): void
     {
+        \Log::info('start browsing next escorts');
         $messageId = $update->getCallbackQuery()->getMessage()->getMessageId();
         $this->sendRandomEscort($update, $messageId);
     }
 
     protected function sendRandomEscort(Update $update, ?int $messageId = null): void
     {
+        \Log::info('start browsing random escorts');
         $chatId = $update->getCallbackQuery()->getMessage()->getChat()->getId();
         $escort = User::inRandomOrder()->first();
 
