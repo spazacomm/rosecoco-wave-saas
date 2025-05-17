@@ -5,6 +5,7 @@ namespace App\Telegram\Handlers;
 use Telegram\Bot\Objects\Update;
 use Illuminate\Support\Facades\Log;
 use App\Telegram\Services\BotUserService;
+use Telegram;
 
 class CallbackQueryHandler
 {
@@ -34,7 +35,7 @@ class CallbackQueryHandler
 
             if ($callbackData === 'role_client') {
                 $this->botUserService->updateProfile($user, ['role' => 'client']);
-                telegram()->sendMessage([
+                Telegram::sendMessage([
                     'chat_id' => $chatId,
                     'text' => "✅ You've been set as a *Client*. Let's help you find the perfect companion.",
                     'parse_mode' => 'Markdown',
@@ -48,7 +49,7 @@ class CallbackQueryHandler
 
             if ($callbackData === 'role_escort') {
                 $this->botUserService->updateProfile($user, ['role' => 'escort']);
-                telegram()->sendMessage([
+                Telegram::sendMessage([
                     'chat_id' => $chatId,
                     'text' => "✅ You've been set as an *Escort*. Let's get your profile started!",
                     'parse_mode' => 'Markdown'
@@ -58,7 +59,7 @@ class CallbackQueryHandler
 
             if ($callbackData === 'browse_escorts') {
                 
-                telegram()->sendMessage([
+                Telegram::sendMessage([
                     'chat_id' => $chatId,
                     'text' => "Here;s our escort list",
                     'parse_mode' => 'Markdown'
@@ -68,7 +69,7 @@ class CallbackQueryHandler
         } catch (\Exception $e) {
             Log::error('Callback query error: ' . $e->getMessage(), ['callback_data' => $callbackData]);
 
-            telegram()->sendMessage([
+            Telegram::sendMessage([
                 'chat_id' => $chatId,
                 'text' => '🚨 An error occurred. Please try again later.'
             ]);
