@@ -5,6 +5,7 @@ namespace App\Telegram\Services;
 use App\Models\User;
 use Telegram\Bot\Objects\Update;
 use Telegram;
+use Telegram\Bot\FileUpload\InputFile;
 
 class EscortBrowseService
 {
@@ -57,7 +58,7 @@ class EscortBrowseService
                 'message_id' => $messageId,
                 'media' => json_encode([
                     'type' => 'photo',
-                    'media' => $imageUrl,
+                    'media' => InputFile::create($imageUrl),
                     'caption' => $text,
                     'parse_mode' => 'Markdown',
                 ]),
@@ -66,7 +67,7 @@ class EscortBrowseService
         } else {
             Telegram::sendPhoto([
                 'chat_id' => $chatId,
-                'photo' => $imageUrl ?? 'https://rosecoco.co.ke/wave/img/rosec_logo.png',
+                'photo' => InputFile::create($imageUrl),
                 'caption' => $text,
                 'parse_mode' => 'Markdown',
                 'reply_markup' => json_encode($keyboard),
