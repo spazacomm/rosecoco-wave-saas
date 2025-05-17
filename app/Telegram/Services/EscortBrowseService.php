@@ -43,7 +43,7 @@ class EscortBrowseService
         $text = "*{$escort->username}, {$escort->age}*\n";
         //$text .= "📍 _" . implode(', ', (array) $escort->locations) . "_\n";
        // $text .= "💋 _" . implode(', ', (array) $escort->services) . "_\n\n";
-        $text .= "{$escort->bio}";
+        //$text .= "{$escort->bio}";
 
         //$imageUrl = is_array($escort->avatar) ? $escort->media[0] ?? null : json_decode($escort->media)[0] ?? null;
         $imageUrl  = Storage::url($escort->avatar);
