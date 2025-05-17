@@ -36,8 +36,16 @@ class StartCommand extends Command
                 Telegram::sendMessage([
                     'chat_id' => $chatId,
                     'text' => 'Who are you in this story?',
-                    'reply_markup' => $this->replyMarkup()
+                    'reply_markup' => json_encode([
+                        'inline_keyboard' => [
+                            [
+                                ['text' => '🧔 The Client', 'callback_data' => 'role_client'],
+                                ['text' => '💃 The Escort', 'callback_data' => 'role_escort'],
+                            ]
+                        ]
+                    ])
                 ]);
+                
             }
     
             if($user->role == 'client'){
