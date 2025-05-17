@@ -39,12 +39,15 @@ class CallbackQueryHandler
                     'chat_id' => $chatId,
                     'text' => "✅ You've been set as a *Client*. Let's help you find the perfect companion.",
                     'parse_mode' => 'Markdown',
-                    'inline_keyboard' => [
-                        [
-                            ['text' => 'Browse Escorts', 'callback_data' => 'browse_escorts']
+                    'reply_markup' => json_encode([
+                        'inline_keyboard' => [
+                            [
+                                ['text' => 'Browse Escorts', 'callback_data' => 'browse_escorts']
+                            ]
                         ]
-                    ]
+                    ])
                 ]);
+                
             }
 
             if ($callbackData === 'role_escort') {
