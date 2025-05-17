@@ -45,7 +45,7 @@ class EscortBrowseService
         $text .= "{$escort->bio}";
 
         //$imageUrl = is_array($escort->avatar) ? $escort->media[0] ?? null : json_decode($escort->media)[0] ?? null;
-        $imageUrl  = $escort->avatar;
+        $imageUrl  = storage_path($escort->avatar);
         $keyboard = [
             'inline_keyboard' => [
                 [['text' => '➡️ Next', 'callback_data' => 'browse_next_escort']]
