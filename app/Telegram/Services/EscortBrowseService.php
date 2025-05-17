@@ -29,7 +29,6 @@ class EscortBrowseService
         $chatId = $update->getCallbackQuery()->getMessage()->getChat()->getId();
         $escort = User::inRandomOrder()->first();
 
-        \Log::info(['escort'=> $escort]);
 
         if (!$escort) {
             Telegram::editMessageText([
@@ -40,10 +39,18 @@ class EscortBrowseService
             return;
         }
 
-        $text = "*{$escort->username}, {$escort->age}*\n";
-        //$text .= "📍 _" . implode(', ', (array) $escort->locations) . "_\n";
-       // $text .= "💋 _" . implode(', ', (array) $escort->services) . "_\n\n";
-        //$text .= "{$escort->bio}";
+        $text = "*" . strtoupper($escort->username) . ", {$escort->age}*\n";
+
+// $locations = is_array($escort->locations) ? implode(', ', $escort->locations) : (string) $escort->locations;
+// $services = is_array($escort->services) ? implode(', ', $escort->services) : (string) $escort->services;
+
+// $text .= "📍 _{$locations}_\n";
+// $text .= "💋 _{$services}_\n\n";
+
+$bio = strip_tags((string) $escort->bio); // Remove HTML if present
+$remaining = 1024 - strlen($text);
+$text .= mb_strimwidth($bio, 0, $remaining, '...');
+
 
         //$imageUrl = is_array($escort->avatar) ? $escort->media[0] ?? null : json_decode($escort->media)[0] ?? null;
         $imageUrl  = Storage::url($escort->avatar);
