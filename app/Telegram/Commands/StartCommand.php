@@ -26,8 +26,10 @@ class StartCommand extends Command
             Telegram::sendPhoto([
                 'chat_id' => $chatId,
                 'photo' => InputFile::create('https://rosecoco.co.ke/wave/img/rosec_logo.png'),
-                'caption' => '🌹 Welcome to Rosecoco Bot 🌹\nYour all-in-one assistant for Kenyas leading escort directory. \nWhether you are an escort looking to get listed or a client searching for a companion, Im here to help you get started quickly and privately.'
+                'caption' => "🌹 *Welcome to Rosecoco Bot* 🌹\nYour all-in-one assistant for Kenya's leading escort directory.\n\nWhether you're an *escort* looking to get listed or a *client* searching for a companion, I'm here to help you get started quickly and privately.",
+                'parse_mode' => 'Markdown'
             ]);
+            
 
             if(empty($user->role)){
                 // ask to select role
