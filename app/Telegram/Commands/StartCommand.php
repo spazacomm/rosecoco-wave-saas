@@ -56,6 +56,12 @@ class StartCommand extends Command
 
                 Telegram::sendMessage([
                     'chat_id' => $chatId,
+                    'text' => 'Please enter your preferred search radius (km):',
+                    'reply_markup' => json_encode(['force_reply' => true])
+                ]);
+
+                Telegram::sendMessage([
+                    'chat_id' => $chatId,
                     'text' => "Let's help you find the perfect companion.",
                     'parse_mode' => 'Markdown',
                     'reply_markup' => json_encode([
