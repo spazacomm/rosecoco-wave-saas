@@ -23,15 +23,18 @@ class StartCommand extends Command
         $user = BotUser::where('telegram_id', $chatId)->first();
 
         try {
-            Telegram::sendPhoto([
-                'chat_id' => $chatId,
-                'photo' => InputFile::create('https://rosecoco.co.ke/wave/img/rosec_logo.png'),
-                'caption' => "🌹 *Welcome to Rosecoco Bot* 🌹\nYour all-in-one assistant for Kenya's leading escort directory.\n\nWhether you're an *escort* looking to get listed or a *client* searching for a companion, I'm here to help you get started quickly and privately.",
-                'parse_mode' => 'Markdown'
-            ]);
+            
             
 
             if(empty($user->role)){
+
+                Telegram::sendPhoto([
+                    'chat_id' => $chatId,
+                    'photo' => InputFile::create('https://rosecoco.co.ke/wave/img/rosec_logo.png'),
+                    'caption' => "🌹 *Welcome to Rosecoco Bot* 🌹\nYour all-in-one assistant for Kenya's leading escort directory.\n\nWhether you're an *escort* looking to get listed or a *client* searching for a companion, I'm here to help you get started quickly and privately.",
+                    'parse_mode' => 'Markdown'
+                ]);
+
                 // ask to select role
                 Telegram::sendMessage([
                     'chat_id' => $chatId,
@@ -58,7 +61,8 @@ class StartCommand extends Command
                     'reply_markup' => json_encode([
                         'inline_keyboard' => [
                             [
-                                ['text' => 'Browse Escorts', 'callback_data' => 'browse_escorts']
+                                ['text' => 'Browse Escorts', 'callback_data' => 'browse_escorts'],
+                                ['text' => 'Browse Offers', 'callback_data' => 'browse_offers']
                             ]
                         ]
                     ])

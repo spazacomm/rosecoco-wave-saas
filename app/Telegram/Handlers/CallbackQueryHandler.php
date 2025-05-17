@@ -22,10 +22,13 @@ class CallbackQueryHandler
 
         $callbackQuery = $update->getCallbackQuery();
         $callbackData = $callbackQuery->getData();
-        $chatId = $callbackQuery->getMessage()->getChat()->getId();
-        $telegramUserId = $callbackQuery->getFrom()->getId();
-        $telegramUsername = $callbackQuery->getFrom()->getUsername();
-        $telegramName = $callbackQuery->getFrom()->getFirstName();
+        $chat = $callbackQuery->getMessage()->getChat();
+        $from = $callbackQuery->getFrom();
+
+        $chatId = $chat->getId();
+        $telegramUserId = $from->getId();
+        $telegramUsername = $from->getUsername();
+        $telegramName = $from->getFirstName();
 
         try {
             // Get or create user
@@ -33,42 +36,12 @@ class CallbackQueryHandler
                 'name' => $telegramName,
             ]);
 
-            if ($callbackData === 'role_client') {
-                $this->botUserService->updateProfile($user, ['role' => 'client']);
-                Telegram::sendMessage([
-                    'chat_id' => $chatId,
-                    'text' => "✅ You've been set as a *Client*. Let's help you find the perfect companion.",
-                    'parse_mode' => 'Markdown',
-                    'reply_markup' => json_encode([
-                        'inline_keyboard' => [
-                            [
-                                ['text' => 'Browse Escorts', 'callback_data' => 'browse_escorts']
-                            ]
-                        ]
-                    ])
-                ]);
-                
-            }
-
-            if ($callbackData === 'role_escort') {
-                $this->botUserService->updateProfile($user, ['role' => 'escort']);
-                Telegram::sendMessage([
-                    'chat_id' => $chatId,
-                    'text' => "✅ You've been set as an *Escort*. Let's get your profile started!",
-                    'parse_mode' => 'Markdown'
-                ]);
-            }
-
-
-            if ($callbackData === 'browse_escorts') {
-                
-                Telegram::sendMessage([
-                    'chat_id' => $chatId,
-                    'text' => "Here;s our escort list",
-                    'parse_mode' => 'Markdown'
-                ]);
-            }
-
+            match ($callbackData) {
+                'role_client' => $this->handleClientRole($chatId, $user),
+                'role_escort' => $this->handleEscortRole($chatId, $user),
+                'browse_escorts' => $this->handleBrowseEscorts($chatId),
+                default => $this->handleUnknown($chatId)
+            };
         } catch (\Exception $e) {
             Log::error('Callback query error: ' . $e->getMessage(), ['callback_data' => $callbackData]);
 
@@ -77,5 +50,51 @@ class CallbackQueryHandler
                 'text' => '🚨 An error occurred. Please try again later.'
             ]);
         }
+    }
+
+    protected function handleClientRole(int|string $chatId, $user): void
+    {
+        $this->botUserService->updateProfile($user, ['role' => 'client']);
+
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => "✅ You've been set as a *Client*. Let's help you find the perfect companion.",
+            'parse_mode' => 'Markdown',
+            'reply_markup' => json_encode([
+                'inline_keyboard' => [
+                    [
+                        ['text' => 'Browse Escorts', 'callback_data' => 'browse_escorts']
+                    ]
+                ]
+            ])
+        ]);
+    }
+
+    protected function handleEscortRole(int|string $chatId, $user): void
+    {
+        $this->botUserService->updateProfile($user, ['role' => 'escort']);
+
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => "✅ You've been set as an *Escort*. Let's get your profile started!",
+            'parse_mode' => 'Markdown'
+        ]);
+    }
+
+    protected function handleBrowseEscorts(int|string $chatId): void
+    {
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => "👀 Here’s our escort list (coming soon)",
+            'parse_mode' => 'Markdown'
+        ]);
+    }
+
+    protected function handleUnknown(int|string $chatId): void
+    {
+        Telegram::sendMessage([
+            'chat_id' => $chatId,
+            'text' => "🤔 Sorry, I didn't understand that option."
+        ]);
     }
 }
