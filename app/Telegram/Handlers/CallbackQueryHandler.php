@@ -39,6 +39,8 @@ class CallbackQueryHandler
                 'name' => $telegramName,
             ]);
 
+            \Log::info(['callback data'=> $callbackData]);
+
             match ($callbackData) {
                 'role_client' => $this->handleClientRole($chatId, $user),
                 'role_escort' => $this->handleEscortRole($chatId, $user),
