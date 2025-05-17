@@ -51,10 +51,10 @@ class CallbackQueryHandler
         } catch (\Exception $e) {
             Log::error('Callback query error: ' . $e->getMessage(), ['callback_data' => $callbackData]);
 
-            Telegram::sendMessage([
-                'chat_id' => $chatId,
-                'text' => '🚨 An error occurred. Please try again later.'
-            ]);
+            // Telegram::sendMessage([
+            //     'chat_id' => $chatId,
+            //     'text' => '🚨 An error occurred. Please try again later.'
+            // ]);
         }
     }
 
